@@ -3,12 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		BF0E4317269F2DE0009E2208 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0E4316269F2DE0009E2208 /* VideoView.swift */; };
-		BF0E4319269F2E09009E2208 /* MainPanelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0E4318269F2E09009E2208 /* MainPanelModel.swift */; };
+		BF0E4319269F2E09009E2208 /* FrameTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0E4318269F2E09009E2208 /* FrameTabModel.swift */; };
 		BF304CE3269888AB005CCB59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF304CE2269888AB005CCB59 /* AppDelegate.swift */; };
 		BF304CE5269888AB005CCB59 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF304CE4269888AB005CCB59 /* SceneDelegate.swift */; };
 		BF304CE7269888AB005CCB59 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF304CE6269888AB005CCB59 /* ContentView.swift */; };
@@ -16,12 +16,25 @@
 		BF304CEC269888AB005CCB59 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF304CEB269888AB005CCB59 /* Preview Assets.xcassets */; };
 		BF304CEF269888AB005CCB59 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF304CED269888AB005CCB59 /* LaunchScreen.storyboard */; };
 		BF304CF726988D42005CCB59 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF304CF626988D42005CCB59 /* SettingsModel.swift */; };
-		BFFBD1BA269E727E004A8F23 /* MainPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFBD1B9269E727E004A8F23 /* MainPanel.swift */; };
+		BFDB829126A02BA900F9195E /* CatalogueTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB829026A02BA900F9195E /* CatalogueTab.swift */; };
+		BFDB829326A02BAF00F9195E /* MoreTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB829226A02BAF00F9195E /* MoreTab.swift */; };
+		BFDB829626A0692400F9195E /* BashRun.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDB829526A0692400F9195E /* BashRun.m */; };
+		BFDB829C26A07B4F00F9195E /* FrameTabPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB829B26A07B4F00F9195E /* FrameTabPage.swift */; };
+		BFDB829E26A07BAB00F9195E /* RootModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB829D26A07BAB00F9195E /* RootModel.swift */; };
+		BFDB82A126A07E8700F9195E /* Frame.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFDB829F26A07E8700F9195E /* Frame.xcdatamodeld */; };
+		BFDB82A426A07EE600F9195E /* VideoRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82A326A07EE600F9195E /* VideoRecord.swift */; };
+		BFDB82AA26A0853F00F9195E /* QGrid in Frameworks */ = {isa = PBXBuildFile; productRef = BFDB82A926A0853F00F9195E /* QGrid */; };
+		BFDB82AC26A0877400F9195E /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82AB26A0877400F9195E /* LibraryView.swift */; };
+		BFDB82AE26A092E400F9195E /* URL++.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82AD26A092E400F9195E /* URL++.swift */; };
+		BFDB82B026A093C100F9195E /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82AF26A093C100F9195E /* Blur.swift */; };
+		BFDB82B526A095DD00F9195E /* AVPlayerVCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82B426A095DD00F9195E /* AVPlayerVCView.swift */; };
+		BFDB82B726A098A000F9195E /* ParallexCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82B626A098A000F9195E /* ParallexCropView.swift */; };
+		BFFBD1BA269E727E004A8F23 /* FrameTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFBD1B9269E727E004A8F23 /* FrameTab.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BF0E4316269F2DE0009E2208 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
-		BF0E4318269F2E09009E2208 /* MainPanelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelModel.swift; sourceTree = "<group>"; };
+		BF0E4318269F2E09009E2208 /* FrameTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameTabModel.swift; sourceTree = "<group>"; };
 		BF304CDF269888AB005CCB59 /* Frame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF304CE2269888AB005CCB59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF304CE4269888AB005CCB59 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,7 +44,22 @@
 		BF304CEE269888AB005CCB59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF304CF0269888AB005CCB59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF304CF626988D42005CCB59 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
-		BFFBD1B9269E727E004A8F23 /* MainPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanel.swift; sourceTree = "<group>"; };
+		BFDB829026A02BA900F9195E /* CatalogueTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogueTab.swift; sourceTree = "<group>"; };
+		BFDB829226A02BAF00F9195E /* MoreTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTab.swift; sourceTree = "<group>"; };
+		BFDB829426A0692400F9195E /* Frame-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Frame-Bridging-Header.h"; sourceTree = "<group>"; };
+		BFDB829526A0692400F9195E /* BashRun.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BashRun.m; sourceTree = "<group>"; };
+		BFDB829726A0693500F9195E /* BashRun.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BashRun.h; sourceTree = "<group>"; };
+		BFDB829A26A06EEF00F9195E /* NSTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSTask.h; sourceTree = "<group>"; };
+		BFDB829B26A07B4F00F9195E /* FrameTabPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameTabPage.swift; sourceTree = "<group>"; };
+		BFDB829D26A07BAB00F9195E /* RootModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootModel.swift; sourceTree = "<group>"; };
+		BFDB82A026A07E8700F9195E /* VideoRecords.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VideoRecords.xcdatamodel; sourceTree = "<group>"; };
+		BFDB82A326A07EE600F9195E /* VideoRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRecord.swift; sourceTree = "<group>"; };
+		BFDB82AB26A0877400F9195E /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		BFDB82AD26A092E400F9195E /* URL++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL++.swift"; sourceTree = "<group>"; };
+		BFDB82AF26A093C100F9195E /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
+		BFDB82B426A095DD00F9195E /* AVPlayerVCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerVCView.swift; sourceTree = "<group>"; };
+		BFDB82B626A098A000F9195E /* ParallexCropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallexCropView.swift; sourceTree = "<group>"; };
+		BFFBD1B9269E727E004A8F23 /* FrameTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameTab.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFDB82AA26A0853F00F9195E /* QGrid in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,15 +95,18 @@
 			children = (
 				BF304CE2269888AB005CCB59 /* AppDelegate.swift */,
 				BF304CE4269888AB005CCB59 /* SceneDelegate.swift */,
+				BFDB829D26A07BAB00F9195E /* RootModel.swift */,
 				BF304CE6269888AB005CCB59 /* ContentView.swift */,
-				BF0E4316269F2DE0009E2208 /* VideoView.swift */,
-				BF0E4318269F2E09009E2208 /* MainPanelModel.swift */,
-				BFFBD1B9269E727E004A8F23 /* MainPanel.swift */,
 				BF304CF626988D42005CCB59 /* SettingsModel.swift */,
-				BF304CE8269888AB005CCB59 /* Assets.xcassets */,
-				BF304CED269888AB005CCB59 /* LaunchScreen.storyboard */,
-				BF304CF0269888AB005CCB59 /* Info.plist */,
-				BF304CEA269888AB005CCB59 /* Preview Content */,
+				BFDB82AD26A092E400F9195E /* URL++.swift */,
+				BFDB82B126A093E100F9195E /* Views */,
+				BFDB828D26A02B7F00F9195E /* FrameTab */,
+				BFDB828E26A02B8D00F9195E /* CatalogueTab */,
+				BFDB828F26A02B9700F9195E /* MoreTab */,
+				BFDB82A226A07ED000F9195E /* DB */,
+				BFDB829426A0692400F9195E /* Frame-Bridging-Header.h */,
+				BFDB829926A06EE200F9195E /* ObjC */,
+				BFDB829826A06ED500F9195E /* Misc */,
 			);
 			path = Frame;
 			sourceTree = "<group>";
@@ -85,6 +117,74 @@
 				BF304CEB269888AB005CCB59 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BFDB828D26A02B7F00F9195E /* FrameTab */ = {
+			isa = PBXGroup;
+			children = (
+				BF0E4318269F2E09009E2208 /* FrameTabModel.swift */,
+				BFFBD1B9269E727E004A8F23 /* FrameTab.swift */,
+				BFDB829B26A07B4F00F9195E /* FrameTabPage.swift */,
+				BFDB82AB26A0877400F9195E /* LibraryView.swift */,
+				BFDB82B626A098A000F9195E /* ParallexCropView.swift */,
+			);
+			path = FrameTab;
+			sourceTree = "<group>";
+		};
+		BFDB828E26A02B8D00F9195E /* CatalogueTab */ = {
+			isa = PBXGroup;
+			children = (
+				BFDB829026A02BA900F9195E /* CatalogueTab.swift */,
+			);
+			path = CatalogueTab;
+			sourceTree = "<group>";
+		};
+		BFDB828F26A02B9700F9195E /* MoreTab */ = {
+			isa = PBXGroup;
+			children = (
+				BFDB829226A02BAF00F9195E /* MoreTab.swift */,
+			);
+			path = MoreTab;
+			sourceTree = "<group>";
+		};
+		BFDB829826A06ED500F9195E /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				BF304CEA269888AB005CCB59 /* Preview Content */,
+				BF304CED269888AB005CCB59 /* LaunchScreen.storyboard */,
+				BF304CE8269888AB005CCB59 /* Assets.xcassets */,
+				BF304CF0269888AB005CCB59 /* Info.plist */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
+		BFDB829926A06EE200F9195E /* ObjC */ = {
+			isa = PBXGroup;
+			children = (
+				BFDB829A26A06EEF00F9195E /* NSTask.h */,
+				BFDB829526A0692400F9195E /* BashRun.m */,
+				BFDB829726A0693500F9195E /* BashRun.h */,
+			);
+			path = ObjC;
+			sourceTree = "<group>";
+		};
+		BFDB82A226A07ED000F9195E /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				BFDB829F26A07E8700F9195E /* Frame.xcdatamodeld */,
+				BFDB82A326A07EE600F9195E /* VideoRecord.swift */,
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		BFDB82B126A093E100F9195E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BFDB82B426A095DD00F9195E /* AVPlayerVCView.swift */,
+				BF0E4316269F2DE0009E2208 /* VideoView.swift */,
+				BFDB82AF26A093C100F9195E /* Blur.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -104,6 +204,9 @@
 			dependencies = (
 			);
 			name = Frame;
+			packageProductDependencies = (
+				BFDB82A926A0853F00F9195E /* QGrid */,
+			);
 			productName = Frame;
 			productReference = BF304CDF269888AB005CCB59 /* Frame.app */;
 			productType = "com.apple.product-type.application";
@@ -119,6 +222,7 @@
 				TargetAttributes = {
 					BF304CDE269888AB005CCB59 = {
 						CreatedOnToolsVersion = 12.5;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -131,6 +235,9 @@
 				Base,
 			);
 			mainGroup = BF304CD6269888AB005CCB59;
+			packageReferences = (
+				BFDB82A826A0853F00F9195E /* XCRemoteSwiftPackageReference "QGrid" */,
+			);
 			productRefGroup = BF304CE0269888AB005CCB59 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -179,12 +286,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF0E4317269F2DE0009E2208 /* VideoView.swift in Sources */,
+				BFDB82B526A095DD00F9195E /* AVPlayerVCView.swift in Sources */,
+				BFDB829626A0692400F9195E /* BashRun.m in Sources */,
+				BFDB829126A02BA900F9195E /* CatalogueTab.swift in Sources */,
+				BFDB829E26A07BAB00F9195E /* RootModel.swift in Sources */,
 				BF304CE3269888AB005CCB59 /* AppDelegate.swift in Sources */,
+				BFDB829C26A07B4F00F9195E /* FrameTabPage.swift in Sources */,
+				BFDB82B026A093C100F9195E /* Blur.swift in Sources */,
 				BF304CE5269888AB005CCB59 /* SceneDelegate.swift in Sources */,
 				BF304CF726988D42005CCB59 /* SettingsModel.swift in Sources */,
-				BF0E4319269F2E09009E2208 /* MainPanelModel.swift in Sources */,
-				BFFBD1BA269E727E004A8F23 /* MainPanel.swift in Sources */,
+				BF0E4319269F2E09009E2208 /* FrameTabModel.swift in Sources */,
+				BFDB82A126A07E8700F9195E /* Frame.xcdatamodeld in Sources */,
+				BFDB82A426A07EE600F9195E /* VideoRecord.swift in Sources */,
+				BFFBD1BA269E727E004A8F23 /* FrameTab.swift in Sources */,
 				BF304CE7269888AB005CCB59 /* ContentView.swift in Sources */,
+				BFDB82AC26A0877400F9195E /* LibraryView.swift in Sources */,
+				BFDB829326A02BAF00F9195E /* MoreTab.swift in Sources */,
+				BFDB82B726A098A000F9195E /* ParallexCropView.swift in Sources */,
+				BFDB82AE26A092E400F9195E /* URL++.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,11 +442,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Frame/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Frame/Misc/Preview Content\"";
 				DEVELOPMENT_TEAM = 789MW96BQB;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Frame/Info.plist;
+				INFOPLIST_FILE = Frame/Misc/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -335,6 +455,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zx02.Frame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Frame/Frame-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -345,11 +467,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Frame/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Frame/Misc/Preview Content\"";
 				DEVELOPMENT_TEAM = 789MW96BQB;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Frame/Info.plist;
+				INFOPLIST_FILE = Frame/Misc/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -357,6 +480,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zx02.Frame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Frame/Frame-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -384,6 +508,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BFDB82A826A0853F00F9195E /* XCRemoteSwiftPackageReference "QGrid" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Q-Mobile/QGrid";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BFDB82A926A0853F00F9195E /* QGrid */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFDB82A826A0853F00F9195E /* XCRemoteSwiftPackageReference "QGrid" */;
+			productName = QGrid;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		BFDB829F26A07E8700F9195E /* Frame.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BFDB82A026A07E8700F9195E /* VideoRecords.xcdatamodel */,
+			);
+			currentVersion = BFDB82A026A07E8700F9195E /* VideoRecords.xcdatamodel */;
+			path = Frame.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BF304CD7269888AB005CCB59 /* Project object */;
 }

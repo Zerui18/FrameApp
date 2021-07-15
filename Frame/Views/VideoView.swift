@@ -19,6 +19,10 @@ class AVPlayerView: UIView {
         self.playerLayer = .init(player: player)
         super.init(frame: .zero)
         layer.addSublayer(playerLayer)
+        layer.cornerRadius = 10
+        layer.borderColor = UIColor.secondaryLabel.cgColor
+        layer.borderWidth = 3
+        layer.masksToBounds = true
     }
     
     required init?(coder: NSCoder) {
@@ -52,6 +56,7 @@ struct VideoView: UIViewRepresentable {
         }
         let item = AVPlayerItem(url: .init(fileURLWithPath: videoPath))
         let looper = AVPlayerLooper(player: player, templateItem: item)
+        player.play()
         objc_setAssociatedObject(uiView, &looperKey, looper, .OBJC_ASSOCIATION_RETAIN)
     }
 }

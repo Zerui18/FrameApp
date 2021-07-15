@@ -11,7 +11,7 @@ import Combine
 let defaults = UserDefaults(suiteName: "com.Zerui.framepreferences")!
 
 enum SettingKeys: String {
-    case isEnabled, disabledOnLPM, mutedLockscreen, mutedHomescreen, pauseInApps, syncRingerVolume, fadeEnabled, fadeAlpha, fadeInactivity, fixBlur, videoURLHomescreen, videoURLLockscreen
+    case isEnabled, disabledOnLPM, lockscreenVolume, homescreenVolume, pauseInApps, syncRingerVolume, fadeEnabled, fadeAlpha, fadeInactivity, fixBlur, videoURLHomescreen, videoURLLockscreen
     case videoURLShared = "videoURL"
 }
 
@@ -38,6 +38,8 @@ class Setting<Value>: NSObject, ObservableObject {
         }
         set {
             value = newValue
+            // Set from outside, update UserDefaults
+            defaults.setValue(newValue, forKey: key.rawValue)
         }
     }
 
