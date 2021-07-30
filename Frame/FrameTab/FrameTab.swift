@@ -9,47 +9,42 @@ import SwiftUI
 
 struct FrameTab: View {
     
-    enum Page {
-        case both, homescreen, lockscreen
-    }
-    
     @ObservedObject var rootModel: RootModel = .shared
-    @State var page: Page = .homescreen
+    @State var domain: SettingDomain = .homescreen
     
     var body: some View {
-        GeometryReader { proxy in
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    // MARK: Title
-                    HStack(alignment: .center) {
-                        Text("Frame")
-                            .fontWeight(.bold)
-                            .font(.largeTitle)
-                        
-                        VStack(alignment: .leading) {
-                            Text("App     \(rootModel.appVersion)")
-                                .font(.caption)
-                                .foregroundColor(.gray)
-                            Text("Tweak \(rootModel.tweakVersion)")
-                                .font(.caption)
-                                .foregroundColor(.gray)
-                        }
-                        .padding(.leading, 5)
+        VStack(alignment: .leading, spacing: 0) {
+            // MARK: Title
+            VStack(alignment: .leading, spacing: 20) {
+                HStack(alignment: .center) {
+                    Text("Frame")
+                        .fontWeight(.bold)
+                        .font(.largeTitle)
+                    
+                    VStack(alignment: .leading) {
+                        Text("App     \(rootModel.appVersion)")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                        Text("Tweak \(rootModel.tweakVersion)")
+                            .font(.caption)
+                            .foregroundColor(.gray)
                     }
-                    
-                    // MARK: Content
-                    Picker(selection: $page, label: Text(""), content: {
-                        Text("Both").tag(Page.both)
-                        Text("Home").tag(Page.homescreen)
-                        Text("Lock").tag(Page.lockscreen)
-                    })
-                    .pickerStyle(SegmentedPickerStyle())
-                    
-                    FrameTabPage(page: page)
+                    .padding(.leading, 5)
                 }
-                .padding()
-                .padding([.leading, .trailing])
+                
+                // MARK: Content
+                Picker(selection: $domain.animation(.easeIn), label: Text(""), content: {
+                    Text("Both").tag(SettingDomain.both)
+                    Text("Home").tag(SettingDomain.homescreen)
+                    Text("Lock").tag(SettingDomain.lockscreen)
+                })
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.bottom)
             }
+            .padding([.leading, .trailing], 30)
+            .padding(.top, 15)
+            
+            FrameTabPage(domain: domain)
         }
     }
 }

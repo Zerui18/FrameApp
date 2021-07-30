@@ -10,44 +10,44 @@ import CoreData
 
 struct FrameTabPage: View {
     
-    @ObservedObject var model: FrameTabModel = .shared
-    @State private var isLibraryOpened = false
-    let page: FrameTab.Page
+    let domain: SettingDomain
     
-    var videoPath: Binding<String?> {
-        switch page {
-        case .both:
-            return $model.videoPathShared
-        case .homescreen:
-            return $model.videoPathHomescreen
-        case .lockscreen:
-            return $model.videoPathLockscreen
-        }
+    init(domain: SettingDomain) {
+        self.domain = domain
+        self.model = .init(domain: domain)
     }
     
+    @ObservedObject private var model: FrameTabPageModel
+    @State private var isLibraryOpened = false
+
     var body: some View {
-        VStack(spacing: 20) {
-            ParallexCropView(videoPath: videoPath)
-                .frame(minHeight: 100)
-                .padding(.bottom)
-            
-            Button {
-                isLibraryOpened = true
-            } label: {
-                Text("Choose Video")
-                    .bold()
-                    .foregroundColor(Color(.label))
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill()
-                    )
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 15) {
+                ParallexCropView()
+                    .environmentObject(model)
+                
+                Spacer()
+                
+                Button {
+                    isLibraryOpened = true
+                } label: {
+                    Text("Choose Video")
+                        .bold()
+                        .foregroundColor(Color(.label))
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill()
+                        )
+                }
+                .sheet(isPresented: $isLibraryOpened) {
+                    LibraryView(domain: domain)
+                        .environment(\.managedObjectContext, persistentContainer.viewContext)
+                }
             }
-            .sheet(isPresented: $isLibraryOpened) {
-                LibraryView(page: page)
-                    .environment(\.managedObjectContext, persistentContainer.viewContext)
-            }
+            .padding([.leading, .trailing], 30)
+            .padding([.top, .bottom], 15)
         }
     }
 }

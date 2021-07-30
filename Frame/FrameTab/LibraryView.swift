@@ -16,7 +16,7 @@ struct LibraryView: View {
     @State private var selectedVideo: VideoRecord?
     @State private var previewingVideo: VideoRecord?
     
-    let page: FrameTab.Page
+    let domain: SettingDomain
     
     var body: some View {
         QGrid(videoRecords, columns: 2) { video in
@@ -44,15 +44,7 @@ struct LibraryView: View {
         .actionSheet(item: $selectedVideo) { video in
             ActionSheet(title: Text(video.name!),
                         buttons: [.default(Text("Set").bold()) {
-                            let model = FrameTabModel.shared
-                            switch page {
-                            case .both:
-                                model.videoPathShared = video.videoURL!.path
-                            case .homescreen:
-                                model.videoPathHomescreen = video.videoURL!.path
-                            case .lockscreen:
-                                model.videoPathLockscreen = video.videoURL!.path
-                            }
+                            FrameTabModel.shared.setVideo(video, forDomain: domain)
                           }, .default(Text("Preview")) {
                             previewingVideo = video
                           }, .cancel()])

@@ -13,54 +13,53 @@ class FrameTabModel: ObservableObject {
     static let shared: FrameTabModel = .init()
     
     // MARK: Privates
-    private var bag = [AnyCancellable]()
-    @Setting(key: .videoURLShared, defaultValue: nil) private var _videoURLShared: String?
-    @Setting(key: .videoURLHomescreen, defaultValue: nil) private var _videoURLHomescreen: String?
-    @Setting(key: .videoURLLockscreen, defaultValue: nil) private var _videoURLLockscreen: String?
+    @Setting(domain: .both, key: .videoPath, defaultValue: "") private var _videoPathShared: String
+    @Setting(domain: .homescreen, key: .videoPath, defaultValue: "") private var _videoPathHomescreen: String
+    @Setting(domain: .lockscreen, key: .videoPath, defaultValue: "") private var _videoPathLockscreen: String
     
     // MARK: Public Properties
     var videoPathShared: String? {
-        get {
-            _videoURLShared
-        }
-        set {
-            _videoURLHomescreen = nil
-            _videoURLLockscreen = nil
-            _videoURLShared = newValue
-        }
+        _videoPathShared.isEmpty ? nil:_videoPathShared
     }
     
     var videoPathHomescreen: String? {
-        get {
-            _videoURLHomescreen
-        }
-        set {
-            if _videoURLShared != nil {
-                _videoURLLockscreen = _videoURLShared
-                _videoURLShared = nil
-            }
-            _videoURLHomescreen = newValue
-        }
+        _videoPathHomescreen.isEmpty ? nil:_videoPathHomescreen
     }
     
     var videoPathLockscreen: String? {
-        get {
-            _videoURLHomescreen
-        }
-        set {
-            if _videoURLShared != nil {
-                _videoURLHomescreen = _videoURLShared
-                _videoURLShared = nil
-            }
-            _videoURLLockscreen = newValue
-        }
+        _videoPathLockscreen.isEmpty ? nil:_videoPathLockscreen
     }
     
-    fileprivate init() {
-        // Forward objectWillChange.
-        bag.append($_videoURLShared.objectWillChange.sink(receiveValue: objectWillChange.send))
-        bag.append($_videoURLHomescreen.objectWillChange.sink(receiveValue: objectWillChange.send))
-        bag.append($_videoURLLockscreen.objectWillChange.sink(receiveValue: objectWillChange.send))
+    func setVideo(_ video: VideoRecord, forDomain domain: SettingDomain) {
+        let path = video.videoURL?.path
+        switch domain {
+        case .both:
+            _videoPathHomescreen = ""
+            _videoPathLockscreen = ""
+            _videoPathShared = path ?? ""
+        case .homescreen:
+            if !_videoPathShared.isEmpty {
+                _videoPathLockscreen = _videoPathShared
+                _videoPathShared = ""
+            }
+            _videoPathHomescreen = path ?? ""
+        case .lockscreen:
+            if !_videoPathShared.isEmpty {
+                _videoPathHomescreen = _videoPathShared
+                _videoPathShared = ""
+            }
+            _videoPathLockscreen = path ?? ""
+        }
+        notifyTweak()
+    }
+    
+    /// Notify the tweak of video change.
+    private func notifyTweak() {
+//        #if !targetEnvironment(simulator)
+        let center = CFNotificationCenterGetDarwinNotifyCenter()
+        let name = CFNotificationName("com.zx02.frame.videoChanged" as CFString)
+        CFNotificationCenterPostNotification(center, name, nil, nil, true)
+//        #endif
     }
     
 }

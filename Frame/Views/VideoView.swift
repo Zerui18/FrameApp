@@ -11,12 +11,10 @@ import AVFoundation
 
 class AVPlayerView: UIView {
     
-    let player: AVPlayer
     let playerLayer: AVPlayerLayer
     
-    init(player: AVPlayer) {
-        self.player = player
-        self.playerLayer = .init(player: player)
+    init() {
+        self.playerLayer = .init()
         super.init(frame: .zero)
         layer.addSublayer(playerLayer)
         layer.cornerRadius = 10
@@ -39,24 +37,23 @@ fileprivate var looperKey = 0
 
 struct VideoView: UIViewRepresentable {
     
-    @Binding var videoPath: String?
-    let player = AVQueuePlayer()
+    init(item: AVPlayerItem) {
+        self.item = item
+    }
+    
+    private let item: AVPlayerItem
     
     func makeUIView(context: Context) -> AVPlayerView {
-        return AVPlayerView(player: player)
+        return AVPlayerView()
     }
     
     func updateUIView(_ uiView: AVPlayerView, context: Context) {
-        // Reset player, removing looper if exists.
-        objc_removeAssociatedObjects(uiView)
-        player.removeAllItems()
-        // Try to init new item and looper.
-        guard let videoPath = videoPath else {
-            return
-        }
-        let item = AVPlayerItem(url: .init(fileURLWithPath: videoPath))
+        let player = AVQueuePlayer()
+        player.isMuted = true
         let looper = AVPlayerLooper(player: player, templateItem: item)
+        objc_setAssociatedObject(player, &looperKey, looper, .OBJC_ASSOCIATION_RETAIN)
+        uiView.playerLayer.player = player
+        uiView.widthAnchor.constraint(equalTo: uiView.heightAnchor).isActive = true
         player.play()
-        objc_setAssociatedObject(uiView, &looperKey, looper, .OBJC_ASSOCIATION_RETAIN)
     }
 }

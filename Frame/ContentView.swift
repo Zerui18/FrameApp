@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+extension String: Identifiable {
+    public var id: String { self }
+}
+
 struct ContentView: View {
     
     @ObservedObject var model: RootModel = .shared
@@ -17,6 +21,11 @@ struct ContentView: View {
                 .tabItem {
                     Image("icon_opaque")
                     Text("Frame")
+                }
+                .alert(item: $model.errorText) { message in
+                    Alert(title: Text("Encountered Error"),
+                          message: Text(message),
+                          dismissButton: .cancel(Text("Dismiss")))
                 }
             
             CatalogueTab()
@@ -33,9 +42,17 @@ struct ContentView: View {
         }
         .alert(isPresented: $model.showTweakAlert) {
             Alert(title: Text("Frame Tweak Not Found"),
-                  message: Text("No compatible frame tweak found. Please check that you have installed the latest version of the frame tweak."),
+                  message: Text("No compatible Frame tweak found. Please check that you have installed the latest version of the Frame tweak."),
                   primaryButton: .cancel(Text("Install/Upgrade Frame")) {
-//                    UIApplication.shared.open(URL, options: [:], completionHandler: nil)
+                    let framePackageURLs = [
+                        "zbra://packages/com.zx02.frame/?source=https://zerui18.github.io/zx02",
+                        "sileo://package/com.zx02.frame",
+                        "installer://show/shared=Installer&name=Frame&bundleid=com.zx02.frame&repo=https://zerui18.github.io/zx02",
+                        "cydia://url/https://cydia.saurik.com/api/share#?source=https://zerui18.github.io/zx02&package=com.zx02.frame"
+                    ].map { URL(string: $0)! }
+                    if let url = framePackageURLs.first(where: UIApplication.shared.canOpenURL) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
                   },
                   secondaryButton: .default(Text("Dismiss")))
         }

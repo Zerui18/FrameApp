@@ -1,0 +1,247 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
+// swift-module-flags: -target x86_64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name WebP
+import CWebP
+import CoreGraphics
+import Foundation
+import Swift
+import UIKit
+extension WebPEncoder {
+  public func encode(_ image: UIKit.UIImage, config: WebP.WebPEncoderConfig, width: Swift.Int = 0, height: Swift.Int = 0) throws -> Foundation.Data
+}
+public struct WebPImageInspector {
+  public static func inspect(_ webPData: Foundation.Data) throws -> WebP.WebPBitstreamFeatures
+}
+public struct WebPDecoderConfig {
+  public var input: WebP.WebPBitstreamFeatures?
+  public var output: WebP.WebPDecBuffer
+  public var options: WebP.WebPDecoderOptions
+  public init()
+}
+public struct WebPBitstreamFeatures {
+  public enum Format : Swift.Int {
+    case undefined
+    case lossy
+    case lossless
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  public var width: Swift.Int
+  public var height: Swift.Int
+  public var hasAlpha: Swift.Bool
+  public var hasAnimation: Swift.Bool
+  public var format: WebP.WebPBitstreamFeatures.Format
+  public var pad: (Swift.Int, Swift.Int, Swift.Int, Swift.Int, Swift.Int)
+}
+public enum ColorspaceMode : Swift.Int {
+  case RGB
+  case RGBA
+  case BGR
+  case BGRA
+  case ARGB
+  case RGBA4444
+  case RGB565
+  case rgbA
+  case bgrA
+  case Argb
+  case rgbA4444
+  case YUV
+  case YUVA
+  public var isPremultipliedMode: Swift.Bool {
+    get
+  }
+  public var isAlphaMode: Swift.Bool {
+    get
+  }
+  public var isRGBMode: Swift.Bool {
+    get
+  }
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public struct WebPDecBuffer {
+  public enum Colorspace {
+    case RGBA(CWebP.WebPRGBABuffer)
+    case YUVA(CWebP.WebPYUVABuffer)
+  }
+  public var colorspace: WebP.ColorspaceMode
+  public var width: Swift.Int
+  public var height: Swift.Int
+  public var isExternalMemory: Swift.Bool
+  public var u: WebP.WebPDecBuffer.Colorspace
+  public var pad: (Swift.Int, Swift.Int, Swift.Int, Swift.Int)
+  public var privateMemory: Swift.UnsafeMutablePointer<Swift.UInt8>?
+}
+public struct WebPDecoderOptions {
+  public var bypassFiltering: Swift.Int
+  public var noFancyUpsampling: Swift.Int
+  public var useCropping: Swift.Bool
+  public var cropLeft: Swift.Int
+  public var cropTop: Swift.Int
+  public var cropWidth: Swift.Int
+  public var cropHeight: Swift.Int
+  public var useScaling: Swift.Bool
+  public var scaledWidth: Swift.Int
+  public var scaledHeight: Swift.Int
+  public var useThreads: Swift.Bool
+  public var ditheringStrength: Swift.Int
+  public var flip: Swift.Int
+  public var alphaDitheringStrength: Swift.Int
+  public var pad: (Swift.Int, Swift.Int, Swift.Int, Swift.Int, Swift.Int)
+  public init()
+}
+public enum WebPEncoderError : Swift.Error {
+  case invalidParameter
+  case versionMismatched
+  public static func == (a: WebP.WebPEncoderError, b: WebP.WebPEncoderError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum WebPEncodeStatusCode : Swift.Int, Swift.Error {
+  case ok
+  case outOfMemory
+  case bitstreamOutOfMemory
+  case nullParameter
+  case invalidConfiguration
+  case badDimension
+  case partition0Overflow
+  case partitionOverflow
+  case badWrite
+  case fileTooBig
+  case userAbort
+  case last
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public struct WebPEncoder {
+  public init()
+  public func encode(RGB: Swift.UnsafeMutablePointer<Swift.UInt8>, config: WebP.WebPEncoderConfig, originWidth: Swift.Int, originHeight: Swift.Int, stride: Swift.Int, resizeWidth: Swift.Int = 0, resizeHeight: Swift.Int = 0) throws -> Foundation.Data
+  public func encode(RGBA: Swift.UnsafeMutablePointer<Swift.UInt8>, config: WebP.WebPEncoderConfig, originWidth: Swift.Int, originHeight: Swift.Int, stride: Swift.Int, resizeWidth: Swift.Int = 0, resizeHeight: Swift.Int = 0) throws -> Foundation.Data
+  public func encode(RGBX: Swift.UnsafeMutablePointer<Swift.UInt8>, config: WebP.WebPEncoderConfig, originWidth: Swift.Int, originHeight: Swift.Int, stride: Swift.Int, resizeWidth: Swift.Int = 0, resizeHeight: Swift.Int = 0) throws -> Foundation.Data
+  public func encode(BGR: Swift.UnsafeMutablePointer<Swift.UInt8>, config: WebP.WebPEncoderConfig, originWidth: Swift.Int, originHeight: Swift.Int, stride: Swift.Int, resizeWidth: Swift.Int = 0, resizeHeight: Swift.Int = 0) throws -> Foundation.Data
+  public func encode(BGRA: Swift.UnsafeMutablePointer<Swift.UInt8>, config: WebP.WebPEncoderConfig, originWidth: Swift.Int, originHeight: Swift.Int, stride: Swift.Int, resizeWidth: Swift.Int = 0, resizeHeight: Swift.Int = 0) throws -> Foundation.Data
+  public func encode(BGRX: Swift.UnsafeMutablePointer<Swift.UInt8>, config: WebP.WebPEncoderConfig, originWidth: Swift.Int, originHeight: Swift.Int, stride: Swift.Int, resizeWidth: Swift.Int = 0, resizeHeight: Swift.Int = 0) throws -> Foundation.Data
+}
+public enum WebPDecodingError : Swift.UInt32, Swift.Error {
+  case ok
+  case outOfMemory
+  case invalidParam
+  case bitstreamError
+  case unsupportedFeature
+  case suspended
+  case userAbort
+  case notEnoughData
+  case unknownError
+  public init?(rawValue: Swift.UInt32)
+  public typealias RawValue = Swift.UInt32
+  public var rawValue: Swift.UInt32 {
+    get
+  }
+}
+public struct WebPDecoder {
+  public init()
+  public func decode(byRGB webPData: Foundation.Data, options: WebP.WebPDecoderOptions) throws -> Foundation.Data
+  public func decode(byRGBA webPData: Foundation.Data, options: WebP.WebPDecoderOptions) throws -> Foundation.Data
+  public func decode(byBGR webPData: Foundation.Data, options: WebP.WebPDecoderOptions, width: Swift.Int, height: Swift.Int) throws -> Foundation.Data
+  public func decode(byBGRA webPData: Foundation.Data, options: WebP.WebPDecoderOptions) throws -> Foundation.Data
+  public func decode(byARGB webPData: Foundation.Data, options: WebP.WebPDecoderOptions) throws -> Foundation.Data
+  public func decode(byRGBA4444 webPData: Foundation.Data, options: WebP.WebPDecoderOptions) throws -> Foundation.Data
+  public func decode(byRGB565 webPData: Foundation.Data, options: WebP.WebPDecoderOptions) throws -> Foundation.Data
+  public func decode(byrgbA webPData: Foundation.Data, options: WebP.WebPDecoderOptions) throws -> Foundation.Data
+  public func decode(bybgrA webPData: Foundation.Data, options: WebP.WebPDecoderOptions) throws -> Foundation.Data
+  public func decode(byArgb webPData: Foundation.Data, options: WebP.WebPDecoderOptions) throws -> Foundation.Data
+  public func decode(byrgbA4444 webPData: Foundation.Data, options: WebP.WebPDecoderOptions) throws -> Foundation.Data
+  public func decode(byYUV webPData: Foundation.Data, options: WebP.WebPDecoderOptions) throws -> Foundation.Data
+  public func decode(byYUVA webPData: Foundation.Data, options: WebP.WebPDecoderOptions) throws -> Foundation.Data
+}
+extension WebPDecoder {
+  public func decode(_ webPData: Foundation.Data, options: WebP.WebPDecoderOptions) throws -> CoreGraphics.CGImage
+}
+extension WebPDecoder {
+  public func decode(toUImage webPData: Foundation.Data, options: WebP.WebPDecoderOptions) throws -> UIKit.UIImage
+}
+extension WebPImageHint : Swift.ExpressibleByIntegerLiteral {
+  public init(integerLiteral value: Swift.Int)
+  public typealias IntegerLiteralType = Swift.Int
+}
+public struct WebPEncoderConfig {
+  public enum WebPImageHint : CWebP.WebPImageHint {
+    case `default`
+    case picture
+    case photo
+    case graph
+    public func hash(into hasher: inout Swift.Hasher)
+    public init?(rawValue: CWebP.WebPImageHint)
+    public typealias RawValue = CWebP.WebPImageHint
+    public var hashValue: Swift.Int {
+      get
+    }
+    public var rawValue: CWebP.WebPImageHint {
+      get
+    }
+  }
+  public var lossless: Swift.Int
+  public var quality: Swift.Float
+  public var method: Swift.Int
+  public var imageHint: WebP.WebPEncoderConfig.WebPImageHint
+  public var targetSize: Swift.Int
+  public var targetPSNR: Swift.Float
+  public var segments: Swift.Int
+  public var snsStrength: Swift.Int
+  public var filterStrength: Swift.Int
+  public var filterSharpness: Swift.Int
+  public var filterType: Swift.Int
+  public var autofilter: Swift.Int
+  public var alphaCompression: Swift.Int
+  public var alphaFiltering: Swift.Int
+  public var alphaQuality: Swift.Int
+  public var pass: Swift.Int
+  public var showCompressed: Swift.Bool
+  public var preprocessing: Swift.Int
+  public var partitions: Swift.Int
+  public var partitionLimit: Swift.Int
+  public var emulateJpegSize: Swift.Bool
+  public var threadLevel: Swift.Int
+  public var lowMemory: Swift.Bool
+  public var nearLossless: Swift.Int
+  public var exact: Swift.Int
+  public var qmin: Swift.Int
+  public var qmax: Swift.Int
+  public static func preset(_ preset: WebP.WebPEncoderConfig.Preset, quality: Swift.Float) -> WebP.WebPEncoderConfig
+  public enum Preset {
+    case `default`
+    case picture
+    case photo
+    case drawing
+    case icon
+    case text
+    public static func == (a: WebP.WebPEncoderConfig.Preset, b: WebP.WebPEncoderConfig.Preset) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+extension WebPEncoder {
+  public func encode(RGB cgImage: CoreGraphics.CGImage, config: WebP.WebPEncoderConfig, resizeWidth: Swift.Int = 0, resizeHeight: Swift.Int = 0) throws -> Foundation.Data
+  public func encode(RGBA cgImage: CoreGraphics.CGImage, config: WebP.WebPEncoderConfig, resizeWidth: Swift.Int = 0, resizeHeight: Swift.Int = 0) throws -> Foundation.Data
+  public func encode(RGBX cgImage: CoreGraphics.CGImage, config: WebP.WebPEncoderConfig, resizeWidth: Swift.Int = 0, resizeHeight: Swift.Int = 0) throws -> Foundation.Data
+  public func encode(BGR cgImage: CoreGraphics.CGImage, config: WebP.WebPEncoderConfig, resizeWidth: Swift.Int = 0, resizeHeight: Swift.Int = 0) throws -> Foundation.Data
+  public func encode(BGRA cgImage: CoreGraphics.CGImage, config: WebP.WebPEncoderConfig, resizeWidth: Swift.Int = 0, resizeHeight: Swift.Int = 0) throws -> Foundation.Data
+  public func encode(BGRX cgImage: CoreGraphics.CGImage, config: WebP.WebPEncoderConfig, resizeWidth: Swift.Int = 0, resizeHeight: Swift.Int = 0) throws -> Foundation.Data
+}
+public enum WebPError : Swift.Error {
+  case unexpectedPointerError
+  case unexpectedError(withMessage: Swift.String)
+}
