@@ -26,7 +26,10 @@
 		BFC9005726B43FFF00B012E1 /* AES.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9005626B43FFF00B012E1 /* AES.swift */; };
 		BFC9005926B4411600B012E1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9005826B4411600B012E1 /* Utils.swift */; };
 		BFC9005D26B4439300B012E1 /* CatalogueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9005C26B4439300B012E1 /* CatalogueModel.swift */; };
-		BFC9005F26B44D8600B012E1 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9005E26B44D8600B012E1 /* AsyncImage.swift */; };
+		BFC9006126B4F03A00B012E1 /* GalleryGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9006026B4F03A00B012E1 /* GalleryGridView.swift */; };
+		BFC9006326B4F90A00B012E1 /* Nuke+WebP.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9006226B4F90A00B012E1 /* Nuke+WebP.swift */; };
+		BFC9006626B4F9A000B012E1 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = BFC9006526B4F9A000B012E1 /* Nuke */; };
+		BFC9006926B507F200B012E1 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = BFC9006826B507F200B012E1 /* NVActivityIndicatorView */; };
 		BFDB829126A02BA900F9195E /* CatalogueTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB829026A02BA900F9195E /* CatalogueTab.swift */; };
 		BFDB829326A02BAF00F9195E /* MoreTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB829226A02BAF00F9195E /* MoreTab.swift */; };
 		BFDB829626A0692400F9195E /* BashRun.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDB829526A0692400F9195E /* BashRun.m */; };
@@ -34,7 +37,6 @@
 		BFDB829E26A07BAB00F9195E /* RootModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB829D26A07BAB00F9195E /* RootModel.swift */; };
 		BFDB82A126A07E8700F9195E /* Frame.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFDB829F26A07E8700F9195E /* Frame.xcdatamodeld */; };
 		BFDB82A426A07EE600F9195E /* VideoRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82A326A07EE600F9195E /* VideoRecord.swift */; };
-		BFDB82AA26A0853F00F9195E /* QGrid in Frameworks */ = {isa = PBXBuildFile; productRef = BFDB82A926A0853F00F9195E /* QGrid */; };
 		BFDB82AC26A0877400F9195E /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82AB26A0877400F9195E /* LibraryView.swift */; };
 		BFDB82AE26A092E400F9195E /* URL++.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82AD26A092E400F9195E /* URL++.swift */; };
 		BFDB82B026A093C100F9195E /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82AF26A093C100F9195E /* Blur.swift */; };
@@ -88,7 +90,8 @@
 		BFC9005626B43FFF00B012E1 /* AES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AES.swift; sourceTree = "<group>"; };
 		BFC9005826B4411600B012E1 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		BFC9005C26B4439300B012E1 /* CatalogueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogueModel.swift; sourceTree = "<group>"; };
-		BFC9005E26B44D8600B012E1 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
+		BFC9006026B4F03A00B012E1 /* GalleryGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryGridView.swift; sourceTree = "<group>"; };
+		BFC9006226B4F90A00B012E1 /* Nuke+WebP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nuke+WebP.swift"; sourceTree = "<group>"; };
 		BFD4B2E526A7A9D4006C71CE /* WebP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebP.framework; sourceTree = "<group>"; };
 		BFDB829026A02BA900F9195E /* CatalogueTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogueTab.swift; sourceTree = "<group>"; };
 		BFDB829226A02BAF00F9195E /* MoreTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTab.swift; sourceTree = "<group>"; };
@@ -113,9 +116,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFC9006926B507F200B012E1 /* NVActivityIndicatorView in Frameworks */,
 				BFC9004126B43C7300B012E1 /* WebP.framework in Frameworks */,
-				BFDB82AA26A0853F00F9195E /* QGrid in Frameworks */,
 				BFC9004F26B43FC600B012E1 /* XKAPI.framework in Frameworks */,
+				BFC9006626B4F9A000B012E1 /* Nuke in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,7 +163,8 @@
 				BF304CE6269888AB005CCB59 /* ContentView.swift */,
 				BF304CF626988D42005CCB59 /* Setting.swift */,
 				BFDB82AD26A092E400F9195E /* URL++.swift */,
-				BFC9005E26B44D8600B012E1 /* AsyncImage.swift */,
+				BFC9006026B4F03A00B012E1 /* GalleryGridView.swift */,
+				BFC9006226B4F90A00B012E1 /* Nuke+WebP.swift */,
 				BFDB82B126A093E100F9195E /* Views */,
 				BFDB828D26A02B7F00F9195E /* FrameTab */,
 				BFDB828E26A02B8D00F9195E /* CatalogueTab */,
@@ -299,7 +304,8 @@
 			);
 			name = Frame;
 			packageProductDependencies = (
-				BFDB82A926A0853F00F9195E /* QGrid */,
+				BFC9006526B4F9A000B012E1 /* Nuke */,
+				BFC9006826B507F200B012E1 /* NVActivityIndicatorView */,
 			);
 			productName = Frame;
 			productReference = BF304CDF269888AB005CCB59 /* Frame.app */;
@@ -352,7 +358,8 @@
 			);
 			mainGroup = BF304CD6269888AB005CCB59;
 			packageReferences = (
-				BFDB82A826A0853F00F9195E /* XCRemoteSwiftPackageReference "QGrid" */,
+				BFC9006426B4F9A000B012E1 /* XCRemoteSwiftPackageReference "Nuke" */,
+				BFC9006726B507F200B012E1 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
 			);
 			productRefGroup = BF304CE0269888AB005CCB59 /* Products */;
 			projectDirPath = "";
@@ -400,7 +407,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n# add webp framework\n# mkdir $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n# cp -r $PROJECT_DIR/Frame/WebP.framework $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n# codesign appears to happen afterwards, so we manually do it here\n# codesign -f -s \"iPhone Developer: Zerui Chen (HWVV478235)\" $BUILT_PRODUCTS_DIR/Frame.app\n# Install to iPhone over ssh\n# rsync -a $BUILT_PRODUCTS_DIR/Frame.app root@localhost:/Applications/\n# Relaunch\n# ssh root@localhost '/usr/local/bin/rela com.zx02.Frame'\n";
+			shellScript = "# add frameworks\nmkdir $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\ncp -r $BUILT_PRODUCTS_DIR/XKAPI.framework $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n# codesign appears to happen afterwards, so we manually do it here\ncodesign -f -s \"iPhone Developer: Zerui Chen (HWVV478235)\" $BUILT_PRODUCTS_DIR/Frame.app\n# Install to iPhone over ssh\nrsync -a $BUILT_PRODUCTS_DIR/Frame.app root@localhost:/Applications/\n# Relaunch\nssh root@localhost '/usr/local/bin/rela com.zx02.Frame'\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -424,8 +431,9 @@
 				BFDB82A426A07EE600F9195E /* VideoRecord.swift in Sources */,
 				BFFBD1BA269E727E004A8F23 /* FrameTab.swift in Sources */,
 				BF16A9CD26A5C92500858F19 /* FrameTabPageModel.swift in Sources */,
+				BFC9006126B4F03A00B012E1 /* GalleryGridView.swift in Sources */,
+				BFC9006326B4F90A00B012E1 /* Nuke+WebP.swift in Sources */,
 				BF304CE7269888AB005CCB59 /* ContentView.swift in Sources */,
-				BFC9005F26B44D8600B012E1 /* AsyncImage.swift in Sources */,
 				BFDB82AC26A0877400F9195E /* LibraryView.swift in Sources */,
 				BFDB829326A02BAF00F9195E /* MoreTab.swift in Sources */,
 				BFDB82B726A098A000F9195E /* ParallexCropView.swift in Sources */,
@@ -745,21 +753,34 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		BFDB82A826A0853F00F9195E /* XCRemoteSwiftPackageReference "QGrid" */ = {
+		BFC9006426B4F9A000B012E1 /* XCRemoteSwiftPackageReference "Nuke" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Q-Mobile/QGrid";
+			repositoryURL = "https://github.com/kean/Nuke.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.4;
+				minimumVersion = 10.3.2;
+			};
+		};
+		BFC9006726B507F200B012E1 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BFDB82A926A0853F00F9195E /* QGrid */ = {
+		BFC9006526B4F9A000B012E1 /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BFDB82A826A0853F00F9195E /* XCRemoteSwiftPackageReference "QGrid" */;
-			productName = QGrid;
+			package = BFC9006426B4F9A000B012E1 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		BFC9006826B507F200B012E1 /* NVActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFC9006726B507F200B012E1 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
+			productName = NVActivityIndicatorView;
 		};
 /* End XCSwiftPackageProductDependency section */
 

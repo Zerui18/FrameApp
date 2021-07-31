@@ -7,7 +7,6 @@
 
 import SwiftUI
 import CoreData
-import QGrid
 
 struct LibraryView: View {
     
@@ -19,44 +18,28 @@ struct LibraryView: View {
     let domain: SettingDomain
     
     var body: some View {
-        QGrid(videoRecords, columns: 2) { video in
-            ZStack(alignment: .init(horizontal: .leading, vertical: .bottom)) {
-                Image(uiImage: video.thumbnailImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .cornerRadius(10)
-                
-                VStack(alignment: .leading) {
-                    Text(video.name!)
-                        .font(.caption)
-                    
-                    Text(video.sizeString)
-                        .font(.caption)
-                }
-                .padding(5)
-                .background(Blur().cornerRadius(5))
-                .padding([.leading, .bottom], 5)
+        GalleryGridView(items: Array(videoRecords))
+            .actionSheet(item: $selectedVideo) { video in
+                ActionSheet(title: Text(video.name),
+                            buttons: [.default(Text("Set").bold()) {
+                                FrameTabModel.shared.setVideo(video, forDomain: domain)
+                              }, .default(Text("Preview")) {
+                                previewingVideo = video
+                              }, .cancel()])
             }
-            .onTapGesture {
-                selectedVideo = video
+            .sheet(item: $previewingVideo) { video in
+                AVPlayerVCView(videoURL: video.videoURL)
             }
-        }
-        .actionSheet(item: $selectedVideo) { video in
-            ActionSheet(title: Text(video.name!),
-                        buttons: [.default(Text("Set").bold()) {
-                            FrameTabModel.shared.setVideo(video, forDomain: domain)
-                          }, .default(Text("Preview")) {
-                            previewingVideo = video
-                          }, .cancel()])
-        }
-        .sheet(item: $previewingVideo) { video in
-            AVPlayerVCView(videoURL: video.videoURL!)
-        }
+            .padding()
     }
 }
 
-//struct LibraryView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LibraryView()
-//    }
-//}
+extension VideoRecord: GalleryGridItemRepresentable {
+    var image: UIImage? {
+        thumbnailData.flatMap(UIImage.init(data:))
+    }
+    
+    var imageURL: URL {
+        URL(fileURLWithPath: "/")
+    }
+}

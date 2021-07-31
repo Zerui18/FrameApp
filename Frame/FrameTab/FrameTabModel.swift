@@ -31,24 +31,24 @@ class FrameTabModel: ObservableObject {
     }
     
     func setVideo(_ video: VideoRecord, forDomain domain: SettingDomain) {
-        let path = video.videoURL?.path
+        let path = video.videoURL.path
         switch domain {
         case .both:
             _videoPathHomescreen = ""
             _videoPathLockscreen = ""
-            _videoPathShared = path ?? ""
+            _videoPathShared = path
         case .homescreen:
             if !_videoPathShared.isEmpty {
                 _videoPathLockscreen = _videoPathShared
                 _videoPathShared = ""
             }
-            _videoPathHomescreen = path ?? ""
+            _videoPathHomescreen = path
         case .lockscreen:
             if !_videoPathShared.isEmpty {
                 _videoPathHomescreen = _videoPathShared
                 _videoPathShared = ""
             }
-            _videoPathLockscreen = path ?? ""
+            _videoPathLockscreen = path
         }
         notifyTweak()
     }

@@ -33,7 +33,7 @@ struct FrameTabPage: View {
                 } label: {
                     Text("Choose Video")
                         .bold()
-                        .foregroundColor(Color(.label))
+                        .foregroundColor(Color(.white))
                         .frame(maxWidth: .infinity)
                         .padding()
                         .background(
@@ -52,8 +52,8 @@ struct FrameTabPage: View {
     }
 }
 
-//struct FrameTabPage_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FrameTabPage(page: .homescreen)
-//    }
-//}
+struct FrameTabPage_Previews: PreviewProvider {
+    static var previews: some View {
+        FrameTabPage(domain: .homescreen)
+    }
+}

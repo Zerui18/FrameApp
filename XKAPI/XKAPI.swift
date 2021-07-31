@@ -43,7 +43,7 @@ public struct XKListingAPIResponse: Codable {
 }
 
 /// The english translation for the important category names.
-fileprivate let englishNames = ["最新" : "Latest", "推荐" : "Recommended", "景观" : "Landscapes", "动漫" : "Anime", "游戏" : "Games", "其它" : "Abstract"]
+fileprivate let englishNames = ["首页" : "Home", "最新" : "New", "推荐" : "Hot", "随机" : "Random", "景观" : "Landscapes", "动漫" : "Anime", "游戏" : "Games", "其它" : "Abstract"]
 
 /// The categories to be filtered out.
 fileprivate let filteredNames = ["小姐姐", "再淘一下", "公告"]

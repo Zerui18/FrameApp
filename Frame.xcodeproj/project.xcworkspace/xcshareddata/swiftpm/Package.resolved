@@ -2,12 +2,21 @@
   "object": {
     "pins": [
       {
-        "package": "QGrid",
-        "repositoryURL": "https://github.com/Q-Mobile/QGrid",
+        "package": "Nuke",
+        "repositoryURL": "https://github.com/kean/Nuke.git",
         "state": {
           "branch": null,
-          "revision": "804e59f8cb9f66b226685e9369fb82029742b83a",
-          "version": "0.1.4"
+          "revision": "3bd3a1765bdf62d561d4c2e10e1c4fc7a010f44e",
+          "version": "10.3.2"
+        }
+      },
+      {
+        "package": "NVActivityIndicatorView",
+        "repositoryURL": "https://github.com/ninjaprox/NVActivityIndicatorView.git",
+        "state": {
+          "branch": null,
+          "revision": "bcb52371f2259254bac6690f92bb474a61768c47",
+          "version": "5.1.1"
         }
       }
     ]

@@ -52,5 +52,6 @@ struct FrameTab: View {
 struct FrameTab_Previews: PreviewProvider {
     static var previews: some View {
         FrameTab()
+            .colorScheme(.light)
     }
 }

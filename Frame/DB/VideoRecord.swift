@@ -44,6 +44,19 @@ class VideoRecord: NSManagedObject {
     
 }
 
+// MARK: CoreData Attributes
+extension VideoRecord {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<VideoRecord> {
+        return NSFetchRequest<VideoRecord>(entityName: "VideoRecord")
+    }
+
+    @NSManaged public var name: String
+    @NSManaged public var size: Int64
+    @NSManaged public var thumbnailData: Data?
+    @NSManaged public var timestamp: Date
+    @NSManaged public var videoURL: URL
+}
+
 // Taken from: https://stackoverflow.com/a/55531065
 extension AVAsset {
     func generateThumbnail(completion: @escaping (UIImage?) -> Void) {
