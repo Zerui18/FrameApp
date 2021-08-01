@@ -10,6 +10,8 @@ import SwiftUI
 struct CatalogueTab: View {
     
     @ObservedObject private var model: CatalogueModel = .shared
+    @State private var selectedVideo: CatalogueModel.Item?
+    @State private var previewingVideo: CatalogueModel.Item?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -28,16 +30,27 @@ struct CatalogueTab: View {
                 }
                 .padding(.leading, 5)
             }
+            .padding([.leading, .trailing], 30)
             .padding(.bottom, 15)
             
-            GalleryGridView(items: model.listingItems)
+            GalleryGridView(items: model.listingItems,
+                            selectedItem: $selectedVideo,
+                            edgeInsets: .init(top: 0, left: 20, bottom: 0, right: 20))
                 .onAppear {
                     WebPImageDecoder.enable()
                     model.fetchIndexIfNecessary()
                 }
         }
-        .padding([.leading, .trailing], 30)
         .padding(.top, 15)
+        .actionSheet(item: $selectedVideo) { video in
+            ActionSheet(title: Text(video.name),
+                        buttons: [.default(Text("Preview")) {
+                            previewingVideo = video
+                          }, .cancel()])
+        }
+        .sheet(item: $previewingVideo) { video in
+            AVPlayerVCView(videoURL: video.videoURL)
+        }
     }
 }
 

@@ -407,7 +407,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# add frameworks\nmkdir $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\ncp -r $BUILT_PRODUCTS_DIR/XKAPI.framework $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n# codesign appears to happen afterwards, so we manually do it here\ncodesign -f -s \"iPhone Developer: Zerui Chen (HWVV478235)\" $BUILT_PRODUCTS_DIR/Frame.app\n# Install to iPhone over ssh\nrsync -a $BUILT_PRODUCTS_DIR/Frame.app root@localhost:/Applications/\n# Relaunch\nssh root@localhost '/usr/local/bin/rela com.zx02.Frame'\n";
+			shellScript = "if [[ \"${SDKROOT}\" != *Simulator* ]]\nthen\n# add frameworks\nmkdir $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\ncp -r $BUILT_PRODUCTS_DIR/XKAPI.framework $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n# codesign appears to happen afterwards, so we manually do it here\ncodesign -f -s \"iPhone Developer: Zerui Chen (HWVV478235)\" $BUILT_PRODUCTS_DIR/Frame.app\n# Install to iPhone over ssh\nrsync -a $BUILT_PRODUCTS_DIR/Frame.app root@localhost:/Applications/\n# Relaunch\nssh root@localhost '/usr/local/bin/rela com.zx02.Frame'\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

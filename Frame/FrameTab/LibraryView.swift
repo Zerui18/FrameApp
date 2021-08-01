@@ -18,7 +18,9 @@ struct LibraryView: View {
     let domain: SettingDomain
     
     var body: some View {
-        GalleryGridView(items: Array(videoRecords))
+        GalleryGridView(items: Array(videoRecords),
+                        selectedItem: $selectedVideo,
+                        edgeInsets: .init(top: 20, left: 20, bottom: 20, right: 20))
             .actionSheet(item: $selectedVideo) { video in
                 ActionSheet(title: Text(video.name),
                             buttons: [.default(Text("Set").bold()) {
@@ -30,7 +32,6 @@ struct LibraryView: View {
             .sheet(item: $previewingVideo) { video in
                 AVPlayerVCView(videoURL: video.videoURL)
             }
-            .padding()
     }
 }
 

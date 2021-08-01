@@ -20,6 +20,29 @@ protocol GalleryGridItemRepresentable: Identifiable, Hashable {
 
 struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable {
     
+    init(items: [Item], selectedItem: Binding<Item?>, edgeInsets: UIEdgeInsets = .zero) {
+        self.items = items
+        self.selectedItem = selectedItem
+        self.edgeInsets = edgeInsets
+    }
+    
+    let items: [Item]
+    let selectedItem: Binding<Item?>
+    let edgeInsets: UIEdgeInsets
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(selectedItem: selectedItem, edgeInsets: edgeInsets)
+    }
+    
+    func makeUIView(context: Context) -> some UIView {
+        context.coordinator.collectionView
+    }
+    
+    func updateUIView(_ uiView: UIViewType, context: Context) {
+        context.coordinator.updateSnapshot(with: items)
+    }
+    
+    // MARK: GalleryGridCell
     fileprivate class GalleryGridCell: UICollectionViewCell {
         
         var item: Item! {
@@ -115,10 +138,11 @@ struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable 
         }
     }
     
-    let items: [Item]
-    
+    // MARK: Coordinator
     class Coordinator: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
         enum Section { case main }
+        
+        let selectedItem: Binding<Item?>
         
         /// The collectionView.
         lazy var collectionView: UICollectionView = {
@@ -126,7 +150,6 @@ struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable 
             cView.register(GalleryGridCell.self, forCellWithReuseIdentifier: "galleryCell")
             cView.delegate = self
             cView.backgroundColor = .systemBackground
-            cView.showsVerticalScrollIndicator = false
             return cView
         }()
         
@@ -137,9 +160,12 @@ struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable 
             return cell
         }
         
-        override init() {
+        init(selectedItem: Binding<Item?>,
+             edgeInsets: UIEdgeInsets) {
+            self.selectedItem = selectedItem
             super.init()
             self.collectionView.dataSource = dataSource
+            self.collectionView.contentInset = edgeInsets
         }
         
         func updateSnapshot(with items: [Item]) {
@@ -155,25 +181,19 @@ struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable 
             let columns: CGFloat = 2
             let spacing: CGFloat = 20
             let aspectRatio: CGFloat = 903 / 507
-            let width = (collectionView.bounds.width - (columns-1) * spacing) / columns
+            let availableWidth = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
+            let width = (availableWidth - (columns-1) * spacing) / columns
             return .init(width: width, height: width * aspectRatio)
         }
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
             20
         }
-    }
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator()
-    }
-    
-    func makeUIView(context: Context) -> some UIView {
-        context.coordinator.collectionView
-    }
-    
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-        context.coordinator.updateSnapshot(with: items)
+        
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            collectionView.deselectItem(at: indexPath, animated: false)
+            selectedItem.wrappedValue = dataSource.itemIdentifier(for: indexPath)
+        }
     }
     
 }
