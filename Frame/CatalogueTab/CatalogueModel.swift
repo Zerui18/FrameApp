@@ -8,11 +8,21 @@
 import UIKit
 import Combine
 import XKAPI
+import Tetra
 
 class CatalogueModel: ObservableObject {
     
-    struct Item: GalleryGridItemRepresentable {
-        public var id: URL { videoURL }
+    class Item: GalleryGridItemRepresentable {
+        
+        init(name: String, sizeString: String, videoURL: URL, imageURL: URL, image: UIImage? = nil) {
+            self.name = name
+            self.sizeString = sizeString
+            self.videoURL = videoURL
+            self.imageURL = imageURL
+            self.image = image
+        }
+        
+        public var id: String { name }
         /// Display name.
         public let name: String
         /// Formatted size string.
@@ -22,7 +32,19 @@ class CatalogueModel: ObservableObject {
         /// URL to the webp thumbnail image.
         public var imageURL: URL
         
-        public let image: UIImage? = nil
+        public let image: UIImage?
+        
+        let isLocal: Bool = false
+        
+        lazy var downloadTask = Tetra.shared.downloadTask(forId: name, dstURL: rootDocumentsFolder.appendingPathComponent("videos/\(name).mp4"))
+        
+        static func ==(_ a: Item, _ b: Item) -> Bool {
+            a.id == b.id
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
     }
     
     static let shared = CatalogueModel()

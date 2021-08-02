@@ -55,11 +55,9 @@ class FrameTabModel: ObservableObject {
     
     /// Notify the tweak of video change.
     private func notifyTweak() {
-//        #if !targetEnvironment(simulator)
         let center = CFNotificationCenterGetDarwinNotifyCenter()
         let name = CFNotificationName("com.zx02.frame.videoChanged" as CFString)
         CFNotificationCenterPostNotification(center, name, nil, nil, true)
-//        #endif
     }
     
 }

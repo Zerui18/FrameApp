@@ -7,7 +7,6 @@
 
 import UIKit
 import CoreData
-import WebP
 
 /// The root folder for all of Frame's documents.
 let rootDocumentsFolder: URL = {
@@ -18,6 +17,10 @@ let rootDocumentsFolder: URL = {
     #endif
     if !FileManager.default.fileExists(atPath: url.path) {
         try! FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: [.posixPermissions:511])
+    }
+    let videosPath = url.appendingPathComponent("videos").path
+    if !FileManager.default.fileExists(atPath: videosPath) {
+        try! FileManager.default.createDirectory(atPath: videosPath, withIntermediateDirectories: false, attributes: [.posixPermissions:511])
     }
     return url
 }()
@@ -63,17 +66,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try FileManager.default.moveItem(at: oldVideoFolder, to: newVideoFolder)
                 // Scan and create records.
                 let videoNames = try FileManager.default.contentsOfDirectory(atPath: newVideoFolder.path).map { String($0.prefix($0.count-4)) }
-                let oldThumbsFolder = oldFolder.appendingPathComponent("Cache/Thumbs")
-                let webpDecoder = WebPDecoder()
                 for name in videoNames {
-                    // Try to get thumbnail, but don't stop if we fail on one.
-                    guard let thumbsData = try? Data(contentsOf: oldThumbsFolder.appendingPathComponent(name + ".webp")) else {
-                        continue
-                    }
-                    // Try to read and decode the thumb, if it's nil we can just generate it from the video.
-                    let thumbnailImage = (try? webpDecoder.decode(thumbsData, options: WebPDecoderOptions())).flatMap(UIImage.init(cgImage:))
                     // Create record in db.
-                    _ = VideoRecord(withName: name, videoURL: newVideoFolder.appendingPathComponent(name+".mp4"), thumbnail: thumbnailImage)
+                    _ = VideoRecord(withName: name, videoURL: newVideoFolder.appendingPathComponent(name+".mp4"), thumbnail: nil)
                 }
                 // Finally, remove the old folder.
                 try FileManager.default.removeItem(at: oldFolder)

@@ -36,8 +36,12 @@ struct LibraryView: View {
 }
 
 extension VideoRecord: GalleryGridItemRepresentable {
+    var isLocal: Bool {
+        true
+    }
+    
     var image: UIImage? {
-        thumbnailData.flatMap(UIImage.init(data:))
+        thumbnailImage
     }
     
     var imageURL: URL {

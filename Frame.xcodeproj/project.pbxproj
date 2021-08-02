@@ -30,6 +30,16 @@
 		BFC9006326B4F90A00B012E1 /* Nuke+WebP.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9006226B4F90A00B012E1 /* Nuke+WebP.swift */; };
 		BFC9006626B4F9A000B012E1 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = BFC9006526B4F9A000B012E1 /* Nuke */; };
 		BFC9006926B507F200B012E1 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = BFC9006826B507F200B012E1 /* NVActivityIndicatorView */; };
+		BFC9007326B82FB400B012E1 /* Tetra.h in Headers */ = {isa = PBXBuildFile; fileRef = BFC9007126B82FB400B012E1 /* Tetra.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFC9007626B82FB400B012E1 /* Tetra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC9006F26B82FB400B012E1 /* Tetra.framework */; };
+		BFC9007726B82FB400B012E1 /* Tetra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFC9006F26B82FB400B012E1 /* Tetra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BFC9007E26B82FBD00B012E1 /* TTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9007B26B82FBD00B012E1 /* TTask.swift */; };
+		BFC9007F26B82FBD00B012E1 /* URLSession+Tetra.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9007C26B82FBD00B012E1 /* URLSession+Tetra.swift */; };
+		BFC9008026B82FBD00B012E1 /* Tetra.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9007D26B82FBD00B012E1 /* Tetra.swift */; };
+		BFC9008626B835E000B012E1 /* DownloadsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9008526B835E000B012E1 /* DownloadsModel.swift */; };
+		BFC9008826B83D0000B012E1 /* DownloadsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9008726B83D0000B012E1 /* DownloadsList.swift */; };
+		BFC9008A26B83D0800B012E1 /* DownloadsListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9008926B83D0800B012E1 /* DownloadsListRow.swift */; };
+		BFC9008C26B84CEB00B012E1 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9008B26B84CEB00B012E1 /* ProgressBar.swift */; };
 		BFDB829126A02BA900F9195E /* CatalogueTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB829026A02BA900F9195E /* CatalogueTab.swift */; };
 		BFDB829326A02BAF00F9195E /* MoreTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB829226A02BAF00F9195E /* MoreTab.swift */; };
 		BFDB829626A0692400F9195E /* BashRun.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDB829526A0692400F9195E /* BashRun.m */; };
@@ -53,6 +63,13 @@
 			remoteGlobalIDString = BFC9004726B43FC600B012E1;
 			remoteInfo = XKAPI;
 		};
+		BFC9007426B82FB400B012E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF304CD7269888AB005CCB59 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFC9006E26B82FB400B012E1;
+			remoteInfo = Tetra;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +80,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				BFC9005026B43FC600B012E1 /* XKAPI.framework in Embed Frameworks */,
+				BFC9007726B82FB400B012E1 /* Tetra.framework in Embed Frameworks */,
 				BFC9004226B43C7300B012E1 /* WebP.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -92,6 +110,16 @@
 		BFC9005C26B4439300B012E1 /* CatalogueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogueModel.swift; sourceTree = "<group>"; };
 		BFC9006026B4F03A00B012E1 /* GalleryGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryGridView.swift; sourceTree = "<group>"; };
 		BFC9006226B4F90A00B012E1 /* Nuke+WebP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nuke+WebP.swift"; sourceTree = "<group>"; };
+		BFC9006F26B82FB400B012E1 /* Tetra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tetra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFC9007126B82FB400B012E1 /* Tetra.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tetra.h; sourceTree = "<group>"; };
+		BFC9007226B82FB400B012E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFC9007B26B82FBD00B012E1 /* TTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTask.swift; sourceTree = "<group>"; };
+		BFC9007C26B82FBD00B012E1 /* URLSession+Tetra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+Tetra.swift"; sourceTree = "<group>"; };
+		BFC9007D26B82FBD00B012E1 /* Tetra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tetra.swift; sourceTree = "<group>"; };
+		BFC9008526B835E000B012E1 /* DownloadsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsModel.swift; sourceTree = "<group>"; };
+		BFC9008726B83D0000B012E1 /* DownloadsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsList.swift; sourceTree = "<group>"; };
+		BFC9008926B83D0800B012E1 /* DownloadsListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsListRow.swift; sourceTree = "<group>"; };
+		BFC9008B26B84CEB00B012E1 /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		BFD4B2E526A7A9D4006C71CE /* WebP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebP.framework; sourceTree = "<group>"; };
 		BFDB829026A02BA900F9195E /* CatalogueTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogueTab.swift; sourceTree = "<group>"; };
 		BFDB829226A02BAF00F9195E /* MoreTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTab.swift; sourceTree = "<group>"; };
@@ -119,11 +147,19 @@
 				BFC9006926B507F200B012E1 /* NVActivityIndicatorView in Frameworks */,
 				BFC9004126B43C7300B012E1 /* WebP.framework in Frameworks */,
 				BFC9004F26B43FC600B012E1 /* XKAPI.framework in Frameworks */,
+				BFC9007626B82FB400B012E1 /* Tetra.framework in Frameworks */,
 				BFC9006626B4F9A000B012E1 /* Nuke in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BFC9004526B43FC600B012E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFC9006C26B82FB400B012E1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -139,6 +175,7 @@
 				BFD4B2E526A7A9D4006C71CE /* WebP.framework */,
 				BF304CE1269888AB005CCB59 /* Frame */,
 				BFC9004926B43FC600B012E1 /* XKAPI */,
+				BFC9007026B82FB400B012E1 /* Tetra */,
 				BF304CE0269888AB005CCB59 /* Products */,
 				BFD4B2DB26A79DB0006C71CE /* Frameworks */,
 			);
@@ -149,6 +186,7 @@
 			children = (
 				BF304CDF269888AB005CCB59 /* Frame.app */,
 				BFC9004826B43FC600B012E1 /* XKAPI.framework */,
+				BFC9006F26B82FB400B012E1 /* Tetra.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -165,6 +203,7 @@
 				BFDB82AD26A092E400F9195E /* URL++.swift */,
 				BFC9006026B4F03A00B012E1 /* GalleryGridView.swift */,
 				BFC9006226B4F90A00B012E1 /* Nuke+WebP.swift */,
+				BFC9008B26B84CEB00B012E1 /* ProgressBar.swift */,
 				BFDB82B126A093E100F9195E /* Views */,
 				BFDB828D26A02B7F00F9195E /* FrameTab */,
 				BFDB828E26A02B8D00F9195E /* CatalogueTab */,
@@ -196,6 +235,18 @@
 			path = XKAPI;
 			sourceTree = "<group>";
 		};
+		BFC9007026B82FB400B012E1 /* Tetra */ = {
+			isa = PBXGroup;
+			children = (
+				BFC9007126B82FB400B012E1 /* Tetra.h */,
+				BFC9007D26B82FBD00B012E1 /* Tetra.swift */,
+				BFC9007B26B82FBD00B012E1 /* TTask.swift */,
+				BFC9007C26B82FBD00B012E1 /* URLSession+Tetra.swift */,
+				BFC9007226B82FB400B012E1 /* Info.plist */,
+			);
+			path = Tetra;
+			sourceTree = "<group>";
+		};
 		BFD4B2DB26A79DB0006C71CE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +272,9 @@
 			children = (
 				BFC9005C26B4439300B012E1 /* CatalogueModel.swift */,
 				BFDB829026A02BA900F9195E /* CatalogueTab.swift */,
+				BFC9008526B835E000B012E1 /* DownloadsModel.swift */,
+				BFC9008726B83D0000B012E1 /* DownloadsList.swift */,
+				BFC9008926B83D0800B012E1 /* DownloadsListRow.swift */,
 			);
 			path = CatalogueTab;
 			sourceTree = "<group>";
@@ -284,6 +338,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFC9006A26B82FB400B012E1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFC9007326B82FB400B012E1 /* Tetra.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -301,6 +363,7 @@
 			);
 			dependencies = (
 				BFC9004E26B43FC600B012E1 /* PBXTargetDependency */,
+				BFC9007526B82FB400B012E1 /* PBXTargetDependency */,
 			);
 			name = Frame;
 			packageProductDependencies = (
@@ -329,6 +392,24 @@
 			productReference = BFC9004826B43FC600B012E1 /* XKAPI.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		BFC9006E26B82FB400B012E1 /* Tetra */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFC9007A26B82FB400B012E1 /* Build configuration list for PBXNativeTarget "Tetra" */;
+			buildPhases = (
+				BFC9006A26B82FB400B012E1 /* Headers */,
+				BFC9006B26B82FB400B012E1 /* Sources */,
+				BFC9006C26B82FB400B012E1 /* Frameworks */,
+				BFC9006D26B82FB400B012E1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tetra;
+			productName = Tetra;
+			productReference = BFC9006F26B82FB400B012E1 /* Tetra.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -343,6 +424,10 @@
 						LastSwiftMigration = 1250;
 					};
 					BFC9004726B43FC600B012E1 = {
+						CreatedOnToolsVersion = 12.5;
+						LastSwiftMigration = 1250;
+					};
+					BFC9006E26B82FB400B012E1 = {
 						CreatedOnToolsVersion = 12.5;
 						LastSwiftMigration = 1250;
 					};
@@ -367,6 +452,7 @@
 			targets = (
 				BF304CDE269888AB005CCB59 /* Frame */,
 				BFC9004726B43FC600B012E1 /* XKAPI */,
+				BFC9006E26B82FB400B012E1 /* Tetra */,
 			);
 		};
 /* End PBXProject section */
@@ -383,6 +469,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BFC9004626B43FC600B012E1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFC9006D26B82FB400B012E1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -419,6 +512,7 @@
 				BF0E4317269F2DE0009E2208 /* VideoView.swift in Sources */,
 				BFDB82B526A095DD00F9195E /* AVPlayerVCView.swift in Sources */,
 				BFDB829626A0692400F9195E /* BashRun.m in Sources */,
+				BFC9008626B835E000B012E1 /* DownloadsModel.swift in Sources */,
 				BFDB829126A02BA900F9195E /* CatalogueTab.swift in Sources */,
 				BFDB829E26A07BAB00F9195E /* RootModel.swift in Sources */,
 				BF304CE3269888AB005CCB59 /* AppDelegate.swift in Sources */,
@@ -426,15 +520,18 @@
 				BFDB82B026A093C100F9195E /* Blur.swift in Sources */,
 				BF304CE5269888AB005CCB59 /* SceneDelegate.swift in Sources */,
 				BF304CF726988D42005CCB59 /* Setting.swift in Sources */,
+				BFC9008826B83D0000B012E1 /* DownloadsList.swift in Sources */,
 				BF0E4319269F2E09009E2208 /* FrameTabModel.swift in Sources */,
 				BFDB82A126A07E8700F9195E /* Frame.xcdatamodeld in Sources */,
 				BFDB82A426A07EE600F9195E /* VideoRecord.swift in Sources */,
 				BFFBD1BA269E727E004A8F23 /* FrameTab.swift in Sources */,
 				BF16A9CD26A5C92500858F19 /* FrameTabPageModel.swift in Sources */,
 				BFC9006126B4F03A00B012E1 /* GalleryGridView.swift in Sources */,
+				BFC9008A26B83D0800B012E1 /* DownloadsListRow.swift in Sources */,
 				BFC9006326B4F90A00B012E1 /* Nuke+WebP.swift in Sources */,
 				BF304CE7269888AB005CCB59 /* ContentView.swift in Sources */,
 				BFDB82AC26A0877400F9195E /* LibraryView.swift in Sources */,
+				BFC9008C26B84CEB00B012E1 /* ProgressBar.swift in Sources */,
 				BFDB829326A02BAF00F9195E /* MoreTab.swift in Sources */,
 				BFDB82B726A098A000F9195E /* ParallexCropView.swift in Sources */,
 				BFC9005D26B4439300B012E1 /* CatalogueModel.swift in Sources */,
@@ -452,6 +549,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFC9006B26B82FB400B012E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFC9007E26B82FBD00B012E1 /* TTask.swift in Sources */,
+				BFC9007F26B82FBD00B012E1 /* URLSession+Tetra.swift in Sources */,
+				BFC9008026B82FBD00B012E1 /* Tetra.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -459,6 +566,11 @@
 			isa = PBXTargetDependency;
 			target = BFC9004726B43FC600B012E1 /* XKAPI */;
 			targetProxy = BFC9004D26B43FC600B012E1 /* PBXContainerItemProxy */;
+		};
+		BFC9007526B82FB400B012E1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFC9006E26B82FB400B012E1 /* Tetra */;
+			targetProxy = BFC9007426B82FB400B012E1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -720,6 +832,65 @@
 			};
 			name = Release;
 		};
+		BFC9007826B82FB400B012E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 789MW96BQB;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Tetra/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zx02.Tetra;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BFC9007926B82FB400B012E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 789MW96BQB;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Tetra/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zx02.Tetra;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -746,6 +917,15 @@
 			buildConfigurations = (
 				BFC9005226B43FC600B012E1 /* Debug */,
 				BFC9005326B43FC600B012E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFC9007A26B82FB400B012E1 /* Build configuration list for PBXNativeTarget "Tetra" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFC9007826B82FB400B012E1 /* Debug */,
+				BFC9007926B82FB400B012E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

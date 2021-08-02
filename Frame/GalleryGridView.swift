@@ -16,6 +16,7 @@ protocol GalleryGridItemRepresentable: Identifiable, Hashable {
     var image: UIImage? { get }
     var imageURL: URL { get }
     var videoURL: URL { get }
+    var isLocal: Bool { get }
 }
 
 struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable {
@@ -56,7 +57,7 @@ struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable 
                         loadingIndicator.stopAnimating()
                         thumbnailImageView.image = image
                     }
-                    else {
+                    else if !item.isLocal {
                         // Load image from URL.
                         loadingIndicator.startAnimating()
                         Nuke.loadImage(with: item.imageURL,

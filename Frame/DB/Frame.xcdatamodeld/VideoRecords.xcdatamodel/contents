@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="21A5284e" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="VideoRecord" representedClassName="VideoRecord" syncable="YES">
+        <attribute name="isDownloaded" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="remoteURL" optional="YES" attributeType="URI"/>
         <attribute name="size" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="thumbnailData" optional="YES" attributeType="Binary"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="videoURL" attributeType="URI"/>
+        <attribute name="videoURL" optional="YES" attributeType="URI"/>
     </entity>
     <elements>
-        <element name="VideoRecord" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="VideoRecord" positionX="-63" positionY="-18" width="128" height="134"/>
     </elements>
 </model>
