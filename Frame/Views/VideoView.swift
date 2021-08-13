@@ -9,18 +9,23 @@ import SwiftUI
 import UIKit
 import AVFoundation
 
-class AVPlayerView: UIView {
+class AVPlayerLoopView: UIView {
     
     let playerLayer: AVPlayerLayer
+    let playerLooper: AVPlayerLooper
     
-    init() {
-        self.playerLayer = .init()
+    init(item: AVPlayerItem) {
+        let player = AVQueuePlayer()
+        player.isMuted = true
+        self.playerLooper = AVPlayerLooper(player: player, templateItem: item)
+        self.playerLayer = .init(player: player)
         super.init(frame: .zero)
         layer.addSublayer(playerLayer)
         layer.cornerRadius = 10
         layer.borderColor = UIColor.secondaryLabel.cgColor
         layer.borderWidth = 3
         layer.masksToBounds = true
+        player.play()
     }
     
     required init?(coder: NSCoder) {
@@ -33,8 +38,6 @@ class AVPlayerView: UIView {
     }
 }
 
-fileprivate var looperKey = 0
-
 struct VideoView: UIViewRepresentable {
     
     init(item: AVPlayerItem) {
@@ -43,17 +46,10 @@ struct VideoView: UIViewRepresentable {
     
     private let item: AVPlayerItem
     
-    func makeUIView(context: Context) -> AVPlayerView {
-        return AVPlayerView()
+    func makeUIView(context: Context) -> AVPlayerLoopView {
+        AVPlayerLoopView(item: item)
     }
     
-    func updateUIView(_ uiView: AVPlayerView, context: Context) {
-        let player = AVQueuePlayer()
-        player.isMuted = true
-        let looper = AVPlayerLooper(player: player, templateItem: item)
-        objc_setAssociatedObject(player, &looperKey, looper, .OBJC_ASSOCIATION_RETAIN)
-        uiView.playerLayer.player = player
-        uiView.widthAnchor.constraint(equalTo: uiView.heightAnchor).isActive = true
-        player.play()
+    func updateUIView(_ uiView: AVPlayerLoopView, context: Context) {
     }
 }

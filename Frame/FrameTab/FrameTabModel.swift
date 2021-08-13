@@ -31,7 +31,7 @@ class FrameTabModel: ObservableObject {
     }
     
     func setVideo(_ video: VideoRecord, forDomain domain: SettingDomain) {
-        let path = video.videoURL.path
+        let path = video.localURL.path
         switch domain {
         case .both:
             _videoPathHomescreen = ""

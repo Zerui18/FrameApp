@@ -55,19 +55,19 @@ class FrameTabPageModel: ObservableObject {
         
         // Handle cropRect to parallexTrail translation.
         // Calculations assume iPhone in portrait.
-        $cropRect
-            .debounce(for: 0.5, scheduler: RunLoop.main)
-            .removeDuplicates()
-            .sink { cropRect in
-                let deviceSize = UIScreen.main.bounds.size
-                let minX = self.videoSize.width * cropRect.minX
-                let maxX = self.videoSize.width * cropRect.maxX
-                let minY = self.videoSize.height * cropRect.minY
-                let maxY = self.videoSize.height * cropRect.maxY
-                let deviceWidthScaled = deviceSize.width * (deviceSize.height / (maxY - minY))
-                
-            }
-            .store(in: &bag)
+//        $cropRect
+//            .debounce(for: 0.5, scheduler: RunLoop.main)
+//            .removeDuplicates()
+//            .sink { cropRect in
+//                let deviceSize = UIScreen.main.bounds.size
+//                let minX = self.videoSize.width * cropRect.minX
+//                let maxX = self.videoSize.width * cropRect.maxX
+//                let minY = self.videoSize.height * cropRect.minY
+//                let maxY = self.videoSize.height * cropRect.maxY
+//                let deviceWidthScaled = deviceSize.width * (deviceSize.height / (maxY - minY))
+//
+//            }
+//            .store(in: &bag)
     }
     
 }

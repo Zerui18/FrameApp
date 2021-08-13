@@ -21,18 +21,23 @@ protocol GalleryGridItemRepresentable: Identifiable, Hashable {
 
 struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable {
     
-    init(items: [Item], selectedItem: Binding<Item?>, edgeInsets: UIEdgeInsets = .zero) {
+    init(items: [Item],
+         selectedItem: Binding<Item?>,
+         edgeInsets: UIEdgeInsets = .zero,
+         onRefresh: ((@escaping () -> Void)->Void)? = nil) {
         self.items = items
         self.selectedItem = selectedItem
         self.edgeInsets = edgeInsets
+        self.onRefresh = onRefresh
     }
     
     let items: [Item]
     let selectedItem: Binding<Item?>
     let edgeInsets: UIEdgeInsets
+    let onRefresh: ((@escaping ()->Void)->Void)?
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(selectedItem: selectedItem, edgeInsets: edgeInsets)
+        Coordinator(selectedItem: selectedItem, edgeInsets: edgeInsets, onRefresh: onRefresh)
     }
     
     func makeUIView(context: Context) -> some UIView {
@@ -40,7 +45,7 @@ struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable 
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        context.coordinator.updateSnapshot(with: items)
+        context.coordinator.items = items
     }
     
     // MARK: GalleryGridCell
@@ -81,6 +86,11 @@ struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable 
             label.font = .systemFont(ofSize: 12)
             return label
         }()
+        lazy var stack: UIStackView = {
+            let view = UIStackView(arrangedSubviews: [self.nameLabel, self.sizeLabel])
+            view.axis = .vertical
+            return view
+        }()
         let blurView: UIVisualEffectView = {
             let view = UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
             view.layer.masksToBounds = true
@@ -113,8 +123,9 @@ struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable 
             loadingIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
             loadingIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
             
-            nameLabel.translatesAutoresizingMaskIntoConstraints = false
-            sizeLabel.translatesAutoresizingMaskIntoConstraints = false
+//            nameLabel.translatesAutoresizingMaskIntoConstraints = false
+//            sizeLabel.translatesAutoresizingMaskIntoConstraints = false
+            stack.translatesAutoresizingMaskIntoConstraints = false
             blurView.translatesAutoresizingMaskIntoConstraints = false
             
             contentView.addSubview(blurView)
@@ -123,15 +134,12 @@ struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable 
             blurView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -5).isActive = true
             blurView.layer.cornerRadius = 5
             
-            blurView.contentView.addSubview(nameLabel)
-            blurView.contentView.addSubview(sizeLabel)
-            nameLabel.leadingAnchor.constraint(equalTo: blurView.contentView.leadingAnchor, constant: 5).isActive = true
-            nameLabel.centerXAnchor.constraint(equalTo: blurView.contentView.centerXAnchor).isActive = true
-            nameLabel.topAnchor.constraint(equalTo: blurView.contentView.topAnchor, constant: 5).isActive = true
-            sizeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5).isActive = true
-            sizeLabel.leadingAnchor.constraint(equalTo: blurView.contentView.leadingAnchor, constant: 5).isActive = true
-            sizeLabel.centerXAnchor.constraint(equalTo: blurView.contentView.centerXAnchor).isActive = true
-            sizeLabel.bottomAnchor.constraint(equalTo: blurView.contentView.bottomAnchor, constant: -5).isActive = true
+            blurView.contentView.addSubview(stack)
+            stack.translatesAutoresizingMaskIntoConstraints = false
+            stack.leadingAnchor.constraint(equalTo: blurView.contentView.leadingAnchor, constant: 5).isActive = true
+            stack.centerXAnchor.constraint(equalTo: blurView.contentView.centerXAnchor).isActive = true
+            stack.topAnchor.constraint(equalTo: blurView.contentView.topAnchor, constant: 5).isActive = true
+            stack.centerYAnchor.constraint(equalTo: blurView.contentView.centerYAnchor).isActive = true
         }
         
         required init?(coder: NSCoder) {
@@ -140,19 +148,55 @@ struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable 
     }
     
     // MARK: Coordinator
-    class Coordinator: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    class Coordinator: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
         enum Section { case main }
         
-        let selectedItem: Binding<Item?>
+        private let selectedItem: Binding<Item?>
+        private let onRefresh: ((@escaping () -> Void) -> Void)?
         
         /// The collectionView.
         lazy var collectionView: UICollectionView = {
             let cView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
             cView.register(GalleryGridCell.self, forCellWithReuseIdentifier: "galleryCell")
+            cView.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerCell")
             cView.delegate = self
             cView.backgroundColor = .systemBackground
+            cView.keyboardDismissMode = .interactive
+            if self.onRefresh != nil {
+                cView.refreshControl = refreshControl
+            }
             return cView
         }()
+        
+        lazy var refreshControl: UIRefreshControl = {
+            let control = UIRefreshControl()
+            control.addTarget(self, action: #selector(performRefresh(_:)), for: .valueChanged)
+            return control
+        }()
+        
+        lazy var searchBar: UISearchBar = {
+            let bar = UISearchBar()
+            bar.delegate = self
+            bar.tintColor = UIColor(named: "AccentColor")
+            bar.placeholder = "Name"
+            bar.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            return bar
+        }()
+        
+        var items = [Item]() {
+            didSet {
+                updateSnapshot()
+            }
+        }
+        
+        var filterActive = false
+        var filteredItems: [Item] {
+            searchBar.text.flatMap { text in
+                items.filter {
+                    $0.name.contains(text)
+                }
+            } ?? items
+        }
         
         /// The diffable datasource.
         lazy var dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) { collectionView, indexPath, item in
@@ -162,22 +206,45 @@ struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable 
         }
         
         init(selectedItem: Binding<Item?>,
-             edgeInsets: UIEdgeInsets) {
+             edgeInsets: UIEdgeInsets,
+             onRefresh: ((@escaping () -> Void)->Void)?) {
             self.selectedItem = selectedItem
+            self.onRefresh = onRefresh
             super.init()
+            dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+                let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerCell", for: indexPath)
+                self.searchBar.frame = header.bounds
+                header.addSubview(self.searchBar)
+                return header
+            }
             self.collectionView.dataSource = dataSource
             self.collectionView.contentInset = edgeInsets
         }
         
-        func updateSnapshot(with items: [Item]) {
+        @objc private func performRefresh(_ event: UIEvent) {
+            if let handler = self.onRefresh {
+                handler {
+                    self.refreshControl.endRefreshing()
+                    UIView.animate(withDuration: 0.2) {
+                        self.collectionView.contentOffset.y = 0
+                    }
+                }
+            }
+            else {
+                refreshControl.endRefreshing()
+            }
+        }
+        
+        func updateSnapshot() {
             DispatchQueue.main.async {
                 var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
                 snapshot.appendSections([.main])
-                snapshot.appendItems(items)
+                snapshot.appendItems(self.filterActive ? self.filteredItems:self.items)
                 self.dataSource.apply(snapshot)
             }
         }
         
+        // MARK: UICollectionViewDelegate
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             let columns: CGFloat = 2
             let spacing: CGFloat = 20
@@ -191,9 +258,23 @@ struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable 
             20
         }
         
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+            .init(top: 20, left: 0, bottom: 0, right: 0)
+        }
+        
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+            CGSize(width: collectionView.frame.width, height: 40)
+        }
+        
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             collectionView.deselectItem(at: indexPath, animated: false)
             selectedItem.wrappedValue = dataSource.itemIdentifier(for: indexPath)
+        }
+        
+        // MARK: UISearchBarDelegate
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            filterActive = !searchText.isEmpty
+            updateSnapshot()
         }
     }
     

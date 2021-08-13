@@ -7,6 +7,8 @@
 
 import UIKit
 import CoreData
+import WebP
+import AVFoundation
 
 /// The root folder for all of Frame's documents.
 let rootDocumentsFolder: URL = {
@@ -15,6 +17,7 @@ let rootDocumentsFolder: URL = {
     #else
     let url = URL(fileURLWithPath: "/Users/zeruichen/Documents/com.zx02/frame/")
     #endif
+//    let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     if !FileManager.default.fileExists(atPath: url.path) {
         try! FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: [.posixPermissions:511])
     }
@@ -45,8 +48,11 @@ let persistentContainer: MyPersistentContainer = {
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    var backgroundSessionCompletionHandler: (() -> Void)?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        _ = RecordsModel.shared
         WebPImageDecoder.enable()
         migrateOldFrameIfNecessary()
         return true
@@ -63,12 +69,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // Move videos.
                 let oldVideoFolder = oldFolder.appendingPathComponent("Cache/Videos")
                 let newVideoFolder = newFolder.appendingPathComponent("videos")
-                try FileManager.default.moveItem(at: oldVideoFolder, to: newVideoFolder)
+                for name in try FileManager.default.contentsOfDirectory(atPath: oldVideoFolder.path) where name.hasSuffix(".mp4") {
+                    let old = oldVideoFolder.appendingPathComponent(name)
+                    let new = newVideoFolder.appendingPathComponent(name)
+                    try FileManager.default.moveItem(at: old, to: new)
+                }
                 // Scan and create records.
                 let videoNames = try FileManager.default.contentsOfDirectory(atPath: newVideoFolder.path).map { String($0.prefix($0.count-4)) }
+                let oldThumbsFolder = oldFolder.appendingPathComponent("Cache/Thumbs")
+                let webpDecoder = WebPDecoder()
                 for name in videoNames {
+                    let videoURL = newVideoFolder.appendingPathComponent(name+".mp4")
+                    var thumbnailImage = UIImage()
+                    // Try to read existing thumbnail.
+                    if let thumbsData = try? Data(contentsOf: oldThumbsFolder.appendingPathComponent(name + ".webp")),
+                       let thumbnail = try? webpDecoder.decode(thumbsData, options: WebPDecoderOptions()) {
+                        thumbnailImage = UIImage(cgImage: thumbnail)
+                    }
+                    // Try to generate a thumbnail from the video.
+                    else if let thumbnail = try? AVAsset.generateThumbnail(fromAssetAtURL: videoURL) {
+                        thumbnailImage = thumbnail
+                    }
                     // Create record in db.
-                    _ = VideoRecord(withName: name, videoURL: newVideoFolder.appendingPathComponent(name+".mp4"), thumbnail: nil)
+                    VideoRecord(withName: name, thumbnail: thumbnailImage, videoURL: videoURL).isDownloaded = true
                 }
                 // Finally, remove the old folder.
                 try FileManager.default.removeItem(at: oldFolder)
@@ -93,6 +116,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillResignActive(_ application: UIApplication) {
         try? persistentContainer.viewContext.save()
+    }
+    
+    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+        backgroundSessionCompletionHandler = completionHandler
     }
 
     // MARK: UISceneSession Lifecycle

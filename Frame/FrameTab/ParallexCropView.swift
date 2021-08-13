@@ -11,7 +11,7 @@ import AVFoundation
 
 struct CropOverlayView: View {
     
-    @EnvironmentObject var model: FrameTabPageModel
+    @ObservedObject var model: FrameTabPageModel
     
     private let outerRadius: CGFloat = 25
     
@@ -115,7 +115,7 @@ struct CropOverlayView: View {
 
 struct ParallexCropView: View {
     
-    @EnvironmentObject var model: FrameTabPageModel
+    var model: FrameTabPageModel
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -126,7 +126,7 @@ struct ParallexCropView: View {
                     Group {
                         VideoView(item: item)
                         if UIDevice.current.userInterfaceIdiom == .phone {
-                            CropOverlayView()
+                            CropOverlayView(model: model)
                         }
                     }
                     .aspectRatio(size, contentMode: .fit)

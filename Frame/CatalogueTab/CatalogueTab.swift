@@ -12,7 +12,7 @@ struct CatalogueTab: View {
     
     @ObservedObject private var model: CatalogueModel = .shared
     @State private var selectedVideo: CatalogueModel.Item?
-    @State private var previewingVideo: CatalogueModel.Item?
+    @State private var previewingVideoURL: URL?
     @State private var downloadingOpened = false
     
     var body: some View {
@@ -33,6 +33,9 @@ struct CatalogueTab: View {
                 .padding(.leading, 5)
             }
             .padding([.leading, .trailing], 30)
+            .sheet(item: $previewingVideoURL) { url in
+                AVPlayerVCView(videoURL: url)
+            }
 
             Button {
                 downloadingOpened = true
@@ -43,10 +46,17 @@ struct CatalogueTab: View {
                 Image(systemName: "chevron.forward")
             }
             .padding([.leading, .trailing], 30)
+            .sheet(isPresented: $downloadingOpened) {
+                DownloadsList()
+                    .environment(\.managedObjectContext, persistentContainer.viewContext)
+            }
             
             GalleryGridView(items: model.listingItems,
                             selectedItem: $selectedVideo,
-                            edgeInsets: .init(top: 0, left: 20, bottom: 0, right: 20))
+                            edgeInsets: .init(top: 0, left: 20, bottom: 0, right: 20), onRefresh: { handler in
+                                model.refreshListing(with: handler)
+                            })
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .onAppear {
                     WebPImageDecoder.enable()
                     model.fetchIndexIfNecessary()
@@ -55,21 +65,18 @@ struct CatalogueTab: View {
         .padding(.top, 15)
         .actionSheet(item: $selectedVideo) { item in
             var buttons: [ActionSheet.Button] = [.default(Text("Preview")) {
-                previewingVideo = item
+                if let record = RecordsModel.shared.record(forVideoURL: item.videoURL), record.isDownloaded {
+                    previewingVideoURL = record.localURL
+                }
               }, .cancel()]
-            if item.downloadTask.simpleState.value == .none {
+            switch item.downloadTask.state {
+            case .paused:
                 buttons.insert(.default(Text("Download")) {
-                    DownloadsModel.shared.downloadVideo(withItem: item)
+                    RecordsModel.shared.downloadVideo(withItem: item)
                 }, at: 1)
+            default: break
             }
             return ActionSheet(title: Text(item.name), buttons: buttons)
-        }
-        .sheet(item: $previewingVideo) { video in
-            AVPlayerVCView(videoURL: video.videoURL)
-        }
-        .sheet(isPresented: $downloadingOpened) {
-            DownloadsList()
-                .environment(\.managedObjectContext, persistentContainer.viewContext)
         }
     }
 }

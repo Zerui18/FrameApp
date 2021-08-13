@@ -10,8 +10,6 @@
 
 #if !(TARGET_IPHONE_SIMULATOR)
 static NSString *locateCommandInPath(NSString *command, NSString *shellPath) {
-    NSLog(@"[Zebra] Locating %@", command);
-    NSLog(@"[Zebra] Shell: %@", shellPath);
     
     NSTask *which = [[NSTask alloc] init];
     [which setLaunchPath:shellPath];
@@ -27,12 +25,9 @@ static NSString *locateCommandInPath(NSString *command, NSString *shellPath) {
     NSData *dataRead = [read readDataToEndOfFile];
     NSString *stringRead = [[NSString alloc] initWithData:dataRead encoding:NSUTF8StringEncoding];
     if ([stringRead containsString:@"not found"] || [stringRead isEqualToString:@""]) {
-        NSLog(@"[Zebra] Can't find %@", command);
         return NULL;
     }
-    
-    NSLog(@"[Zebra] %@ location: %@", command, stringRead);
-    
+        
     return stringRead;
 }
 #endif
@@ -60,7 +55,6 @@ NSString *_Nonnull runCommandInPath(NSString *_Nonnull command) {
         [task waitUntilExit];
     }
     @catch (NSException *e) {
-        NSLog(@"[Zebra] %@ Could not spawn %@. Reason: %@", e.name, command, e.reason);
         @throw e;
     }
     

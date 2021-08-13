@@ -36,3 +36,7 @@ fileprivate let allocatedSizeResourceKeys: Set<URLResourceKey> = [
     .fileAllocatedSizeKey,
     .totalFileAllocatedSizeKey,
 ]
+
+extension URL: Identifiable {
+    public var id: String { absoluteString }
+}

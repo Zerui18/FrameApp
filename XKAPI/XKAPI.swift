@@ -19,8 +19,23 @@ public struct XKListingAPIResponse: Codable {
         
         /// Display name.
         public let name: String
-        /// Formatted size string.
+        /// Subtitle.
         public let size: String
+        
+        /// Formatted size string.
+        public var sizeString: String {
+            let parts = size.split(separator: "\n")
+            if parts.count == 0 {
+                return "??"
+            }
+            else if parts.count == 1 {
+                return String(parts[0])
+            }
+            // Find the segment containing "MB", or default to the first segment.
+            else {
+                return String(parts.first(where: { $0.contains("MB") }) ?? parts[0])
+            }
+        }
         
         /// URL to the video file.
         public var videoURL: URL {

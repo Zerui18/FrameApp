@@ -34,9 +34,8 @@
 		BFC9007626B82FB400B012E1 /* Tetra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC9006F26B82FB400B012E1 /* Tetra.framework */; };
 		BFC9007726B82FB400B012E1 /* Tetra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFC9006F26B82FB400B012E1 /* Tetra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BFC9007E26B82FBD00B012E1 /* TTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9007B26B82FBD00B012E1 /* TTask.swift */; };
-		BFC9007F26B82FBD00B012E1 /* URLSession+Tetra.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9007C26B82FBD00B012E1 /* URLSession+Tetra.swift */; };
 		BFC9008026B82FBD00B012E1 /* Tetra.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9007D26B82FBD00B012E1 /* Tetra.swift */; };
-		BFC9008626B835E000B012E1 /* DownloadsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9008526B835E000B012E1 /* DownloadsModel.swift */; };
+		BFC9008626B835E000B012E1 /* RecordsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9008526B835E000B012E1 /* RecordsModel.swift */; };
 		BFC9008826B83D0000B012E1 /* DownloadsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9008726B83D0000B012E1 /* DownloadsList.swift */; };
 		BFC9008A26B83D0800B012E1 /* DownloadsListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9008926B83D0800B012E1 /* DownloadsListRow.swift */; };
 		BFC9008C26B84CEB00B012E1 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9008B26B84CEB00B012E1 /* ProgressBar.swift */; };
@@ -52,6 +51,7 @@
 		BFDB82B026A093C100F9195E /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82AF26A093C100F9195E /* Blur.swift */; };
 		BFDB82B526A095DD00F9195E /* AVPlayerVCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82B426A095DD00F9195E /* AVPlayerVCView.swift */; };
 		BFDB82B726A098A000F9195E /* ParallexCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82B626A098A000F9195E /* ParallexCropView.swift */; };
+		BFE8382526BED64C008357E5 /* AVAsset++.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE8382426BED64C008357E5 /* AVAsset++.swift */; };
 		BFFBD1BA269E727E004A8F23 /* FrameTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFBD1B9269E727E004A8F23 /* FrameTab.swift */; };
 /* End PBXBuildFile section */
 
@@ -114,9 +114,8 @@
 		BFC9007126B82FB400B012E1 /* Tetra.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tetra.h; sourceTree = "<group>"; };
 		BFC9007226B82FB400B012E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BFC9007B26B82FBD00B012E1 /* TTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTask.swift; sourceTree = "<group>"; };
-		BFC9007C26B82FBD00B012E1 /* URLSession+Tetra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+Tetra.swift"; sourceTree = "<group>"; };
 		BFC9007D26B82FBD00B012E1 /* Tetra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tetra.swift; sourceTree = "<group>"; };
-		BFC9008526B835E000B012E1 /* DownloadsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsModel.swift; sourceTree = "<group>"; };
+		BFC9008526B835E000B012E1 /* RecordsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsModel.swift; sourceTree = "<group>"; };
 		BFC9008726B83D0000B012E1 /* DownloadsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsList.swift; sourceTree = "<group>"; };
 		BFC9008926B83D0800B012E1 /* DownloadsListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsListRow.swift; sourceTree = "<group>"; };
 		BFC9008B26B84CEB00B012E1 /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
@@ -136,6 +135,7 @@
 		BFDB82AF26A093C100F9195E /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		BFDB82B426A095DD00F9195E /* AVPlayerVCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerVCView.swift; sourceTree = "<group>"; };
 		BFDB82B626A098A000F9195E /* ParallexCropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallexCropView.swift; sourceTree = "<group>"; };
+		BFE8382426BED64C008357E5 /* AVAsset++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVAsset++.swift"; sourceTree = "<group>"; };
 		BFFBD1B9269E727E004A8F23 /* FrameTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameTab.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -200,10 +200,7 @@
 				BFDB829D26A07BAB00F9195E /* RootModel.swift */,
 				BF304CE6269888AB005CCB59 /* ContentView.swift */,
 				BF304CF626988D42005CCB59 /* Setting.swift */,
-				BFDB82AD26A092E400F9195E /* URL++.swift */,
-				BFC9006026B4F03A00B012E1 /* GalleryGridView.swift */,
-				BFC9006226B4F90A00B012E1 /* Nuke+WebP.swift */,
-				BFC9008B26B84CEB00B012E1 /* ProgressBar.swift */,
+				BFE8382626BED655008357E5 /* Extensions */,
 				BFDB82B126A093E100F9195E /* Views */,
 				BFDB828D26A02B7F00F9195E /* FrameTab */,
 				BFDB828E26A02B8D00F9195E /* CatalogueTab */,
@@ -241,7 +238,6 @@
 				BFC9007126B82FB400B012E1 /* Tetra.h */,
 				BFC9007D26B82FBD00B012E1 /* Tetra.swift */,
 				BFC9007B26B82FBD00B012E1 /* TTask.swift */,
-				BFC9007C26B82FBD00B012E1 /* URLSession+Tetra.swift */,
 				BFC9007226B82FB400B012E1 /* Info.plist */,
 			);
 			path = Tetra;
@@ -272,7 +268,6 @@
 			children = (
 				BFC9005C26B4439300B012E1 /* CatalogueModel.swift */,
 				BFDB829026A02BA900F9195E /* CatalogueTab.swift */,
-				BFC9008526B835E000B012E1 /* DownloadsModel.swift */,
 				BFC9008726B83D0000B012E1 /* DownloadsList.swift */,
 				BFC9008926B83D0800B012E1 /* DownloadsListRow.swift */,
 			);
@@ -313,6 +308,7 @@
 			children = (
 				BFDB829F26A07E8700F9195E /* Frame.xcdatamodeld */,
 				BFDB82A326A07EE600F9195E /* VideoRecord.swift */,
+				BFC9008526B835E000B012E1 /* RecordsModel.swift */,
 			);
 			path = DB;
 			sourceTree = "<group>";
@@ -320,11 +316,23 @@
 		BFDB82B126A093E100F9195E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BFC9006026B4F03A00B012E1 /* GalleryGridView.swift */,
+				BFC9008B26B84CEB00B012E1 /* ProgressBar.swift */,
 				BFDB82B426A095DD00F9195E /* AVPlayerVCView.swift */,
 				BF0E4316269F2DE0009E2208 /* VideoView.swift */,
 				BFDB82AF26A093C100F9195E /* Blur.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		BFE8382626BED655008357E5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BFE8382426BED64C008357E5 /* AVAsset++.swift */,
+				BFDB82AD26A092E400F9195E /* URL++.swift */,
+				BFC9006226B4F90A00B012E1 /* Nuke+WebP.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -500,7 +508,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ \"${SDKROOT}\" != *Simulator* ]]\nthen\n# add frameworks\nmkdir $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\ncp -r $BUILT_PRODUCTS_DIR/XKAPI.framework $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n# codesign appears to happen afterwards, so we manually do it here\ncodesign -f -s \"iPhone Developer: Zerui Chen (HWVV478235)\" $BUILT_PRODUCTS_DIR/Frame.app\n# Install to iPhone over ssh\nrsync -a $BUILT_PRODUCTS_DIR/Frame.app root@localhost:/Applications/\n# Relaunch\nssh root@localhost '/usr/local/bin/rela com.zx02.Frame'\nfi\n";
+			shellScript = "if [[ \"${SDKROOT}\" != *Simulator* ]]\nthen\n# add frameworks\n#mkdir $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n#cp -r $BUILT_PRODUCTS_DIR/XKAPI.framework $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n# codesign appears to happen afterwards, so we manually do it here\ncodesign -f -s \"iPhone Developer: Zerui Chen (HWVV478235)\" $BUILT_PRODUCTS_DIR/Frame.app\n# Install to iPhone over ssh\nrsync -a $BUILT_PRODUCTS_DIR/Frame.app root@localhost:/Applications/\n# Relaunch\nssh root@localhost '/usr/local/bin/rela com.zx02.Frame'\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -512,11 +520,12 @@
 				BF0E4317269F2DE0009E2208 /* VideoView.swift in Sources */,
 				BFDB82B526A095DD00F9195E /* AVPlayerVCView.swift in Sources */,
 				BFDB829626A0692400F9195E /* BashRun.m in Sources */,
-				BFC9008626B835E000B012E1 /* DownloadsModel.swift in Sources */,
+				BFC9008626B835E000B012E1 /* RecordsModel.swift in Sources */,
 				BFDB829126A02BA900F9195E /* CatalogueTab.swift in Sources */,
 				BFDB829E26A07BAB00F9195E /* RootModel.swift in Sources */,
 				BF304CE3269888AB005CCB59 /* AppDelegate.swift in Sources */,
 				BFDB829C26A07B4F00F9195E /* FrameTabPage.swift in Sources */,
+				BFE8382526BED64C008357E5 /* AVAsset++.swift in Sources */,
 				BFDB82B026A093C100F9195E /* Blur.swift in Sources */,
 				BF304CE5269888AB005CCB59 /* SceneDelegate.swift in Sources */,
 				BF304CF726988D42005CCB59 /* Setting.swift in Sources */,
@@ -554,7 +563,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFC9007E26B82FBD00B012E1 /* TTask.swift in Sources */,
-				BFC9007F26B82FBD00B012E1 /* URLSession+Tetra.swift in Sources */,
 				BFC9008026B82FBD00B012E1 /* Tetra.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

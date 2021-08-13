@@ -12,27 +12,45 @@ public class TTask: ObservableObject {
     
     // MARK: Private Properties
     
+    private let session: URLSession
+    
     private var remoteURL: URL!
     
-    private var dstURL: URL
+    let dstURL: URL
     
-    private var onSuccess: (()-> Void)!
+    var onSuccess: (()-> Void)!
     
     /// The underlying download task object.
-    private var downloadTask: URLSessionDownloadTask!
+    var downloadTask: URLSessionDownloadTask?
+    
+    private var resumeDataTemporaryFile: URL {
+        URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("zx02.frame.\(id).resume")
+    }
     
     /// The resume data, if applicable.
-    private var resumeData: Data?
+    var resumeData: Data? {
+        set {
+            do {
+                try newValue?.write(to: resumeDataTemporaryFile)
+            }
+            catch {
+                NSLog("[Tetra] error setting resume data \(error)")
+            }
+            NSLog("[Tetra] Set resume data for \(remoteURL!), \(resumeData)")
+        }
+        get {
+            try? Data(contentsOf: resumeDataTemporaryFile)
+        }
+    }
     
     /// Property keeping track of whether this task was paused.
-    private var isPaused = false
-    
-    private var progressObservation: NSKeyValueObservation?
-    
+    var isPaused = false
+        
     // MARK: Init
     
     /// Init a partial TTask, more information needs to be provided by calling .download before download starts.
-    init(id: String, dstURL: URL) {
+    init(session: URLSession, id: String, dstURL: URL) {
+        self.session = session
         self.id = id
         self.dstURL = dstURL
         
@@ -44,110 +62,48 @@ public class TTask: ObservableObject {
     
     // MARK: Private API
     
-    /// Callback for when task completes.
-    private lazy var onTaskCompleted = { [weak self] (_ url: URL?, _ res: URLResponse?, _ error: Error?) in
-        DispatchQueue.main.async {
-            guard let self = self else {
-                return
-            }
-            
-            if error != nil {
-                self.state = self.isPaused ? .paused : .failure(error!)
-            }
-            else {
-                // Downloaded, try moving to destination.
-                do {
-                    // Remove existing item.
-                    if FileManager.default.fileExists(atPath: self.dstURL.path) {
-                        try FileManager.default.removeItem(at: self.dstURL)
-                    }
-                    try FileManager.default.moveItem(at: url!, to: self.dstURL)
-                    // Update state and call success callback.
-                    self.state = .success
-                    self.onSuccess()
-                }
-                catch {
-                    self.state = .failure(error)
-                }
-            }
-        }
-    }
-    
     /// Create a new URLSessionDownloadTask.
     private func createTask() {
+        downloadTask?.cancel()
         if let resumeData = resumeData {
-            downloadTask = URLSession.tetra.downloadTask(withResumeData: resumeData, completionHandler: onTaskCompleted)
+            downloadTask = session.downloadTask(withResumeData: resumeData)
+            NSLog("[Tetra] created task from resume data: \(downloadTask!)")
         }
         else {
-            downloadTask = URLSession.tetra.downloadTask(with: remoteURL, completionHandler: onTaskCompleted)
+            var request = URLRequest(url: remoteURL)
+            request.setValue("okhttp/3.10.0", forHTTPHeaderField: "User-Agent")
+            downloadTask = session.downloadTask(with: request)
+            print("[Tetra] created task from url: \(downloadTask!)")
         }
-        downloadTask.resume()
         
-        // Observe progress of task when running.
-        progressObservation = downloadTask.progress.observe(\.fractionCompleted) { (progress, fraction) in
-            DispatchQueue.main.async {
-                self.state = .downloading(progress.fractionCompleted)
-            }
-        }
+        state = .preparing
+        downloadTask!.resume()
     }
     
     // MARK: Public API
     
     /// Provide complete download information and begin a new download task.
     public func download(_ url: URL, onSuccess handler: @escaping ()-> Void) {
+        NSLog("[Tetra] Downloading from \(url)")
         self.remoteURL = url
         self.onSuccess = handler
         createTask()
     }
     
     public enum State {
-        case downloading(Double), success, failure(Error), paused
+        case downloading(Double), success, failure(Error), paused, preparing
     }
     
     /// Publisher for the download state.
-    @Published public var state: State = .paused {
-        didSet {
-            // Here we update simpleState accordingly.
-            let newSState: SimpleState.State
-            switch state {
-            case .downloading(_):
-                newSState = .downloading
-            case .failure(_):
-                newSState = .none
-            case .paused:
-                newSState = .downloading
-            case .success:
-                newSState = .downloaded
-            }
-            // Write only if the value changed.
-            if newSState != simpleState.value {
-                simpleState.value = newSState
-            }
-        }
-    }
+    @Published public internal(set) var state: State = .paused
     
     /// A unique id attached to each task.
     public let id: String
     
-    // Simplified State to minimize update cost.
-    public class SimpleState: ObservableObject {
-        
-        public enum State: Equatable {
-            case none, downloading, downloaded
-        }
-        
-        @Published public var value: State = .none
-    }
-    
-    /// A simplified, observable state object that is updated by the main state.
-    public let simpleState = SimpleState()
-    
     /// Pause the task.
     public func pause() {
         isPaused = true
-        downloadTask.cancel { (resumeData) in
-            self.resumeData = resumeData
-        }
+        downloadTask?.cancel { self.resumeData = $0 }
     }
     
     /// Resume the task.
@@ -162,7 +118,7 @@ public class TTask: ObservableObject {
     
     /// Cancel the task.
     func cancel() {
-        downloadTask.cancel()
+        downloadTask?.cancel()
     }
     
 }

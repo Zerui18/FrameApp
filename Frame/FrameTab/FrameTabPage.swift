@@ -23,8 +23,7 @@ struct FrameTabPage: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 15) {
-                ParallexCropView()
-                    .environmentObject(model)
+                ParallexCropView(model: model)
                 
                 Spacer()
                 

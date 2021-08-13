@@ -36,7 +36,9 @@ class CatalogueModel: ObservableObject {
         
         let isLocal: Bool = false
         
-        lazy var downloadTask = Tetra.shared.downloadTask(forId: name, dstURL: rootDocumentsFolder.appendingPathComponent("videos/\(name).mp4"))
+        lazy var downloadTask: TTask = {
+            Tetra.shared.downloadTask(forId: name, dstURL: rootDocumentsFolder.appendingPathComponent("videos/\(name).mp4"))
+        }()
         
         static func ==(_ a: Item, _ b: Item) -> Bool {
             a.id == b.id
@@ -60,6 +62,8 @@ class CatalogueModel: ObservableObject {
     }
     
     private var handle: AnyCancellable?
+    private let refreshSubject = PassthroughSubject<Void, Error>()
+    private var refreshCompletedHandler: (() -> Void)?
     
     private init() {}
     
@@ -73,22 +77,31 @@ class CatalogueModel: ObservableObject {
                 }
                 return response
             }
-            .combineLatest($selectedCategoryIndex.setFailureType(to: Error.self))
-            .flatMap { indexResponse, selectedCategoryIndex in
-                return indexResponse.items[selectedCategoryIndex]
+            .combineLatest($selectedCategoryIndex.setFailureType(to: Error.self), refreshSubject)
+            .flatMap { indexResponse, selectedCategoryIndex, _ in
+                indexResponse.items[selectedCategoryIndex]
                     .fetchListing()
                     .eraseToAnyPublisher()
             }
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] completion in
-                if case let .failure(error) = completion {
-                    self?.error = error
-                }
-            } receiveValue: { [weak self] listingResponse in
-                self?.listingItems = listingResponse.items.map {
-                    .init(name: $0.name, sizeString: $0.size, videoURL: $0.videoURL, imageURL: $0.imageURL)
-                }
+            .receive(on: RunLoop.main)
+            .mapError { error -> Error in
+                self.error = error
+                self.refreshCompletedHandler?()
+                return error
             }
+            .sink { _ in } receiveValue: { listingResponse in
+                self.listingItems = listingResponse.items.map {
+                    .init(name: $0.name, sizeString: $0.sizeString, videoURL: $0.videoURL, imageURL: $0.imageURL)
+                }
+                self.refreshCompletedHandler?()
+            }
+        
+        refreshSubject.send()
+    }
+    
+    func refreshListing(with refreshCompletedHandler: @escaping ()->Void) {
+        self.refreshCompletedHandler = refreshCompletedHandler
+        refreshSubject.send()
     }
     
 }

@@ -15,82 +15,67 @@ fileprivate let bcFormatter = ByteCountFormatter()
 @objc(VideoRecord)
 class VideoRecord: NSManagedObject {
     
-    convenience init(withName name: String, remoteURL: URL? = nil, videoURL: URL? = nil, thumbnail: UIImage? = nil) {
-        self.init(entity: VideoRecord.entity(), insertInto: persistentContainer.viewContext)
-        self.name = name
-        self.remoteURL = remoteURL
-        self.videoURL = videoURL ?? rootDocumentsFolder.appendingPathComponent("videos/\(name).mp4")
-        self.size = Int64(videoURL?.fileSize ?? 0)
-        self.timestamp = Date()
-        if let image = thumbnail {
-            // If provided with thumbnail we're good to go.
-            self._thumbnailImage = image
-            self.thumbnailData = image.pngData()
-        }
-    }
-    
-    /// The decoded image from thumbnailData. Cached.
-    private lazy var _thumbnailImage: UIImage? = thumbnailData.flatMap(UIImage.init(data:))
-    var thumbnailImage: UIImage? {
-        if let image = _thumbnailImage {
-            return image
-        }
-        self.processVideo()
-        return nil
-    }
+    lazy var size: UInt64 = {
+        localURL.fileSize
+    }()
     
     /// The size of the video in text.
-    lazy var sizeString: String = bcFormatter.string(fromByteCount: size)
+    lazy var sizeString: String = bcFormatter.string(fromByteCount: Int64(size))
+    
+    /// The decoded image from thumbnailData.
+    lazy var thumbnailImage: UIImage = .init(data: thumbnailData!) ?? .init()
     
     /// The download task for this video.
-    lazy var downloadTask = Tetra.shared.downloadTask(forId: self.name, dstURL: self.videoURL)
+    lazy var downloadTask = Tetra.shared.downloadTask(forId: self.name, dstURL: self.localURL)
     
-    /// To be called after the local video file is available.
-    func processVideo() {
-        guard isDownloaded else { return }
-        // Create thumbnail.
-        AVAsset(url: videoURL).generateThumbnail { image in
-            guard let image = image else {
-                return
-            }
-            self._thumbnailImage = image
-            self.thumbnailData = image.pngData()
-        }
-        // Update size.
-        self.size = Int64(videoURL.fileSize)
-        self.sizeString = bcFormatter.string(fromByteCount: self.size)
+    // MARK: CoreData
+    override class func entity() -> NSEntityDescription {
+        NSEntityDescription.entity(forEntityName: "VideoRecord", in: persistentContainer.viewContext)!
+    }
+    
+    convenience init(withName name: String, thumbnail: UIImage, remoteURL: URL? = nil, videoURL: URL? = nil) {
+        self.init(entity: VideoRecord.entity(),
+                  insertInto: persistentContainer.viewContext)
+        self.name = name
+        self.isDownloaded = remoteURL == nil
+        self.thumbnailData = thumbnail.pngData()
+        self.remoteURL = remoteURL
+        self.localURL = videoURL ?? rootDocumentsFolder.appendingPathComponent("videos/\(name).mp4")
+        self.timestamp = Date()
+    }
+    
+    func delete() {
+        Tetra.shared.remove(task: downloadTask)
+        try? FileManager.default.removeItem(at: localURL)
+        persistentContainer.viewContext.delete(self)
+        try? persistentContainer.viewContext.save()
+    }
+    
+    // MARK: Download
+    func markAsDownloaded() {
+        self.isDownloaded = true
+        self.size = localURL.fileSize
+        self.sizeString = bcFormatter.string(fromByteCount: Int64(size))
+        try? persistentContainer.viewContext.save()
+    }
+    
+    func beginDownload() {
+        downloadTask.download(remoteURL!, onSuccess: markAsDownloaded)
     }
 }
 
 // MARK: CoreData Attributes
 extension VideoRecord {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<VideoRecord> {
-        return NSFetchRequest<VideoRecord>(entityName: "VideoRecord")
+        let request = NSFetchRequest<VideoRecord>(entityName: "VideoRecord")
+        request.sortDescriptors = [.init(key: "timestamp", ascending: false)]
+        return request
     }
 
+    @NSManaged public var name: String
     @NSManaged public var isDownloaded: Bool
     @NSManaged public var remoteURL: URL?
-    @NSManaged public var name: String
-    @NSManaged public var size: Int64
     @NSManaged public var thumbnailData: Data?
     @NSManaged public var timestamp: Date
-    @NSManaged public var videoURL: URL
-}
-
-// Taken from: https://stackoverflow.com/a/55531065
-extension AVAsset {
-    func generateThumbnail(completion: @escaping (UIImage?) -> Void) {
-        DispatchQueue.global().async {
-            let imageGenerator = AVAssetImageGenerator(asset: self)
-            let time = CMTime(seconds: 0.0, preferredTimescale: 600)
-            let times = [NSValue(time: time)]
-            imageGenerator.generateCGImagesAsynchronously(forTimes: times, completionHandler: { _, image, _, _, _ in
-                if let image = image {
-                    completion(UIImage(cgImage: image))
-                } else {
-                    completion(nil)
-                }
-            })
-        }
-    }
+    @NSManaged public var localURL: URL
 }

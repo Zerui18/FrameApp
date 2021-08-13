@@ -12,14 +12,12 @@ struct DownloadsList: View {
     @FetchRequest(entity: VideoRecord.entity(),
                   sortDescriptors: [.init(key: "timestamp", ascending: false)],
                   predicate: NSPredicate(format: "isDownloaded == NO"))
-    private var videoRecords: FetchedResults<VideoRecord>
-    
+    var videoRecords: FetchedResults<VideoRecord>
+        
     var body: some View {
-        ScrollView {
-            List {
-                ForEach(videoRecords) { record in
-                    DownloadsListRow(forRecord: record)
-                }
+        List {
+            ForEach(videoRecords) { record in
+                DownloadsListRow(forRecord: record)
             }
         }
     }
