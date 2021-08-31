@@ -125,9 +125,9 @@ struct ParallexCropView: View {
                 if let size = item.asset.tracks(withMediaType: .video).first?.naturalSize {
                     Group {
                         VideoView(item: item)
-                        if UIDevice.current.userInterfaceIdiom == .phone {
-                            CropOverlayView(model: model)
-                        }
+//                        if UIDevice.current.userInterfaceIdiom == .phone {
+//                            CropOverlayView(model: model)
+//                        }
                     }
                     .aspectRatio(size, contentMode: .fit)
                     .transition(.scale)

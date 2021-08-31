@@ -68,6 +68,9 @@ struct CatalogueTab: View {
                 if let record = RecordsModel.shared.record(forVideoURL: item.videoURL), record.isDownloaded {
                     previewingVideoURL = record.localURL
                 }
+                else {
+                    previewingVideoURL = item.videoURL
+                }
               }, .cancel()]
             switch item.downloadTask.state {
             case .paused:
