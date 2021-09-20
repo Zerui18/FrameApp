@@ -1,0 +1,32 @@
+PODS:
+  - libwebp (1.1.0):
+    - libwebp/demux (= 1.1.0)
+    - libwebp/mux (= 1.1.0)
+    - libwebp/webp (= 1.1.0)
+  - libwebp/demux (1.1.0):
+    - libwebp/webp
+  - libwebp/mux (1.1.0):
+    - libwebp/demux
+  - libwebp/webp (1.1.0)
+  - Nuke (9.5.0)
+  - Nuke-WebP-Plugin (6.0.1):
+    - libwebp (= 1.1.0)
+    - Nuke (~> 9.0)
+
+DEPENDENCIES:
+  - Nuke-WebP-Plugin
+
+SPEC REPOS:
+  trunk:
+    - libwebp
+    - Nuke
+    - Nuke-WebP-Plugin
+
+SPEC CHECKSUMS:
+  libwebp: 946cb3063cea9236285f7e9a8505d806d30e07f3
+  Nuke: 6f400a4ea957e09149ec335a3c6acdcc814d89e4
+  Nuke-WebP-Plugin: ea80971975a0fff00900a0ad19bc146d6759ee25
+
+PODFILE CHECKSUM: 0f3f046d436504a2bf0a4aa9ee60f27db6b75a56
+
+COCOAPODS: 1.10.1

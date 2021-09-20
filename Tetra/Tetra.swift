@@ -19,7 +19,7 @@ public class Tetra: NSObject, ObservableObject {
             self.allTasks.forEach { $0.pause() }
         }
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil) { _ in
-            self.allTasks.forEach { $0.resume() }
+            self.allTasks.filter(\.canResume).forEach { $0.resume() }
         }
 //        self.session = URLSession(configuration: .background(withIdentifier: "com.zx02.tetra"), delegate: self, delegateQueue: .main)
     }

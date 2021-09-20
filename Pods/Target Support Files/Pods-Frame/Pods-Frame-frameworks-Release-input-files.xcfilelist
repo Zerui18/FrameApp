@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-Frame/Pods-Frame-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework
+${BUILT_PRODUCTS_DIR}/Nuke-WebP-Plugin/NukeWebPPlugin.framework
+${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework

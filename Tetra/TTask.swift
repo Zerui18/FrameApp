@@ -20,6 +20,10 @@ public class TTask: ObservableObject {
     
     var onSuccess: (()-> Void)!
     
+    var canResume: Bool {
+        isPaused && remoteURL != nil
+    }
+    
     /// The underlying download task object.
     var downloadTask: URLSessionDownloadTask?
     
@@ -36,7 +40,7 @@ public class TTask: ObservableObject {
             catch {
                 NSLog("[Tetra] error setting resume data \(error)")
             }
-            NSLog("[Tetra] Set resume data for \(remoteURL!), \(resumeData)")
+            NSLog("[Tetra] Set resume data for \(remoteURL!), \(resumeData ?? Data())")
         }
         get {
             try? Data(contentsOf: resumeDataTemporaryFile)
