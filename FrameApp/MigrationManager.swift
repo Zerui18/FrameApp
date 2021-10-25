@@ -15,8 +15,7 @@ struct MigrationManager {
     
     static func migrateOldFrameIfNecessary() {
         // Files
-        let documents = URL(fileURLWithPath: "/var/mobile/Documents")
-        let oldFolder = documents.appendingPathComponent("com.ZX02.Frame")
+        let oldFolder = URL(fileURLWithPath: "/var/mobile/Documents/com.ZX02.Frame")
         let newFolder = Paths.rootDocumentsFolder
         if FileManager.default.fileExists(atPath: oldFolder.path) {
             // Migration needed.
@@ -47,7 +46,7 @@ struct MigrationManager {
                             thumbnailImage = thumbnail
                         }
                         // Create record in db.
-                        VideoRecord(withName: name, thumbnail: thumbnailImage, videoURL: videoURL).isDownloaded = true
+                        SavedVideo(withName: name, thumbnail: thumbnailImage, videoURL: videoURL).isDownloaded = true
                     }
                     // Finally, remove the old folder.
                     try? FileManager.default.removeItem(at: oldFolder)
@@ -65,7 +64,7 @@ struct MigrationManager {
                 UserDefaults.shared.setValue(value, forKey: keyNew)
             }
         }
-        moveDefaults(fromKey: "videoURL", toKey: "videoPath")
+        moveDefaults(fromKey: "videoURL", toKey: "both.videoPath")
         moveDefaults(fromKey: "videoURLHomescreen", toKey: "homescreen.videoPath")
         moveDefaults(fromKey: "videoURLLockscreen", toKey: "lockscreen.videoPath")
     }

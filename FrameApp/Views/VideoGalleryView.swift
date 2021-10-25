@@ -1,5 +1,5 @@
 //
-//  GalleryGridView.swift
+//  VideoGalleryView.swift
 //  Frame
 //
 //  Created by Zerui Chen on 31/7/21.
@@ -10,7 +10,8 @@ import SwiftUI
 import Nuke
 import NVActivityIndicatorView
 
-protocol GalleryGridItemRepresentable: Identifiable, Hashable {
+// MARK: Item Protocol
+protocol VideoGalleryItemRepresentable: Identifiable, Hashable {
     var name: String { get }
     var sizeString: String { get }
     var image: UIImage? { get }
@@ -19,25 +20,26 @@ protocol GalleryGridItemRepresentable: Identifiable, Hashable {
     var isLocal: Bool { get }
 }
 
-struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable {
+// MARK: Gallery View
+struct VideoGalleryView<Item: VideoGalleryItemRepresentable>: UIViewRepresentable {
     
     init(items: [Item],
          selectedItem: Binding<Item?>,
          edgeInsets: UIEdgeInsets = .zero,
-         onRefresh: ((@escaping () -> Void)->Void)? = nil) {
+         refreshHandler: ((@escaping () -> Void)->Void)? = nil) {
         self.items = items
         self.selectedItem = selectedItem
         self.edgeInsets = edgeInsets
-        self.onRefresh = onRefresh
+        self.refreshHandler = refreshHandler
     }
     
     private let items: [Item]
     private let selectedItem: Binding<Item?>
     private let edgeInsets: UIEdgeInsets
-    private let onRefresh: ((@escaping ()->Void)->Void)?
+    private let refreshHandler: ((@escaping ()->Void)->Void)?
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(selectedItem: selectedItem, edgeInsets: edgeInsets, onRefresh: onRefresh)
+        Coordinator(selectedItem: selectedItem, edgeInsets: edgeInsets, onRefresh: refreshHandler)
     }
     
     func makeUIView(context: Context) -> some UIView {
@@ -48,8 +50,8 @@ struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable 
         context.coordinator.items = items
     }
     
-    // MARK: GalleryGridCell
-    fileprivate class GalleryGridCell: UICollectionViewCell {
+    // MARK: Cell
+    fileprivate class Cell: UICollectionViewCell {
         
         var item: Item! {
             didSet {
@@ -150,17 +152,17 @@ struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable 
         enum Section { case main }
         
         private let selectedItem: Binding<Item?>
-        private let onRefresh: ((@escaping () -> Void) -> Void)?
+        private let refreshHandler: ((@escaping () -> Void) -> Void)?
         
         /// The collectionView.
         lazy var collectionView: UICollectionView = {
             let cView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-            cView.register(GalleryGridCell.self, forCellWithReuseIdentifier: "galleryCell")
+            cView.register(Cell.self, forCellWithReuseIdentifier: "galleryCell")
             cView.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerCell")
             cView.delegate = self
             cView.backgroundColor = .systemBackground
             cView.keyboardDismissMode = .interactive
-            if self.onRefresh != nil {
+            if self.refreshHandler != nil {
                 cView.refreshControl = refreshControl
             }
             return cView
@@ -199,7 +201,7 @@ struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable 
         
         /// The diffable datasource.
         lazy var dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) { collectionView, indexPath, item in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "galleryCell", for: indexPath) as! GalleryGridCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "galleryCell", for: indexPath) as! Cell
             cell.item = item
             return cell
         }
@@ -208,7 +210,7 @@ struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable 
              edgeInsets: UIEdgeInsets,
              onRefresh: ((@escaping () -> Void)->Void)?) {
             self.selectedItem = selectedItem
-            self.onRefresh = onRefresh
+            self.refreshHandler = onRefresh
             super.init()
             dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
                 let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerCell", for: indexPath)
@@ -221,7 +223,7 @@ struct GalleryGridView<Item: GalleryGridItemRepresentable>: UIViewRepresentable 
         }
         
         @objc private func performRefresh(_ event: UIEvent) {
-            if let handler = self.onRefresh {
+            if let handler = self.refreshHandler {
                 handler {
                     self.refreshControl.endRefreshing()
                     UIView.animate(withDuration: 0.2) {

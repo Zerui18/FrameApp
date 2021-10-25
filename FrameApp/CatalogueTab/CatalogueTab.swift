@@ -12,16 +12,16 @@ import NukeWebPPlugin
 struct CatalogueTab: View {
     
     @ObservedObject private var model: CatalogueModel = .shared
-    @State private var selectedVideo: CatalogueModel.Item?
+    @State private var selectedVideo: CatalogueModel.VideoItem?
     @State private var previewingVideoURL: URL?
-    @State private var downloadingOpened = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
-            HStack(alignment: .center) {
+            HStack(alignment: .center, spacing: 10) {
                 Text("Catalogue")
                     .fontWeight(.bold)
                     .font(.largeTitle)
+                    .layoutPriority(1)
                 
                 VStack(alignment: .leading) {
                     Text(model.selectedCategoryName)
@@ -30,57 +30,40 @@ struct CatalogueTab: View {
                     Text("\(model.listingItems.count) videos")
                         .font(.caption)
                         .foregroundColor(.gray)
-                }
-                .padding(.leading, 5)
-            }
-            .padding([.leading, .trailing], 30)
-            .sheet(item: $previewingVideoURL) { url in
-                AVPlayerVCView(videoURL: url)
-            }
-
-            Button {
-                downloadingOpened = true
-            } label: {
-                Image(systemName: "square.and.arrow.down.on.square")
-                Text("Downloading")
+                }.layoutPriority(1)
+                
                 Spacer()
-                Image(systemName: "chevron.forward")
+                
+                DownloadsWidget()
             }
             .padding([.leading, .trailing], 30)
-            .sheet(isPresented: $downloadingOpened) {
-                DownloadsList()
-                    .environment(\.managedObjectContext, CDManager.moc)
-            }
             
-            GalleryGridView(items: model.listingItems,
+            VideoGalleryView(items: model.listingItems,
                             selectedItem: $selectedVideo,
-                            edgeInsets: .init(top: 0, left: 20, bottom: 0, right: 20), onRefresh: { handler in
-                                model.refreshListing(with: handler)
-                            })
+                            edgeInsets: .init(top: 0, left: 20, bottom: 0, right: 20),
+                            refreshHandler: model.refreshListing)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .onAppear {
                     WebPImageDecoder.enable()
                     model.fetchIndexIfNecessary()
                 }
+                .sheet(item: $previewingVideoURL) { url in
+                    AVPlayerVCView(videoURL: url)
+                }
         }
         .padding(.top, 15)
-        .actionSheet(item: $selectedVideo) { item in
+        .actionSheet(item: $selectedVideo) { selectedVideo in
             var buttons: [ActionSheet.Button] = [.default(Text("Preview")) {
-                if let record = RecordsModel.shared.record(forVideoURL: item.videoURL), record.isDownloaded {
-                    previewingVideoURL = record.localURL
-                }
-                else {
-                    previewingVideoURL = item.videoURL
-                }
+                previewingVideoURL = model.getPreviewURL(forVideo: selectedVideo)
               }, .cancel()]
-            switch item.downloadTask.state {
+            switch selectedVideo.downloadTask.state {
             case .paused:
                 buttons.insert(.default(Text("Download")) {
-                    RecordsModel.shared.downloadVideo(withItem: item)
+                    model.addToSavedVideos(selectedVideo)
                 }, at: 1)
             default: break
             }
-            return ActionSheet(title: Text(item.name), buttons: buttons)
+            return ActionSheet(title: Text(selectedVideo.name), buttons: buttons)
         }
     }
 }

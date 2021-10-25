@@ -18,6 +18,7 @@
 		BF304CEC269888AB005CCB59 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF304CEB269888AB005CCB59 /* Preview Assets.xcassets */; };
 		BF304CEF269888AB005CCB59 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF304CED269888AB005CCB59 /* LaunchScreen.storyboard */; };
 		BF304CF726988D42005CCB59 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF304CF626988D42005CCB59 /* Setting.swift */; };
+		BF3EC92C26FEEC8200182164 /* DownloadsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3EC92B26FEEC8200182164 /* DownloadsWidget.swift */; };
 		BF8A943126F8B15900F2F919 /* FrameInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A943026F8B15900F2F919 /* FrameInfoView.swift */; };
 		BF8A943326F8D44600F2F919 /* MigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A943226F8D44600F2F919 /* MigrationManager.swift */; };
 		BF8A943526F8D4D300F2F919 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A943426F8D4D300F2F919 /* Paths.swift */; };
@@ -29,14 +30,14 @@
 		BFC9005726B43FFF00B012E1 /* AES.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9005626B43FFF00B012E1 /* AES.swift */; };
 		BFC9005926B4411600B012E1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9005826B4411600B012E1 /* Utils.swift */; };
 		BFC9005D26B4439300B012E1 /* CatalogueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9005C26B4439300B012E1 /* CatalogueModel.swift */; };
-		BFC9006126B4F03A00B012E1 /* GalleryGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9006026B4F03A00B012E1 /* GalleryGridView.swift */; };
+		BFC9006126B4F03A00B012E1 /* VideoGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9006026B4F03A00B012E1 /* VideoGalleryView.swift */; };
 		BFC9006926B507F200B012E1 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = BFC9006826B507F200B012E1 /* NVActivityIndicatorView */; };
 		BFC9007326B82FB400B012E1 /* Tetra.h in Headers */ = {isa = PBXBuildFile; fileRef = BFC9007126B82FB400B012E1 /* Tetra.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFC9007626B82FB400B012E1 /* Tetra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC9006F26B82FB400B012E1 /* Tetra.framework */; };
 		BFC9007726B82FB400B012E1 /* Tetra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFC9006F26B82FB400B012E1 /* Tetra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BFC9007E26B82FBD00B012E1 /* TTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9007B26B82FBD00B012E1 /* TTask.swift */; };
 		BFC9008026B82FBD00B012E1 /* Tetra.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9007D26B82FBD00B012E1 /* Tetra.swift */; };
-		BFC9008626B835E000B012E1 /* RecordsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9008526B835E000B012E1 /* RecordsModel.swift */; };
+		BFC9008626B835E000B012E1 /* SavedVideoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9008526B835E000B012E1 /* SavedVideoStore.swift */; };
 		BFC9008826B83D0000B012E1 /* DownloadsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9008726B83D0000B012E1 /* DownloadsList.swift */; };
 		BFC9008A26B83D0800B012E1 /* DownloadsListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9008926B83D0800B012E1 /* DownloadsListRow.swift */; };
 		BFC9008C26B84CEB00B012E1 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9008B26B84CEB00B012E1 /* ProgressBar.swift */; };
@@ -46,12 +47,12 @@
 		BFDB829C26A07B4F00F9195E /* FrameTabPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB829B26A07B4F00F9195E /* FrameTabPage.swift */; };
 		BFDB829E26A07BAB00F9195E /* FrameInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB829D26A07BAB00F9195E /* FrameInfoModel.swift */; };
 		BFDB82A126A07E8700F9195E /* Frame.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFDB829F26A07E8700F9195E /* Frame.xcdatamodeld */; };
-		BFDB82A426A07EE600F9195E /* VideoRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82A326A07EE600F9195E /* VideoRecord.swift */; };
+		BFDB82A426A07EE600F9195E /* SavedVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82A326A07EE600F9195E /* SavedVideo.swift */; };
 		BFDB82AC26A0877400F9195E /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82AB26A0877400F9195E /* LibraryView.swift */; };
 		BFDB82AE26A092E400F9195E /* URL++.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82AD26A092E400F9195E /* URL++.swift */; };
 		BFDB82B026A093C100F9195E /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82AF26A093C100F9195E /* Blur.swift */; };
 		BFDB82B526A095DD00F9195E /* AVPlayerVCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82B426A095DD00F9195E /* AVPlayerVCView.swift */; };
-		BFDB82B726A098A000F9195E /* ParallexCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82B626A098A000F9195E /* ParallexCropView.swift */; };
+		BFDB82B726A098A000F9195E /* CropOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82B626A098A000F9195E /* CropOverlayView.swift */; };
 		BFE8382526BED64C008357E5 /* AVAsset++.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE8382426BED64C008357E5 /* AVAsset++.swift */; };
 		BFFBD1BA269E727E004A8F23 /* FrameTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFBD1B9269E727E004A8F23 /* FrameTab.swift */; };
 		C902F2F2304E6A91714B7386 /* Pods_XKAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA901FDC232D4B00275B0B /* Pods_XKAPI.framework */; };
@@ -109,6 +110,7 @@
 		BF304CEE269888AB005CCB59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF304CF0269888AB005CCB59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF304CF626988D42005CCB59 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		BF3EC92B26FEEC8200182164 /* DownloadsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsWidget.swift; sourceTree = "<group>"; };
 		BF8A943026F8B15900F2F919 /* FrameInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameInfoView.swift; sourceTree = "<group>"; };
 		BF8A943226F8D44600F2F919 /* MigrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationManager.swift; sourceTree = "<group>"; };
 		BF8A943426F8D4D300F2F919 /* Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
@@ -120,13 +122,13 @@
 		BFC9005626B43FFF00B012E1 /* AES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AES.swift; sourceTree = "<group>"; };
 		BFC9005826B4411600B012E1 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		BFC9005C26B4439300B012E1 /* CatalogueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogueModel.swift; sourceTree = "<group>"; };
-		BFC9006026B4F03A00B012E1 /* GalleryGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryGridView.swift; sourceTree = "<group>"; };
+		BFC9006026B4F03A00B012E1 /* VideoGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoGalleryView.swift; sourceTree = "<group>"; };
 		BFC9006F26B82FB400B012E1 /* Tetra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tetra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC9007126B82FB400B012E1 /* Tetra.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tetra.h; sourceTree = "<group>"; };
 		BFC9007226B82FB400B012E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BFC9007B26B82FBD00B012E1 /* TTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTask.swift; sourceTree = "<group>"; };
 		BFC9007D26B82FBD00B012E1 /* Tetra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tetra.swift; sourceTree = "<group>"; };
-		BFC9008526B835E000B012E1 /* RecordsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsModel.swift; sourceTree = "<group>"; };
+		BFC9008526B835E000B012E1 /* SavedVideoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedVideoStore.swift; sourceTree = "<group>"; };
 		BFC9008726B83D0000B012E1 /* DownloadsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsList.swift; sourceTree = "<group>"; };
 		BFC9008926B83D0800B012E1 /* DownloadsListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsListRow.swift; sourceTree = "<group>"; };
 		BFC9008B26B84CEB00B012E1 /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
@@ -139,12 +141,12 @@
 		BFDB829B26A07B4F00F9195E /* FrameTabPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameTabPage.swift; sourceTree = "<group>"; };
 		BFDB829D26A07BAB00F9195E /* FrameInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameInfoModel.swift; sourceTree = "<group>"; };
 		BFDB82A026A07E8700F9195E /* VideoRecords.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VideoRecords.xcdatamodel; sourceTree = "<group>"; };
-		BFDB82A326A07EE600F9195E /* VideoRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRecord.swift; sourceTree = "<group>"; };
+		BFDB82A326A07EE600F9195E /* SavedVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedVideo.swift; sourceTree = "<group>"; };
 		BFDB82AB26A0877400F9195E /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		BFDB82AD26A092E400F9195E /* URL++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL++.swift"; sourceTree = "<group>"; };
 		BFDB82AF26A093C100F9195E /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		BFDB82B426A095DD00F9195E /* AVPlayerVCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerVCView.swift; sourceTree = "<group>"; };
-		BFDB82B626A098A000F9195E /* ParallexCropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallexCropView.swift; sourceTree = "<group>"; };
+		BFDB82B626A098A000F9195E /* CropOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropOverlayView.swift; sourceTree = "<group>"; };
 		BFE8382426BED64C008357E5 /* AVAsset++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVAsset++.swift"; sourceTree = "<group>"; };
 		BFFBD1B9269E727E004A8F23 /* FrameTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameTab.swift; sourceTree = "<group>"; };
 		C2BE11A5FCB93D9425C5042F /* Pods-XKAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XKAPI.release.xcconfig"; path = "Target Support Files/Pods-XKAPI/Pods-XKAPI.release.xcconfig"; sourceTree = "<group>"; };
@@ -291,7 +293,7 @@
 				BFFBD1B9269E727E004A8F23 /* FrameTab.swift */,
 				BF16A9CC26A5C92500858F19 /* FrameTabPageModel.swift */,
 				BFDB829B26A07B4F00F9195E /* FrameTabPage.swift */,
-				BFDB82B626A098A000F9195E /* ParallexCropView.swift */,
+				BFDB82B626A098A000F9195E /* CropOverlayView.swift */,
 				BFDB82AB26A0877400F9195E /* LibraryView.swift */,
 			);
 			path = FrameTab;
@@ -300,6 +302,7 @@
 		BFDB828E26A02B8D00F9195E /* CatalogueTab */ = {
 			isa = PBXGroup;
 			children = (
+				BF3EC92B26FEEC8200182164 /* DownloadsWidget.swift */,
 				BFC9005C26B4439300B012E1 /* CatalogueModel.swift */,
 				BFDB829026A02BA900F9195E /* CatalogueTab.swift */,
 				BFC9008726B83D0000B012E1 /* DownloadsList.swift */,
@@ -341,8 +344,8 @@
 			isa = PBXGroup;
 			children = (
 				BFDB829F26A07E8700F9195E /* Frame.xcdatamodeld */,
-				BFDB82A326A07EE600F9195E /* VideoRecord.swift */,
-				BFC9008526B835E000B012E1 /* RecordsModel.swift */,
+				BFDB82A326A07EE600F9195E /* SavedVideo.swift */,
+				BFC9008526B835E000B012E1 /* SavedVideoStore.swift */,
 			);
 			path = DB;
 			sourceTree = "<group>";
@@ -350,7 +353,7 @@
 		BFDB82B126A093E100F9195E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BFC9006026B4F03A00B012E1 /* GalleryGridView.swift */,
+				BFC9006026B4F03A00B012E1 /* VideoGalleryView.swift */,
 				BFC9008B26B84CEB00B012E1 /* ProgressBar.swift */,
 				BFDB82B426A095DD00F9195E /* AVPlayerVCView.swift */,
 				BF0E4316269F2DE0009E2208 /* VideoView.swift */,
@@ -605,7 +608,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ \"${SDKROOT}\" != *Simulator* ]]\nthen\n# add frameworks\n#mkdir $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n#cp -r $BUILT_PRODUCTS_DIR/XKAPI.framework $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n# codesign appears to happen afterwards, so we manually do it here\ncodesign -f -s \"iPhone Developer: Zerui Chen (HWVV478235)\" $BUILT_PRODUCTS_DIR/Frame.app\n# Install to iPhone over ssh\nrsync -a $BUILT_PRODUCTS_DIR/Frame.app root@localhost:/Applications/\n# Relaunch\nssh root@localhost '/usr/local/bin/rela com.zx02.FrameApp'\nfi\n";
+			shellScript = "if [[ \"${SDKROOT}\" != *Simulator* ]]\nthen\n# add frameworks\n#mkdir $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n#cp -r $BUILT_PRODUCTS_DIR/XKAPI.framework $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n# codesign appears to happen afterwards, so we manually do it here\ncodesign -f -s \"iPhone Developer: Zerui Chen (HWVV478235)\" $BUILT_PRODUCTS_DIR/FrameApp.app\n# Install to iPhone over ssh\nrsync -a $BUILT_PRODUCTS_DIR/FrameApp.app root@localhost:/Applications/\n# Relaunch\nssh root@localhost '/usr/local/bin/rela com.zx02.FrameApp'\nfi\n";
 		};
 		D1AC2D59FBC65F414F3E8D43 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -639,7 +642,7 @@
 				BF0E4317269F2DE0009E2208 /* VideoView.swift in Sources */,
 				BFDB82B526A095DD00F9195E /* AVPlayerVCView.swift in Sources */,
 				BFDB829626A0692400F9195E /* BashRun.m in Sources */,
-				BFC9008626B835E000B012E1 /* RecordsModel.swift in Sources */,
+				BFC9008626B835E000B012E1 /* SavedVideoStore.swift in Sources */,
 				BFDB829126A02BA900F9195E /* CatalogueTab.swift in Sources */,
 				BFDB829E26A07BAB00F9195E /* FrameInfoModel.swift in Sources */,
 				BF8A943526F8D4D300F2F919 /* Paths.swift in Sources */,
@@ -653,10 +656,10 @@
 				BF8A943726F8D52800F2F919 /* CDManager.swift in Sources */,
 				BF0E4319269F2E09009E2208 /* FrameTabModel.swift in Sources */,
 				BFDB82A126A07E8700F9195E /* Frame.xcdatamodeld in Sources */,
-				BFDB82A426A07EE600F9195E /* VideoRecord.swift in Sources */,
+				BFDB82A426A07EE600F9195E /* SavedVideo.swift in Sources */,
 				BFFBD1BA269E727E004A8F23 /* FrameTab.swift in Sources */,
 				BF16A9CD26A5C92500858F19 /* FrameTabPageModel.swift in Sources */,
-				BFC9006126B4F03A00B012E1 /* GalleryGridView.swift in Sources */,
+				BFC9006126B4F03A00B012E1 /* VideoGalleryView.swift in Sources */,
 				BF8A943326F8D44600F2F919 /* MigrationManager.swift in Sources */,
 				BF8A943126F8B15900F2F919 /* FrameInfoView.swift in Sources */,
 				BFC9008A26B83D0800B012E1 /* DownloadsListRow.swift in Sources */,
@@ -664,9 +667,10 @@
 				BFDB82AC26A0877400F9195E /* LibraryView.swift in Sources */,
 				BFC9008C26B84CEB00B012E1 /* ProgressBar.swift in Sources */,
 				BFDB829326A02BAF00F9195E /* MoreTab.swift in Sources */,
-				BFDB82B726A098A000F9195E /* ParallexCropView.swift in Sources */,
+				BFDB82B726A098A000F9195E /* CropOverlayView.swift in Sources */,
 				BFC9005D26B4439300B012E1 /* CatalogueModel.swift in Sources */,
 				BFDB82AE26A092E400F9195E /* URL++.swift in Sources */,
+				BF3EC92C26FEEC8200182164 /* DownloadsWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -847,7 +851,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Frame",
+					"$(PROJECT_DIR)/FrameApp",
 				);
 				INFOPLIST_FILE = FrameApp/Misc/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -857,7 +861,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Frame",
+					"$(PROJECT_DIR)/FrameApp",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zx02.FrameApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -884,7 +888,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Frame",
+					"$(PROJECT_DIR)/FrameApp",
 				);
 				INFOPLIST_FILE = FrameApp/Misc/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -894,7 +898,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Frame",
+					"$(PROJECT_DIR)/FrameApp",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zx02.FrameApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

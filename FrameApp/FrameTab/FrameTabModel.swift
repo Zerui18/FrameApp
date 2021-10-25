@@ -30,7 +30,7 @@ class FrameTabModel: ObservableObject {
         _videoPathLockscreen.isEmpty ? nil:_videoPathLockscreen
     }
     
-    func setVideo(_ video: VideoRecord, forDomain domain: SettingDomain) {
+    func setVideo(_ video: SavedVideo, forDomain domain: SettingDomain) {
         let path = video.localURL.path
         switch domain {
         case .both:

@@ -5,7 +5,7 @@
 //  Created by Zerui Chen on 15/7/21.
 //
 
-import Foundation
+import UIKit
 
 class FrameInfoModel: ObservableObject {
     
@@ -49,6 +49,18 @@ class FrameInfoModel: ObservableObject {
         }
         timer.schedule(deadline: .now(), repeating: .seconds(5))
         timer.resume()
+    }
+    
+    func launchPMToInstallTweak() {
+        let framePackageURLs = [
+            "zbra://packages/com.zx02.frame/?source=https://zerui18.github.io/zx02",
+            "sileo://package/com.zx02.frame",
+            "installer://show/shared=Installer&name=Frame&bundleid=com.zx02.frame&repo=https://zerui18.github.io/zx02",
+            "cydia://url/https://cydia.saurik.com/api/share#?source=https://zerui18.github.io/zx02&package=com.zx02.frame"
+        ].map { URL(string: $0)! }
+        if let url = framePackageURLs.first(where: UIApplication.shared.canOpenURL) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
 }

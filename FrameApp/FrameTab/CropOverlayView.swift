@@ -1,5 +1,5 @@
 //
-//  ParallexCropView.swift
+//  CropOverlayView.swift
 //  Frame
 //
 //  Created by Zerui Chen on 16/7/21.
@@ -112,33 +112,3 @@ struct CropOverlayView: View {
         }
     }
 }
-
-struct ParallexCropView: View {
-    
-    var model: FrameTabPageModel
-    
-    var body: some View {
-        ZStack(alignment: .topLeading) {
-            if let videoPath = model.videoPath {
-                // Fix the aspect ratio of the views to the video.
-                let item = AVPlayerItem(url: URL(fileURLWithPath: videoPath))
-                if let size = item.asset.tracks(withMediaType: .video).first?.naturalSize {
-                    Group {
-                        VideoView(item: item)
-//                        if UIDevice.current.userInterfaceIdiom == .phone {
-//                            CropOverlayView(model: model)
-//                        }
-                    }
-                    .aspectRatio(size, contentMode: .fit)
-                    .transition(.scale)
-                }
-            }
-        }
-    }
-}
-
-//struct ParallexCropView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ParallexCropView(videoPath: .constant("/Users/zeruichen/Downloads/iOS 13 Apple Store Demo.mp4"))
-//    }
-//}

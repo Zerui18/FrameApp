@@ -30,7 +30,8 @@ class FrameTabPageModel: ObservableObject {
     
     private let domain: SettingDomain
     private var bag = Set<AnyCancellable>()
-    private var videoSize: CGSize = .init(width: 1, height: 1)
+    
+    @Published var videoSize: CGSize = .init(width: 1, height: 1)
     
     @Setting private(set) var videoPath: String
     @Setting var videoVolume: Double

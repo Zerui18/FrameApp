@@ -6,25 +6,23 @@
 //
 
 import UIKit
+import AVFoundation
 import NukeWebPPlugin
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var backgroundSessionCompletionHandler: (() -> Void)?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        _ = RecordsModel.shared
+        SavedVideoStore.shared.restartDownloads()
         WebPImageDecoder.enable()
         MigrationManager.migrateOldFrameIfNecessary()
         return true
     }
     
-    func applicationWillResignActive(_ application: UIApplication) {
-    }
-    
-    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
-        backgroundSessionCompletionHandler = completionHandler
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
+        try? AVAudioSession.sharedInstance().setActive(true, options: [])
     }
 
     // MARK: UISceneSession Lifecycle

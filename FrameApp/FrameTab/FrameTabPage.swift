@@ -23,7 +23,13 @@ struct FrameTabPage: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 15) {
-                ParallexCropView(model: model)
+                ZStack(alignment: .topLeading) {
+                    VideoView(videoPath: model.videoPath)
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        CropOverlayView(model: model)
+                    }
+                }
+                .aspectRatio(model.videoSize, contentMode: .fit)
                 
                 Spacer()
                 

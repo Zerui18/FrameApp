@@ -10,12 +10,12 @@ import Tetra
 
 struct DownloadsListRow: View {
     
-    init(forRecord record: VideoRecord) {
+    init(forRecord record: SavedVideo) {
         self.record = record
         self.task = record.downloadTask
     }
     
-    private let record: VideoRecord
+    private let record: SavedVideo
     @ObservedObject private var task: TTask
     
     var body: some View {
@@ -56,13 +56,8 @@ struct DownloadsListRow: View {
             .padding([.top, .bottom])
             
             VStack(spacing: 10) {
-                let retryButton = Image(systemName: "arrow.clockwise").onTapGesture {
-                    record.beginDownload()
-                }
-                
-                let deleteButton = Image(systemName: "trash.fill").onTapGesture {
-                    record.delete()
-                }
+                let retryButton = Image(systemName: "arrow.clockwise").onTapGesture(perform: record.beginDownload)
+                let deleteButton = Image(systemName: "trash.fill").onTapGesture(perform: record.delete)
                 
                 switch task.state {
                 case .failure:

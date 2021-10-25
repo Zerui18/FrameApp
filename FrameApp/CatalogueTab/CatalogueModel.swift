@@ -12,7 +12,7 @@ import Tetra
 
 class CatalogueModel: ObservableObject {
     
-    class Item: GalleryGridItemRepresentable {
+    class VideoItem: VideoGalleryItemRepresentable {
         
         init(name: String, sizeString: String, videoURL: URL, imageURL: URL, image: UIImage? = nil) {
             self.name = name
@@ -40,7 +40,7 @@ class CatalogueModel: ObservableObject {
             Tetra.shared.downloadTask(forId: name, dstURL: Paths.urlFor(videoName: name))
         }()
         
-        static func ==(_ a: Item, _ b: Item) -> Bool {
+        static func ==(_ a: VideoItem, _ b: VideoItem) -> Bool {
             a.id == b.id
         }
         
@@ -53,7 +53,7 @@ class CatalogueModel: ObservableObject {
     
     // MARK: Published
     @Published var categoryNames = [String]()
-    @Published var listingItems = [Item]()
+    @Published var listingItems = [VideoItem]()
     @Published var error: Error?
     @Published var selectedCategoryIndex: Int = 0
     
@@ -104,4 +104,16 @@ class CatalogueModel: ObservableObject {
         refreshSubject.send()
     }
     
+    func getPreviewURL(forVideo video: VideoItem) -> URL {
+        if let record = SavedVideoStore.shared.getVideo(withURL: video.videoURL), record.isDownloaded {
+            return record.localURL
+        }
+        else {
+            return video.videoURL
+        }
+    }
+    
+    func addToSavedVideos(_ video: VideoItem) {
+        SavedVideoStore.shared.addVideo(video)
+    }
 }

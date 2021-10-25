@@ -10,18 +10,18 @@ import CoreData
 
 struct LibraryView: View {
     
-    @FetchRequest(entity: VideoRecord.entity(),
+    @FetchRequest(entity: SavedVideo.entity(),
                   sortDescriptors: [.init(key: "timestamp", ascending: false)],
                   predicate: NSPredicate(format: "isDownloaded == YES"))
-    var videoRecords: FetchedResults<VideoRecord>
+    var videoRecords: FetchedResults<SavedVideo>
     
-    @State private var selectedVideo: VideoRecord?
-    @State private var previewingVideo: VideoRecord?
+    @State private var selectedVideo: SavedVideo?
+    @State private var previewingVideo: SavedVideo?
     
     let domain: SettingDomain
     
     var body: some View {
-        GalleryGridView(items: Array(videoRecords),
+        VideoGalleryView(items: Array(videoRecords),
                         selectedItem: $selectedVideo,
                         edgeInsets: .init(top: 20, left: 20, bottom: 20, right: 20))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -41,7 +41,7 @@ struct LibraryView: View {
     }
 }
 
-extension VideoRecord: GalleryGridItemRepresentable {
+extension SavedVideo: VideoGalleryItemRepresentable {
     var videoURL: URL {
         localURL
     }

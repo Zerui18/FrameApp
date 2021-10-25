@@ -1,5 +1,5 @@
 //
-//  VideoRecord.swift
+//  SavedVideo.swift
 //  Frame
 //
 //  Created by Zerui Chen on 15/7/21.
@@ -12,8 +12,8 @@ import Tetra
 
 fileprivate let bcFormatter = ByteCountFormatter()
 
-@objc(VideoRecord)
-class VideoRecord: NSManagedObject {
+@objc(SavedVideo)
+class SavedVideo: NSManagedObject {
     
     lazy var size: UInt64 = {
         localURL.fileSize
@@ -30,11 +30,11 @@ class VideoRecord: NSManagedObject {
     
     // MARK: CoreData
     override class func entity() -> NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "VideoRecord", in: CDManager.moc)!
+        NSEntityDescription.entity(forEntityName: "SavedVideo", in: CDManager.moc)!
     }
     
     convenience init(withName name: String, thumbnail: UIImage, remoteURL: URL? = nil, videoURL: URL? = nil) {
-        self.init(entity: VideoRecord.entity(), insertInto: CDManager.moc)
+        self.init(entity: SavedVideo.entity(), insertInto: CDManager.moc)
         self.name = name
         self.isDownloaded = remoteURL == nil
         self.thumbnailData = thumbnail.pngData()
@@ -66,9 +66,9 @@ class VideoRecord: NSManagedObject {
 }
 
 // MARK: CoreData Attributes
-extension VideoRecord {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<VideoRecord> {
-        let request = NSFetchRequest<VideoRecord>(entityName: "VideoRecord")
+extension SavedVideo {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<SavedVideo> {
+        let request = NSFetchRequest<SavedVideo>(entityName: "SavedVideo")
         request.sortDescriptors = [.init(key: "timestamp", ascending: false)]
         return request
     }

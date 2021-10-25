@@ -49,6 +49,10 @@ class AVPlayerLoopView: UIView {
 
 struct VideoView: UIViewRepresentable {
     
+    init(videoPath: String) {
+        self.init(item: .init(url: URL(fileURLWithPath: videoPath)))
+    }
+    
     init(item: AVPlayerItem) {
         self.item = item
     }

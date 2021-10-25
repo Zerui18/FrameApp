@@ -28,7 +28,7 @@ public class TTask: ObservableObject {
     var downloadTask: URLSessionDownloadTask?
     
     private var resumeDataTemporaryFile: URL {
-        URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("zx02.frame.\(id).resume")
+        URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("zx02.tetra.\(id).resume")
     }
     
     /// The resume data, if applicable.
@@ -40,7 +40,6 @@ public class TTask: ObservableObject {
             catch {
                 NSLog("[Tetra] error setting resume data \(error)")
             }
-            NSLog("[Tetra] Set resume data for \(remoteURL!), \(resumeData ?? Data())")
         }
         get {
             try? Data(contentsOf: resumeDataTemporaryFile)
@@ -71,13 +70,11 @@ public class TTask: ObservableObject {
         downloadTask?.cancel()
         if let resumeData = resumeData {
             downloadTask = session.downloadTask(withResumeData: resumeData)
-            NSLog("[Tetra] created task from resume data: \(downloadTask!)")
         }
         else {
             var request = URLRequest(url: remoteURL)
             request.setValue("okhttp/3.10.0", forHTTPHeaderField: "User-Agent")
             downloadTask = session.downloadTask(with: request)
-            print("[Tetra] created task from url: \(downloadTask!)")
         }
         
         state = .preparing
@@ -88,7 +85,6 @@ public class TTask: ObservableObject {
     
     /// Provide complete download information and begin a new download task.
     public func download(_ url: URL, onSuccess handler: @escaping ()-> Void) {
-        NSLog("[Tetra] Downloading from \(url)")
         self.remoteURL = url
         self.onSuccess = handler
         createTask()
