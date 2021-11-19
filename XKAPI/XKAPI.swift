@@ -18,7 +18,7 @@ public struct XKListingAPIResponse: Codable {
         let ipath: String
         
         /// Display name.
-        public let name: String
+        public let name: String!
         /// Subtitle.
         public let size: String
         
@@ -58,10 +58,10 @@ public struct XKListingAPIResponse: Codable {
 }
 
 /// The english translation for the important category names.
-fileprivate let englishNames = ["首页" : "Home", "最新" : "New", "推荐" : "Hot", "随机" : "Random", "景观" : "Landscapes", "动漫" : "Anime", "游戏" : "Games", "其它" : "Abstract"]
+fileprivate let englishNames = ["首页" : "Home", "最新" : "New", "推荐" : "Hot", "景观" : "Landscapes", "动漫" : "Anime", "游戏" : "Games", "其它" : "Abstract"]
 
 /// The categories to be filtered out.
-fileprivate let filteredNames = ["小姐姐", "再淘一下", "公告"]
+fileprivate let filteredNames = ["小姐姐", "再淘一下", "公告", "随机"]
 
 /// Struct representing the api response of the root/index categories.
 public struct XKIndexAPIResponse: Codable {
@@ -89,6 +89,7 @@ public struct XKIndexAPIResponse: Codable {
                     if response.items.first?.size == "32.78MB" {
                         response.items.remove(at: 0)
                     }
+                    response.items.removeAll { $0.name == nil }
                     return response
                 }
                 .eraseToAnyPublisher()

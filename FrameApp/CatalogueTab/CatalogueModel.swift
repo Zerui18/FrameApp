@@ -9,6 +9,7 @@ import UIKit
 import Combine
 import XKAPI
 import Tetra
+import simd
 
 class CatalogueModel: ObservableObject {
     
@@ -81,13 +82,13 @@ class CatalogueModel: ObservableObject {
             .flatMap { indexResponse, selectedCategoryIndex, _ in
                 indexResponse.items[selectedCategoryIndex]
                     .fetchListing()
+                    .receive(on: RunLoop.main)
+                    // Catch errors here to keep the main stream alive.
+                    .catch { error -> Empty<XKListingAPIResponse, Error> in
+                        self.error = error
+                        return Empty<XKListingAPIResponse, Error>()
+                    }
                     .eraseToAnyPublisher()
-            }
-            .receive(on: RunLoop.main)
-            .mapError { error -> Error in
-                self.error = error
-                self.refreshCompletedHandler?()
-                return error
             }
             .sink { _ in } receiveValue: { listingResponse in
                 self.listingItems = listingResponse.items.map {

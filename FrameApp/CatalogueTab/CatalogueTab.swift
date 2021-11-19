@@ -31,12 +31,18 @@ struct CatalogueTab: View {
                         .font(.caption)
                         .foregroundColor(.gray)
                 }.layoutPriority(1)
+                .transition(.opacity.animation(.easeIn))
+                // Force SwiftUI to always treat this as a new View, triggering the transition.
+                .id(arc4random())
                 
                 Spacer()
                 
                 DownloadsWidget()
             }
             .padding([.leading, .trailing], 30)
+            
+            ScrollSelector(items: model.categoryNames, selectedIndex: $model.selectedCategoryIndex)
+                .padding([.leading, .trailing], 30)
             
             VideoGalleryView(items: model.listingItems,
                             selectedItem: $selectedVideo,
@@ -71,6 +77,6 @@ struct CatalogueTab: View {
 struct CatalogueTab_Previews: PreviewProvider {
     static var previews: some View {
         CatalogueTab()
-            .colorScheme(.light)
+            .colorScheme(.dark)
     }
 }

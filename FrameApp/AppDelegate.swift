@@ -14,15 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
         SavedVideoStore.shared.restartDownloads()
         WebPImageDecoder.enable()
         MigrationManager.migrateOldFrameIfNecessary()
         return true
-    }
-    
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
-        try? AVAudioSession.sharedInstance().setActive(true, options: [])
     }
 
     // MARK: UISceneSession Lifecycle

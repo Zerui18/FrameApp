@@ -31,7 +31,7 @@ func fetchAndDecode<T: Codable>(from url: URL) -> AnyPublisher<T, Error> {
             if let decrypted = decryptAndUnzip(data: $0.data) {
                 return decrypted
             }
-            throw NSError(domain: "com.zx02.frame", code: 123, userInfo: nil)
+            throw NSError(domain: "com.zx02.frame", code: 123, userInfo: [NSLocalizedDescriptionKey: "Either decryption or unzipping of the xkapi data failed."])
         }
         .decode(type: T.self, decoder: JSONDecoder())
         .eraseToAnyPublisher()

@@ -23,6 +23,7 @@
 		BF8A943326F8D44600F2F919 /* MigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A943226F8D44600F2F919 /* MigrationManager.swift */; };
 		BF8A943526F8D4D300F2F919 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A943426F8D4D300F2F919 /* Paths.swift */; };
 		BF8A943726F8D52800F2F919 /* CDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A943626F8D52800F2F919 /* CDManager.swift */; };
+		BFA1CAAF2747E75400FDC85E /* ScrollSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA1CAAE2747E75400FDC85E /* ScrollSelector.swift */; };
 		BFC9004C26B43FC600B012E1 /* XKAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = BFC9004A26B43FC600B012E1 /* XKAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFC9004F26B43FC600B012E1 /* XKAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC9004826B43FC600B012E1 /* XKAPI.framework */; };
 		BFC9005026B43FC600B012E1 /* XKAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFC9004826B43FC600B012E1 /* XKAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -115,6 +116,7 @@
 		BF8A943226F8D44600F2F919 /* MigrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationManager.swift; sourceTree = "<group>"; };
 		BF8A943426F8D4D300F2F919 /* Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
 		BF8A943626F8D52800F2F919 /* CDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDManager.swift; sourceTree = "<group>"; };
+		BFA1CAAE2747E75400FDC85E /* ScrollSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollSelector.swift; sourceTree = "<group>"; };
 		BFC9004826B43FC600B012E1 /* XKAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XKAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC9004A26B43FC600B012E1 /* XKAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XKAPI.h; sourceTree = "<group>"; };
 		BFC9004B26B43FC600B012E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 			children = (
 				BF3EC92B26FEEC8200182164 /* DownloadsWidget.swift */,
 				BFC9005C26B4439300B012E1 /* CatalogueModel.swift */,
+				BFA1CAAE2747E75400FDC85E /* ScrollSelector.swift */,
 				BFDB829026A02BA900F9195E /* CatalogueTab.swift */,
 				BFC9008726B83D0000B012E1 /* DownloadsList.swift */,
 				BFC9008926B83D0800B012E1 /* DownloadsListRow.swift */,
@@ -653,6 +656,7 @@
 				BF304CE5269888AB005CCB59 /* SceneDelegate.swift in Sources */,
 				BF304CF726988D42005CCB59 /* Setting.swift in Sources */,
 				BFC9008826B83D0000B012E1 /* DownloadsList.swift in Sources */,
+				BFA1CAAF2747E75400FDC85E /* ScrollSelector.swift in Sources */,
 				BF8A943726F8D52800F2F919 /* CDManager.swift in Sources */,
 				BF0E4319269F2E09009E2208 /* FrameTabModel.swift in Sources */,
 				BFDB82A126A07E8700F9195E /* Frame.xcdatamodeld in Sources */,
