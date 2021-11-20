@@ -49,6 +49,8 @@ class FrameTabModel: ObservableObject {
                 _videoPathShared = ""
             }
             _videoPathLockscreen = path
+        case .global:
+            fatalError("\"videoPath\" cannot be set on the global domain!")
         }
         notifyTweak()
     }

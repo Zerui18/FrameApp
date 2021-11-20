@@ -24,6 +24,8 @@
 		BF8A943526F8D4D300F2F919 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A943426F8D4D300F2F919 /* Paths.swift */; };
 		BF8A943726F8D52800F2F919 /* CDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A943626F8D52800F2F919 /* CDManager.swift */; };
 		BFA1CAAF2747E75400FDC85E /* ScrollSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA1CAAE2747E75400FDC85E /* ScrollSelector.swift */; };
+		BFA1CAB62748997300FDC85E /* SettingToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA1CAB52748997300FDC85E /* SettingToggle.swift */; };
+		BFA1CAB827489ED900FDC85E /* FadeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA1CAB727489ED900FDC85E /* FadeSettings.swift */; };
 		BFC9004C26B43FC600B012E1 /* XKAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = BFC9004A26B43FC600B012E1 /* XKAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFC9004F26B43FC600B012E1 /* XKAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC9004826B43FC600B012E1 /* XKAPI.framework */; };
 		BFC9005026B43FC600B012E1 /* XKAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFC9004826B43FC600B012E1 /* XKAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -117,6 +119,8 @@
 		BF8A943426F8D4D300F2F919 /* Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
 		BF8A943626F8D52800F2F919 /* CDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDManager.swift; sourceTree = "<group>"; };
 		BFA1CAAE2747E75400FDC85E /* ScrollSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollSelector.swift; sourceTree = "<group>"; };
+		BFA1CAB52748997300FDC85E /* SettingToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingToggle.swift; sourceTree = "<group>"; };
+		BFA1CAB727489ED900FDC85E /* FadeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeSettings.swift; sourceTree = "<group>"; };
 		BFC9004826B43FC600B012E1 /* XKAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XKAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC9004A26B43FC600B012E1 /* XKAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XKAPI.h; sourceTree = "<group>"; };
 		BFC9004B26B43FC600B012E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -318,6 +322,8 @@
 			isa = PBXGroup;
 			children = (
 				BFDB829226A02BAF00F9195E /* MoreTab.swift */,
+				BFA1CAB727489ED900FDC85E /* FadeSettings.swift */,
+				BFA1CAB52748997300FDC85E /* SettingToggle.swift */,
 			);
 			path = MoreTab;
 			sourceTree = "<group>";
@@ -659,6 +665,7 @@
 				BFA1CAAF2747E75400FDC85E /* ScrollSelector.swift in Sources */,
 				BF8A943726F8D52800F2F919 /* CDManager.swift in Sources */,
 				BF0E4319269F2E09009E2208 /* FrameTabModel.swift in Sources */,
+				BFA1CAB827489ED900FDC85E /* FadeSettings.swift in Sources */,
 				BFDB82A126A07E8700F9195E /* Frame.xcdatamodeld in Sources */,
 				BFDB82A426A07EE600F9195E /* SavedVideo.swift in Sources */,
 				BFFBD1BA269E727E004A8F23 /* FrameTab.swift in Sources */,
@@ -667,6 +674,7 @@
 				BF8A943326F8D44600F2F919 /* MigrationManager.swift in Sources */,
 				BF8A943126F8B15900F2F919 /* FrameInfoView.swift in Sources */,
 				BFC9008A26B83D0800B012E1 /* DownloadsListRow.swift in Sources */,
+				BFA1CAB62748997300FDC85E /* SettingToggle.swift in Sources */,
 				BF304CE7269888AB005CCB59 /* ContentView.swift in Sources */,
 				BFDB82AC26A0877400F9195E /* LibraryView.swift in Sources */,
 				BFC9008C26B84CEB00B012E1 /* ProgressBar.swift in Sources */,

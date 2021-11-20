@@ -12,12 +12,14 @@ import AVFoundation
 class AVPlayerLoopView: UIView {
     
     let playerLayer: AVPlayerLayer
+    var currentURL: URL
     var playerLooper: AVPlayerLooper
     
-    init(item: AVPlayerItem) {
+    init(item: AVPlayerItem, withURL url: URL) {
         let player = AVQueuePlayer()
         player.isMuted = true
         self.playerLooper = AVPlayerLooper(player: player, templateItem: item)
+        self.currentURL = url
         self.playerLayer = .init(player: player)
         super.init(frame: .zero)
         layer.addSublayer(playerLayer)
@@ -37,12 +39,15 @@ class AVPlayerLoopView: UIView {
         playerLayer.frame = layer.bounds
     }
     
-    func set(playerItem: AVPlayerItem) {
-        let player = AVQueuePlayer()
-        player.isMuted = true
-        self.playerLooper = AVPlayerLooper(player: player, templateItem: playerItem)
-        self.playerLayer.player = player
-        player.play()
+    func set(playerItem: AVPlayerItem, withURL url: URL) {
+        if url != currentURL {
+            let player = AVQueuePlayer()
+            player.isMuted = true
+            playerLooper = AVPlayerLooper(player: player, templateItem: playerItem)
+            currentURL = url
+            playerLayer.player = player
+            player.play()
+        }
     }
 
 }
@@ -50,20 +55,18 @@ class AVPlayerLoopView: UIView {
 struct VideoView: UIViewRepresentable {
     
     init(videoPath: String) {
-        self.init(item: .init(url: URL(fileURLWithPath: videoPath)))
+        self.url =  .init(fileURLWithPath: videoPath)
+        self.item = .init(url: url)
     }
     
-    init(item: AVPlayerItem) {
-        self.item = item
-    }
-    
+    private let url: URL
     private let item: AVPlayerItem
     
     func makeUIView(context: Context) -> AVPlayerLoopView {
-        AVPlayerLoopView(item: item)
+        AVPlayerLoopView(item: item, withURL: url)
     }
     
     func updateUIView(_ uiView: AVPlayerLoopView, context: Context) {
-        uiView.set(playerItem: self.item)
+        uiView.set(playerItem: self.item, withURL: url)
     }
 }
