@@ -66,7 +66,7 @@ struct MoreTab: View {
                 }
 
                 Section {
-                    SettingToggle(title: "Fix Blur", forKey: .syncRingerVolume, inDomain: .global, defaultValue: false)
+                    SettingToggle(title: "Fix Blur", forKey: .fixBlur, inDomain: .global, defaultValue: false)
                 } footer: {
                     Text("Enable this option if the folders'/dock's backgrounds appear fixed despite the video playing below them. It's side-effect is mild to serious lagging when editing homescreen. Requires a respring to apply.")
                         .neatenOn14()

@@ -16,7 +16,7 @@ extension UserDefaults {
 }
 
 enum SettingKey: String {
-    case isEnabled, disabledOnLPM, pauseInApps, syncRingerVolume, fadeEnabled, fadeAlpha, fadeInactivity, fixBlur, videoPath, videoVolume, parallexTrail, parallexNPages
+    case isEnabled, disabledOnLPM, pauseInApps, syncRingerVolume, fadeEnabled, fadeAlpha, fadeInactivity, fixBlur, videoPath, videoVolume, parallexTrail, parallexNPages, isMuted
 }
 
 enum SettingDomain: String {
@@ -26,26 +26,26 @@ enum SettingDomain: String {
          global // other global settings (eg., isEnabled, disabledOnLPM)
 }
 
-protocol EncodedSetting: Codable {}
+//protocol EncodedSetting: Codable {}
 
 /// Wrapper for a UserDefaults setting.
 @propertyWrapper
 struct Setting<Value: Codable>: DynamicProperty {
     
     /// Actual object interfacing with UserDefaults.
-    fileprivate class Storage: NSObject, ObservableObject {
+    class Storage: NSObject, ObservableObject {
         
         private let userDefaultKey: String
         fileprivate var changeHandler: ((Value) -> Void)?
         
-        init(userDefaultKey: String, defaultValue: Value) {
-            self.userDefaultKey = userDefaultKey
+        init(userDefaultKey key: String, defaultValue: Value) {
+            self.userDefaultKey = key
             // Now we properly retrieve the actual value, if any.
-            if Value.self is EncodedSetting.Type,
-               let value = UserDefaults.shared.data(forKey: userDefaultKey).flatMap({ try? JSONDecoder().decode(Value.self, from: $0) }) {
-                self.value = value
-            }
-            else if let value = UserDefaults.shared.value(forKey: userDefaultKey) as? Value {
+//            if Value.self is EncodedSetting.Type,
+//               let value = UserDefaults.shared.data(forKey: userDefaultKey).flatMap({ try? JSONDecoder().decode(Value.self, from: $0) }) {
+//                self.value = value
+//            }
+            if let value = UserDefaults.shared.value(forKey: key) as? Value {
                 self.value = value
             }
             else {
@@ -54,7 +54,7 @@ struct Setting<Value: Codable>: DynamicProperty {
             }
             super.init()
             // Use KVO to update value with changes from the defaults.
-            UserDefaults.shared.addObserver(self, forKeyPath: userDefaultKey, options: [.new], context: nil)
+            UserDefaults.shared.addObserver(self, forKeyPath: self.userDefaultKey, options: .new, context: nil)
         }
         
         /// Read-only property for the stored value.
@@ -63,7 +63,14 @@ struct Setting<Value: Codable>: DynamicProperty {
         /// Write to the stored value.
         func write(_ newValue: Value) {
             value = newValue
-            UserDefaults.shared.setValue(newValue, forKey: userDefaultKey)
+            // First check is newValue == nil, which causes a crash if passed to setValue.
+            if let optionalValue = newValue as? OptionalProtocol, optionalValue.isNil {
+                UserDefaults.shared.removeObject(forKey: userDefaultKey)
+            }
+            // newValue is not nil, safe to proceed.
+            else {
+                UserDefaults.shared.setValue(newValue, forKey: userDefaultKey)
+            }
         }
 
         // MARK: Deinit
@@ -73,10 +80,25 @@ struct Setting<Value: Codable>: DynamicProperty {
         
         // MARK: KVO
         override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-            guard keyPath == userDefaultKey, let change = change, let newValue = change[.newKey] as? Value
+
+            guard keyPath == userDefaultKey, let change = change
             else { return }
             
-            value = newValue
+            let newValue = change[.newKey]!
+            
+            if newValue is NSNull {
+                // Magic to set self.value to nil / pointer to 0.
+                let none = 0
+                withUnsafePointer(to: none) { ptr in
+                    ptr.withMemoryRebound(to: Value.self, capacity: 1) { retypedPtr in
+                        self.value = retypedPtr.pointee
+                    }
+                }
+            }
+            else {
+                value = newValue as! Value
+                changeHandler?(newValue as! Value)
+            }
         }
     }
     
@@ -104,7 +126,7 @@ struct Setting<Value: Codable>: DynamicProperty {
 
     // MARK: Init
     init(domain: SettingDomain, key: SettingKey, defaultValue: Value) {
-        let userDefaultsKey = domain == .global ? key.rawValue : "\(domain.rawValue).\(key.rawValue)"
+        let userDefaultsKey = domain == .global ? key.rawValue : "\(domain.rawValue)/\(key.rawValue)"
         self.storage = Storage(userDefaultKey: userDefaultsKey, defaultValue: defaultValue)
     }
     

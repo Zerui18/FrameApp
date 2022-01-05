@@ -13,42 +13,42 @@ class FrameTabModel: ObservableObject {
     static let shared: FrameTabModel = .init()
     
     // MARK: Privates
-    @Setting(domain: .both, key: .videoPath, defaultValue: "") private var _videoPathShared: String
-    @Setting(domain: .homescreen, key: .videoPath, defaultValue: "") private var _videoPathHomescreen: String
-    @Setting(domain: .lockscreen, key: .videoPath, defaultValue: "") private var _videoPathLockscreen: String
+    @Setting(domain: .both, key: .videoPath, defaultValue: nil) private var videoPathShared: String?
+    @Setting(domain: .homescreen, key: .videoPath, defaultValue: nil) private var videoPathHomescreen: String?
+    @Setting(domain: .lockscreen, key: .videoPath, defaultValue: nil) private var videoPathLockscreen: String?
     
     // MARK: Public Properties
-    var videoPathShared: String? {
-        _videoPathShared.isEmpty ? nil:_videoPathShared
-    }
+//    var videoPathShared: String? {
+//        _videoPathShared.isEmpty ? nil:_videoPathShared
+//    }
+//
+//    var videoPathHomescreen: String? {
+//        _videoPathHomescreen.isEmpty ? nil:_videoPathHomescreen
+//    }
+//
+//    var videoPathLockscreen: String? {
+//        _videoPathLockscreen.isEmpty ? nil:_videoPathLockscreen
+//    }
     
-    var videoPathHomescreen: String? {
-        _videoPathHomescreen.isEmpty ? nil:_videoPathHomescreen
-    }
-    
-    var videoPathLockscreen: String? {
-        _videoPathLockscreen.isEmpty ? nil:_videoPathLockscreen
-    }
-    
-    func setVideo(_ video: SavedVideo, forDomain domain: SettingDomain) {
-        let path = video.localURL.path
+    func setVideo(_ video: SavedVideo?, forDomain domain: SettingDomain) {
+        let path = video?.localURL.path
         switch domain {
         case .both:
-            _videoPathHomescreen = ""
-            _videoPathLockscreen = ""
-            _videoPathShared = path
+            videoPathHomescreen = nil
+            videoPathLockscreen = nil
+            videoPathShared = path
         case .homescreen:
-            if !_videoPathShared.isEmpty {
-                _videoPathLockscreen = _videoPathShared
-                _videoPathShared = ""
+            if videoPathShared != nil {
+                videoPathLockscreen = videoPathShared
+                videoPathShared = nil
             }
-            _videoPathHomescreen = path
+            videoPathHomescreen = path
         case .lockscreen:
-            if !_videoPathShared.isEmpty {
-                _videoPathHomescreen = _videoPathShared
-                _videoPathShared = ""
+            if videoPathShared != nil {
+                videoPathHomescreen = videoPathShared
+                videoPathShared = nil
             }
-            _videoPathLockscreen = path
+            videoPathLockscreen = path
         case .global:
             fatalError("\"videoPath\" cannot be set on the global domain!")
         }

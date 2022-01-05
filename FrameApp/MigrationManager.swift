@@ -13,20 +13,23 @@ struct MigrationManager {
     
     private init() {}
     
+    /// Migrate old Frame files to Frame 3's storage non-destructively.
     static func migrateOldFrameIfNecessary() {
         // Files
         let oldFolder = URL(fileURLWithPath: "/var/mobile/Documents/com.ZX02.Frame")
         let newFolder = Paths.rootDocumentsFolder
-        if FileManager.default.fileExists(atPath: oldFolder.path) {
+        // ONLY migrate if old frame folder exists AND new frame folder doesn't
+        if FileManager.default.fileExists(atPath: oldFolder.path)
+            && !FileManager.default.fileExists(atPath: newFolder.path) {
             // Migration needed.
             do {
-                // Move videos.
+                // Copy videos.
                 let oldVideoFolder = oldFolder.appendingPathComponent("Cache/Videos")
                 let newVideoFolder = newFolder.appendingPathComponent("videos")
                 for name in try FileManager.default.contentsOfDirectory(atPath: oldVideoFolder.path) where name.hasSuffix(".mp4") {
                     let old = oldVideoFolder.appendingPathComponent(name)
                     let new = newVideoFolder.appendingPathComponent(name)
-                    try FileManager.default.moveItem(at: old, to: new)
+                    try FileManager.default.copyItem(at: old, to: new)
                 }
                 // Scan and create records.
                 let videoNames = try FileManager.default.contentsOfDirectory(atPath: newVideoFolder.path).map { String($0.prefix($0.count-4)) }
@@ -48,8 +51,6 @@ struct MigrationManager {
                         // Create record in db.
                         SavedVideo(withName: name, thumbnail: thumbnailImage, videoURL: videoURL).isDownloaded = true
                     }
-                    // Finally, remove the old folder.
-                    try? FileManager.default.removeItem(at: oldFolder)
                 }
             }
             catch (let error) {
@@ -58,15 +59,20 @@ struct MigrationManager {
         }
         
         // UserDefaults
-        func moveDefaults(fromKey keyOri: String, toKey keyNew: String) {
+        func copyDefaults(fromKey keyOri: String, toKey keyNew: String) {
             if let value = UserDefaults.shared.value(forKey: keyOri) {
-                UserDefaults.shared.removeObject(forKey: keyOri)
+//                UserDefaults.shared.removeObject(forKey: keyOri)
                 UserDefaults.shared.setValue(value, forKey: keyNew)
             }
         }
-        moveDefaults(fromKey: "videoURL", toKey: "both.videoPath")
-        moveDefaults(fromKey: "videoURLHomescreen", toKey: "homescreen.videoPath")
-        moveDefaults(fromKey: "videoURLLockscreen", toKey: "lockscreen.videoPath")
+        // There's no need to manually convert from URL to String
+        // as a URL is stored as the String of its path.
+        copyDefaults(fromKey: "videoURL", toKey: "both/videoPath")
+        copyDefaults(fromKey: "videoURLHomescreen", toKey: "homescreen/videoPath")
+        copyDefaults(fromKey: "videoURLLockscreen", toKey: "lockscreen/videoPath")
+        
+        copyDefaults(fromKey: "mutedHomescreen", toKey: "homescreen/isMuted")
+        copyDefaults(fromKey: "mutedLockscreen", toKey: "lockscreen/isMuted")
     }
 
     

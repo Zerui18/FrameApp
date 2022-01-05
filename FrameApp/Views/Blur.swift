@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 struct Blur: UIViewRepresentable {
-    let style: UIBlurEffect.Style = .systemMaterial
+    var style: UIBlurEffect.Style = .systemMaterial
 
     func makeUIView(context: Context) -> UIVisualEffectView {
         UIVisualEffectView(effect: UIBlurEffect(style: style))

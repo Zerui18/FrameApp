@@ -9,22 +9,22 @@ import SwiftUI
 import Combine
 import AVFoundation
 
-struct Rect: Equatable {
-    var minX: CGFloat = 0
-    var minY: CGFloat = 0
-    var maxX: CGFloat = 1
-    var maxY: CGFloat = 1
-}
-
-struct ParallexTrail: EncodedSetting {
-    struct Rect: EncodedSetting {
-        var centerX: Double = 0.5
-        var centerY: Double = 0.5
-        var width: Double = 1
-        var height: Double = 1
-    }
-    var rects: [Rect] = [.init()]
-}
+//struct Rect: Equatable {
+//    var minX: CGFloat = 0
+//    var minY: CGFloat = 0
+//    var maxX: CGFloat = 1
+//    var maxY: CGFloat = 1
+//}
+//
+//struct ParallexTrail: EncodedSetting {
+//    struct Rect: EncodedSetting {
+//        var centerX: Double = 0.5
+//        var centerY: Double = 0.5
+//        var width: Double = 1
+//        var height: Double = 1
+//    }
+//    var rects: [Rect] = [.init()]
+//}
 
 class FrameTabPageModel: ObservableObject {
     
@@ -33,24 +33,32 @@ class FrameTabPageModel: ObservableObject {
     
     @Published var videoSize: CGSize = .init(width: 1, height: 1)
     
-    @Setting private(set) var videoPath: String
+    @Setting private(set) var videoPath: String?
     @Setting var videoVolume: Double
-    @Setting private(set) var parallexTrail: ParallexTrail
-    @Setting var parallexNPages: Int
+//    @Setting private(set) var parallexTrail: ParallexTrail
+//    @Setting var parallexNPages: Int
     
-    @Published var cropRect: Rect = .init()
+//    @Published var cropRect: Rect = .init()
     
     init(domain: SettingDomain) {
         self.domain = domain
         
         // Init settings.
-        self._videoPath = .init(domain: domain, key: .videoPath, defaultValue: "")
+        self._videoPath = .init(domain: domain, key: .videoPath, defaultValue: nil)
         self._videoVolume = .init(domain: domain, key: .videoVolume, defaultValue: 0)
-        self._parallexTrail = .init(domain: domain, key: .parallexTrail, defaultValue: .init())
-        self._parallexNPages = .init(domain: domain, key: .parallexNPages, defaultValue: 1)
+//        self._parallexTrail = .init(domain: domain, key: .parallexTrail, defaultValue: .init())
+//        self._parallexNPages = .init(domain: domain, key: .parallexNPages, defaultValue: 1)
+        
+        if let videoPath = videoPath {
+            self.videoSize = AVAsset(url: URL(fileURLWithPath: videoPath)).tracks(withMediaType: .video)[0].naturalSize
+        }
         
         // Keep track of size of current video.
         self._videoPath.setChangeHandler { [weak self] videoPath in
+            guard let videoPath = videoPath else {
+                self?.videoSize = .init(width: 1, height: 1)
+                return
+            }
             self?.videoSize = AVAsset(url: URL(fileURLWithPath: videoPath)).tracks(withMediaType: .video)[0].naturalSize
         }
         

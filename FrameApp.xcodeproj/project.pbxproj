@@ -19,6 +19,8 @@
 		BF304CEF269888AB005CCB59 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF304CED269888AB005CCB59 /* LaunchScreen.storyboard */; };
 		BF304CF726988D42005CCB59 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF304CF626988D42005CCB59 /* Setting.swift */; };
 		BF3EC92C26FEEC8200182164 /* DownloadsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3EC92B26FEEC8200182164 /* DownloadsWidget.swift */; };
+		BF43799227847877007FD04C /* Optional++.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF43799127847877007FD04C /* Optional++.swift */; };
+		BF437994278539DC007FD04C /* TinyToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF437993278539DC007FD04C /* TinyToggle.swift */; };
 		BF8A943126F8B15900F2F919 /* FrameInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A943026F8B15900F2F919 /* FrameInfoView.swift */; };
 		BF8A943326F8D44600F2F919 /* MigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A943226F8D44600F2F919 /* MigrationManager.swift */; };
 		BF8A943526F8D4D300F2F919 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A943426F8D4D300F2F919 /* Paths.swift */; };
@@ -55,7 +57,6 @@
 		BFDB82AE26A092E400F9195E /* URL++.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82AD26A092E400F9195E /* URL++.swift */; };
 		BFDB82B026A093C100F9195E /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82AF26A093C100F9195E /* Blur.swift */; };
 		BFDB82B526A095DD00F9195E /* AVPlayerVCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82B426A095DD00F9195E /* AVPlayerVCView.swift */; };
-		BFDB82B726A098A000F9195E /* CropOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB82B626A098A000F9195E /* CropOverlayView.swift */; };
 		BFE8382526BED64C008357E5 /* AVAsset++.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE8382426BED64C008357E5 /* AVAsset++.swift */; };
 		BFFBD1BA269E727E004A8F23 /* FrameTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFBD1B9269E727E004A8F23 /* FrameTab.swift */; };
 		C902F2F2304E6A91714B7386 /* Pods_XKAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA901FDC232D4B00275B0B /* Pods_XKAPI.framework */; };
@@ -114,6 +115,8 @@
 		BF304CF0269888AB005CCB59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF304CF626988D42005CCB59 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		BF3EC92B26FEEC8200182164 /* DownloadsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsWidget.swift; sourceTree = "<group>"; };
+		BF43799127847877007FD04C /* Optional++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional++.swift"; sourceTree = "<group>"; };
+		BF437993278539DC007FD04C /* TinyToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinyToggle.swift; sourceTree = "<group>"; };
 		BF8A943026F8B15900F2F919 /* FrameInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameInfoView.swift; sourceTree = "<group>"; };
 		BF8A943226F8D44600F2F919 /* MigrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationManager.swift; sourceTree = "<group>"; };
 		BF8A943426F8D4D300F2F919 /* Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
@@ -301,6 +304,7 @@
 				BFDB829B26A07B4F00F9195E /* FrameTabPage.swift */,
 				BFDB82B626A098A000F9195E /* CropOverlayView.swift */,
 				BFDB82AB26A0877400F9195E /* LibraryView.swift */,
+				BF437993278539DC007FD04C /* TinyToggle.swift */,
 			);
 			path = FrameTab;
 			sourceTree = "<group>";
@@ -376,6 +380,7 @@
 			children = (
 				BFE8382426BED64C008357E5 /* AVAsset++.swift */,
 				BFDB82AD26A092E400F9195E /* URL++.swift */,
+				BF43799127847877007FD04C /* Optional++.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -664,6 +669,8 @@
 				BFC9008826B83D0000B012E1 /* DownloadsList.swift in Sources */,
 				BFA1CAAF2747E75400FDC85E /* ScrollSelector.swift in Sources */,
 				BF8A943726F8D52800F2F919 /* CDManager.swift in Sources */,
+				BF43799227847877007FD04C /* Optional++.swift in Sources */,
+				BF437994278539DC007FD04C /* TinyToggle.swift in Sources */,
 				BF0E4319269F2E09009E2208 /* FrameTabModel.swift in Sources */,
 				BFA1CAB827489ED900FDC85E /* FadeSettings.swift in Sources */,
 				BFDB82A126A07E8700F9195E /* Frame.xcdatamodeld in Sources */,
@@ -679,7 +686,6 @@
 				BFDB82AC26A0877400F9195E /* LibraryView.swift in Sources */,
 				BFC9008C26B84CEB00B012E1 /* ProgressBar.swift in Sources */,
 				BFDB829326A02BAF00F9195E /* MoreTab.swift in Sources */,
-				BFDB82B726A098A000F9195E /* CropOverlayView.swift in Sources */,
 				BFC9005D26B4439300B012E1 /* CatalogueModel.swift in Sources */,
 				BFDB82AE26A092E400F9195E /* URL++.swift in Sources */,
 				BF3EC92C26FEEC8200182164 /* DownloadsWidget.swift in Sources */,
