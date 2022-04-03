@@ -39,7 +39,7 @@ struct FrameTabPage: View {
                             TinyToggle(setting:
                                             .init(domain: domain, key: .isMuted, defaultValue: true),
                                        onImage: Image(systemName: "speaker.slash.fill"),
-                                       offImage: Image(systemName: "speaker.wave.2.fill"))
+                                       offImage: Image(systemName: "speaker.fill"))
                                 .padding()
                                 .frame(maxWidth: .infinity,
                                        maxHeight: .infinity,

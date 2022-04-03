@@ -26,6 +26,7 @@ struct MigrationManager {
                 // Copy videos.
                 let oldVideoFolder = oldFolder.appendingPathComponent("Cache/Videos")
                 let newVideoFolder = newFolder.appendingPathComponent("videos")
+                try FileManager.default.createDirectory(at: newVideoFolder, withIntermediateDirectories: true)
                 for name in try FileManager.default.contentsOfDirectory(atPath: oldVideoFolder.path) where name.hasSuffix(".mp4") {
                     let old = oldVideoFolder.appendingPathComponent(name)
                     let new = newVideoFolder.appendingPathComponent(name)
@@ -56,23 +57,24 @@ struct MigrationManager {
             catch (let error) {
                 print("Migration Error: \(error)")
             }
-        }
-        
-        // UserDefaults
-        func copyDefaults(fromKey keyOri: String, toKey keyNew: String) {
-            if let value = UserDefaults.shared.value(forKey: keyOri) {
-//                UserDefaults.shared.removeObject(forKey: keyOri)
-                UserDefaults.shared.setValue(value, forKey: keyNew)
+            
+            // UserDefaults
+            func copyDefaults(fromKey keyOri: String, toKey keyNew: String) {
+                if let value = UserDefaults.shared.value(forKey: keyOri) {
+    //                UserDefaults.shared.removeObject(forKey: keyOri)
+                    UserDefaults.shared.setValue(value, forKey: keyNew)
+                }
             }
+            // There's no need to manually convert from URL to String
+            // as a URL is stored as the String of its path.
+            copyDefaults(fromKey: "videoURL", toKey: "both/videoPath")
+            copyDefaults(fromKey: "videoURLHomescreen", toKey: "homescreen/videoPath")
+            copyDefaults(fromKey: "videoURLLockscreen", toKey: "lockscreen/videoPath")
+            
+            copyDefaults(fromKey: "mutedHomescreen", toKey: "homescreen/isMuted")
+            copyDefaults(fromKey: "mutedLockscreen", toKey: "lockscreen/isMuted")
         }
-        // There's no need to manually convert from URL to String
-        // as a URL is stored as the String of its path.
-        copyDefaults(fromKey: "videoURL", toKey: "both/videoPath")
-        copyDefaults(fromKey: "videoURLHomescreen", toKey: "homescreen/videoPath")
-        copyDefaults(fromKey: "videoURLLockscreen", toKey: "lockscreen/videoPath")
         
-        copyDefaults(fromKey: "mutedHomescreen", toKey: "homescreen/isMuted")
-        copyDefaults(fromKey: "mutedLockscreen", toKey: "lockscreen/isMuted")
     }
 
     

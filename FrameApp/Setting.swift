@@ -11,6 +11,8 @@ import Foundation
 import Combine
 import SwiftUI
 
+let none = Optional<Any>.none
+
 extension UserDefaults {
     static let shared: UserDefaults = .init(suiteName: "com.Zerui.framepreferences")!
 }
@@ -87,8 +89,8 @@ struct Setting<Value: Codable>: DynamicProperty {
             let newValue = change[.newKey]!
             
             if newValue is NSNull {
-                // Magic to set self.value to nil / pointer to 0.
-                let none = 0
+                // Magic to set self.value to nil / pointer to Optional.none.
+                // Essentially self.value = (Value *) nullptr
                 withUnsafePointer(to: none) { ptr in
                     ptr.withMemoryRebound(to: Value.self, capacity: 1) { retypedPtr in
                         self.value = retypedPtr.pointee

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		806FF8171864666706D2B22A /* Pods_Frame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA678A3FFF7C9760D9459A6B /* Pods_Frame.framework */; };
+		BF0B09D427F926E400E44A85 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF0B09D327F926E400E44A85 /* HealthKit.framework */; };
 		BF0E4317269F2DE0009E2208 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0E4316269F2DE0009E2208 /* VideoView.swift */; };
 		BF0E4319269F2E09009E2208 /* FrameTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0E4318269F2E09009E2208 /* FrameTabModel.swift */; };
 		BF16A9CD26A5C92500858F19 /* FrameTabPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF16A9CC26A5C92500858F19 /* FrameTabPageModel.swift */; };
@@ -102,6 +103,8 @@
 		5F4CE37F014E394E4E83BF39 /* Pods-XKAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XKAPI.debug.xcconfig"; path = "Target Support Files/Pods-XKAPI/Pods-XKAPI.debug.xcconfig"; sourceTree = "<group>"; };
 		881A43D7EF897B2B690111BD /* Pods-Tetra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tetra.release.xcconfig"; path = "Target Support Files/Pods-Tetra/Pods-Tetra.release.xcconfig"; sourceTree = "<group>"; };
 		94BB21E33C91228D67278498 /* Pods_Tetra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tetra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF0B09D227F9260F00E44A85 /* FrameApp_.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FrameApp_.entitlements; sourceTree = "<group>"; };
+		BF0B09D327F926E400E44A85 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		BF0E4316269F2DE0009E2208 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		BF0E4318269F2E09009E2208 /* FrameTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameTabModel.swift; sourceTree = "<group>"; };
 		BF16A9CC26A5C92500858F19 /* FrameTabPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameTabPageModel.swift; sourceTree = "<group>"; };
@@ -172,6 +175,7 @@
 				BFC9004F26B43FC600B012E1 /* XKAPI.framework in Frameworks */,
 				BFC9007626B82FB400B012E1 /* Tetra.framework in Frameworks */,
 				806FF8171864666706D2B22A /* Pods_Frame.framework in Frameworks */,
+				BF0B09D427F926E400E44A85 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +252,7 @@
 				BFDB82A226A07ED000F9195E /* DB */,
 				BFDB829926A06EE200F9195E /* ObjC */,
 				BFDB829826A06ED500F9195E /* Misc */,
+				BF0B09D227F9260F00E44A85 /* FrameApp_.entitlements */,
 			);
 			path = FrameApp;
 			sourceTree = "<group>";
@@ -286,6 +291,7 @@
 		BFD4B2DB26A79DB0006C71CE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF0B09D327F926E400E44A85 /* HealthKit.framework */,
 				FA678A3FFF7C9760D9459A6B /* Pods_Frame.framework */,
 				94BB21E33C91228D67278498 /* Pods_Tetra.framework */,
 				43BA901FDC232D4B00275B0B /* Pods_XKAPI.framework */,
@@ -622,7 +628,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ \"${SDKROOT}\" != *Simulator* ]]\nthen\n# add frameworks\n#mkdir $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n#cp -r $BUILT_PRODUCTS_DIR/XKAPI.framework $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n# codesign appears to happen afterwards, so we manually do it here\ncodesign -f -s \"iPhone Developer: Zerui Chen (HWVV478235)\" $BUILT_PRODUCTS_DIR/FrameApp.app\n# Install to iPhone over ssh\nrsync -a $BUILT_PRODUCTS_DIR/FrameApp.app root@localhost:/Applications/\n# Relaunch\nssh root@localhost '/usr/local/bin/rela com.zx02.FrameApp'\nfi\n";
+			shellScript = "if [[ \"${SDKROOT}\" != *Simulator* ]]\nthen\n# add frameworks\n#mkdir $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n#cp -r $BUILT_PRODUCTS_DIR/XKAPI.framework $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n# codesign appears to happen afterwards, so we manually do it here\ncodesign -f -s \"-\" --entitlements $PROJECT_DIR/FrameApp/FrameApp_.entitlements $BUILT_PRODUCTS_DIR/FrameApp.app\n# Install to iPhone over ssh\nrsync -a $BUILT_PRODUCTS_DIR/FrameApp.app root@localhost:/Applications/\n# Relaunch\n# ssh root@localhost '/usr/local/bin/rela com.zx02.FrameApp'\nfi\n";
 		};
 		D1AC2D59FBC65F414F3E8D43 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -862,9 +868,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"FrameApp/Misc/Preview Content\"";
-				DEVELOPMENT_TEAM = 789MW96BQB;
+				DEVELOPMENT_TEAM = AXWX43M7C4;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -883,6 +892,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zx02.FrameApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FrameApp/FrameApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -899,9 +909,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"FrameApp/Misc/Preview Content\"";
-				DEVELOPMENT_TEAM = 789MW96BQB;
+				DEVELOPMENT_TEAM = AXWX43M7C4;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -920,6 +933,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zx02.FrameApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FrameApp/FrameApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

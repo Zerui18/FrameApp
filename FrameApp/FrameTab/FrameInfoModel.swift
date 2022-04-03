@@ -72,6 +72,6 @@ fileprivate func getFrameTweakVersion() -> String? {
     guard let match = expr.firstMatch(in: output, options: [], range: NSRange(location: 0, length: output.count)) else { return nil }
     return (output as NSString).substring(with: match.range(at: 1)) as String
     #else
-    return ""
+    return "3.0.0"
     #endif
 }

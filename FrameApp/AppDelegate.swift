@@ -15,9 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
-        SavedVideoStore.shared.restartDownloads()
         WebPImageDecoder.enable()
         MigrationManager.migrateOldFrameIfNecessary()
+        SavedVideoStore.shared.restartDownloads()
         return true
     }
 

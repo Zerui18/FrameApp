@@ -33,7 +33,7 @@ struct CatalogueTab: View {
                 }.layoutPriority(1)
                 .transition(.opacity.animation(.easeIn))
                 // Force SwiftUI to always treat this as a new View, triggering the transition.
-                .id(arc4random())
+//                .id(arc4random())
                 
                 Spacer()
                 

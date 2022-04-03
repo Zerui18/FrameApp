@@ -16,7 +16,9 @@ class DownloadsWidgetModel: ObservableObject {
     
     init() {
         cancellable = SavedVideoStore.shared.$savedVideos.sink { savedVideos in
-            self.downloadingVideosCount = savedVideos.filter { !$0.isDownloaded }.count
+            withAnimation {
+                self.downloadingVideosCount = savedVideos.filter { !$0.isDownloaded }.count
+            }
         }
     }
     
@@ -36,10 +38,10 @@ struct DownloadsWidget: View {
                 if model.downloadingVideosCount > 0 {
                     Text("\(model.downloadingVideosCount)")
                         .font(.caption)
+                        .transition(.slide.combined(with: .opacity))
+                        
                 }
             }
-            .transition(.slide.combined(with: .opacity))
-            .animation(.easeIn)
         }
         .sheet(isPresented: $downloadingOpened) {
             DownloadsList()

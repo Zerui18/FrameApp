@@ -24,7 +24,9 @@ struct TinyToggle: View {
     
     var body: some View {
         let image = value ? onImage:offImage
-        image.resizable()
+        image
+            .resizable()
+            .aspectRatio(contentMode: .fit)
             .frame(width: 30, height: 30)
             .padding(10)
             .background(
@@ -32,9 +34,7 @@ struct TinyToggle: View {
                     .cornerRadius(10)
             )
             .onTapGesture {
-                withAnimation {
-                    value.toggle()
-                }
+                value.toggle()
             }
     }
 }
