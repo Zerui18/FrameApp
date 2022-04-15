@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		806FF8171864666706D2B22A /* Pods_Frame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA678A3FFF7C9760D9459A6B /* Pods_Frame.framework */; };
-		BF0B09D427F926E400E44A85 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF0B09D327F926E400E44A85 /* HealthKit.framework */; };
 		BF0E4317269F2DE0009E2208 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0E4316269F2DE0009E2208 /* VideoView.swift */; };
 		BF0E4319269F2E09009E2208 /* FrameTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0E4318269F2E09009E2208 /* FrameTabModel.swift */; };
 		BF16A9CD26A5C92500858F19 /* FrameTabPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF16A9CC26A5C92500858F19 /* FrameTabPageModel.swift */; };
@@ -104,7 +103,6 @@
 		881A43D7EF897B2B690111BD /* Pods-Tetra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tetra.release.xcconfig"; path = "Target Support Files/Pods-Tetra/Pods-Tetra.release.xcconfig"; sourceTree = "<group>"; };
 		94BB21E33C91228D67278498 /* Pods_Tetra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tetra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF0B09D227F9260F00E44A85 /* FrameApp_.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FrameApp_.entitlements; sourceTree = "<group>"; };
-		BF0B09D327F926E400E44A85 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		BF0E4316269F2DE0009E2208 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		BF0E4318269F2E09009E2208 /* FrameTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameTabModel.swift; sourceTree = "<group>"; };
 		BF16A9CC26A5C92500858F19 /* FrameTabPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameTabPageModel.swift; sourceTree = "<group>"; };
@@ -175,7 +173,6 @@
 				BFC9004F26B43FC600B012E1 /* XKAPI.framework in Frameworks */,
 				BFC9007626B82FB400B012E1 /* Tetra.framework in Frameworks */,
 				806FF8171864666706D2B22A /* Pods_Frame.framework in Frameworks */,
-				BF0B09D427F926E400E44A85 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +288,6 @@
 		BFD4B2DB26A79DB0006C71CE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BF0B09D327F926E400E44A85 /* HealthKit.framework */,
 				FA678A3FFF7C9760D9459A6B /* Pods_Frame.framework */,
 				94BB21E33C91228D67278498 /* Pods_Tetra.framework */,
 				43BA901FDC232D4B00275B0B /* Pods_XKAPI.framework */,
@@ -628,7 +624,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ \"${SDKROOT}\" != *Simulator* ]]\nthen\n# add frameworks\n#mkdir $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n#cp -r $BUILT_PRODUCTS_DIR/XKAPI.framework $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n# codesign appears to happen afterwards, so we manually do it here\ncodesign -f -s \"-\" --entitlements $PROJECT_DIR/FrameApp/FrameApp_.entitlements $BUILT_PRODUCTS_DIR/FrameApp.app\n# Install to iPhone over ssh\nrsync -a $BUILT_PRODUCTS_DIR/FrameApp.app root@localhost:/Applications/\n# Relaunch\n# ssh root@localhost '/usr/local/bin/rela com.zx02.FrameApp'\nfi\n";
+			shellScript = "if [[ \"${SDKROOT}\" != *Simulator* ]]\nthen\n# add frameworks\n#mkdir $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n#cp -r $BUILT_PRODUCTS_DIR/XKAPI.framework $BUILT_PRODUCTS_DIR/Frame.app/Frameworks/\n# codesign appears to happen afterwards, so we manually do it here\ncodesign -f -s \"-\" --entitlements $PROJECT_DIR/FrameApp/FrameApp_.entitlements $BUILT_PRODUCTS_DIR/FrameApp.app\n# save a copy of the properly signed app\ncp -r $BUILT_PRODUCTS_DIR/FrameApp.app $BUILT_PRODUCTS_DIR/FrameApp_good.app\nrm $BUILT_PRODUCTS_DIR/FrameApp_good.app/embedded.mobileprovision\n# Install to iPhone over ssh\n# rsync -a $BUILT_PRODUCTS_DIR/FrameApp.app root@localhost:/Applications/\n# Relaunch\n# ssh root@localhost '/usr/local/bin/rela com.zx02.FrameApp'\nfi\n";
 		};
 		D1AC2D59FBC65F414F3E8D43 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -50,7 +50,7 @@ class FrameTabPageModel: ObservableObject {
 //        self._parallexNPages = .init(domain: domain, key: .parallexNPages, defaultValue: 1)
         
         if let videoPath = videoPath {
-            self.videoSize = AVAsset(url: URL(fileURLWithPath: videoPath)).tracks(withMediaType: .video)[0].naturalSize
+            self.videoSize = AVAsset(url: URL(fileURLWithPath: videoPath)).tracks(withMediaType: .video).first?.naturalSize ?? .init(width: 1, height: 1)
         }
         
         // Keep track of size of current video.
@@ -59,7 +59,7 @@ class FrameTabPageModel: ObservableObject {
                 self?.videoSize = .init(width: 1, height: 1)
                 return
             }
-            self?.videoSize = AVAsset(url: URL(fileURLWithPath: videoPath)).tracks(withMediaType: .video)[0].naturalSize
+            self?.videoSize = AVAsset(url: URL(fileURLWithPath: videoPath)).tracks(withMediaType: .video).first?.naturalSize ?? .init(width: 1, height: 1)
         }
         
         // Handle cropRect to parallexTrail translation.
