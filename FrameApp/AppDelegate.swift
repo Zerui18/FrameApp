@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
         WebPImageDecoder.enable()
         MigrationManager.migrateOldFrameIfNecessary()
+        Paths.mkdirIfNecessary() // must be after migration to not interfere with the decision to migrate
         SavedVideoStore.shared.restartDownloads()
         return true
     }

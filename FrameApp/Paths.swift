@@ -21,6 +21,13 @@ struct Paths {
         return url
     }()
     
+    static func mkdirIfNecessary() {
+        let videoFolder = rootDocumentsFolder.appendingPathComponent("videos")
+        if !FileManager.default.fileExists(atPath: videoFolder.path) {
+            try! FileManager.default.createDirectory(at: videoFolder, withIntermediateDirectories: true)
+        }
+    }
+    
     static func urlFor(videoName: String) -> URL {
         rootDocumentsFolder.appendingPathComponent("videos/\(videoName).mp4")
     }
